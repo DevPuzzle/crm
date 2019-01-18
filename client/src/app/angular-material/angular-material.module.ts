@@ -8,6 +8,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 // all angular material modules go here
 const MATERIAL_MODULES = [
@@ -17,7 +18,8 @@ const MATERIAL_MODULES = [
   MatRadioModule,
   MatMenuModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatButtonModule
 ]
 
 @NgModule({
@@ -25,7 +27,10 @@ const MATERIAL_MODULES = [
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    MATERIAL_MODULES
+    ...MATERIAL_MODULES
+  ],
+  exports: [
+    ...MATERIAL_MODULES
   ]
 })
 export class AngularMaterialModule { }
