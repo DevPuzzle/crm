@@ -7,7 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/auth/signin/login.component';
-import { SignupComponent } from './components/auth/signup/signup.component'
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SignupComponent } from './components/auth/signup/signup.component'
     ReactiveFormsModule,
     HttpClientModule,
     GraphQLModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
