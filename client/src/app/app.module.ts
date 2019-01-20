@@ -6,26 +6,29 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/auth/signin/login.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthModule } from './components/auth/auth.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SignupComponent
+    DashboardComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     GraphQLModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    /* custom modules */
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
