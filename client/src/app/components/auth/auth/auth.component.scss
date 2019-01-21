@@ -1,9 +1,8 @@
-.image-wrapper{
+.wrapper{
   height: 100vh;
   background: url('../../../../assets/img/starting-page.jpg');
   background-size: cover;
   position: relative;
-  display: flex;
   align-items: center;
 
   .logo{
@@ -14,6 +13,13 @@
     font-size: 20px;
     font-family: "Helvetica Neue";
     font-weight: 100;
+  }
+
+  .auth-panel{
+    display: flex;
+    width: fit-content;
+    padding: 30px;
+    margin: 0 auto;
   }
 
   .motto{
@@ -32,10 +38,4 @@
   }
 }
 
-.center-panel{
-  display: flex;
-  width: fit-content;
-  padding: 30px;
-  margin: 0 auto;
-  background: #fff;
-}
+

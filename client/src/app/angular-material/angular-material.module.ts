@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material';
 
 // all angular material modules go here
 const MATERIAL_MODULES = [
@@ -23,7 +24,8 @@ const MATERIAL_MODULES = [
   MatToolbarModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCardModule
 ]
 
 @NgModule({
