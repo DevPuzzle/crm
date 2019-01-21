@@ -14,8 +14,7 @@ const userSchema = new Schema({
     type: String
   },
   company_id: {
-    type: String,
-    required: true
+    type: String
   } 
 });
 
