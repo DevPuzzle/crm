@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // all angular material modules go here
 const MATERIAL_MODULES = [
@@ -19,7 +21,9 @@ const MATERIAL_MODULES = [
   MatMenuModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatButtonModule
+  MatButtonModule,
+  MatSnackBarModule,
+  MatTabsModule
 ]
 
 @NgModule({

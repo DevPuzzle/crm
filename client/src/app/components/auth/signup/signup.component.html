@@ -1,44 +1,16 @@
-<div fxLayout="row">
-
-  <div class="image-wrapper" fxFlex="80">
-    <div class="motto" fxLayout="row">
-      <p>
-        Business is like a chess match. <br>
-        Let us help you to remember and foresee each step.
-      </p>
-    </div>
-  </div>
-
-  <div class="right-panel" fxFlex="20">
-    <div>
-      <h3>
-        Login to your CRM account
-      </h3>
-    </div>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" fxLayout="column">
-      <mat-form-field>
-        <input matInput formControlName="email" type="email" placeholder="Email" required>
-      </mat-form-field>
-    
-      <mat-form-field>
-        <input matInput formControlName="password" type="password" placeholder="Password" required>
-      </mat-form-field>
-
-      <div class="controls" fxLayout="row">
-        <button mat-flat-button color="primary" [disabled]="signupForm.invalid" fxFlex="40">
-          Sign in
-        </button>
+<form [formGroup]="signupForm" (ngSubmit)="onSignUp()" fxLayout="column">
   
-        <button mat-flat-button color="primary" [disabled]="signupForm.invalid" fxFlex="40" fxFlexOffset="20">
-          Sign up
-        </button>
-      </div>
-      
-    </form>
+  <mat-form-field>
+    <input matInput formControlName="email" type="email" placeholder="Email" required>
+  </mat-form-field>
 
-    <footer>
-      DevPuzzle. All rights reserved. &copy;
-    </footer>
-  </div>
+  <mat-form-field>
+    <input matInput formControlName="password" type="password" placeholder="Password" required>
+  </mat-form-field>
 
-</div>
+  
+  <button mat-flat-button color="primary" [disabled]="signupForm.invalid">
+    Sign up
+  </button>
+    
+</form>
