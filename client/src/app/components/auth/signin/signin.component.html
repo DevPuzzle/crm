@@ -1,3 +1,16 @@
-<p>
-  signin works!
-</p>
+<form [formGroup]="signinForm" (ngSubmit)="onSignIn()" fxLayout="column">
+
+  <mat-form-field>
+    <input matInput formControlName="email" type="email" placeholder="Email" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="password" type="password" placeholder="Password" required>
+  </mat-form-field>
+
+
+  <button mat-flat-button color="primary" [disabled]="signinForm.invalid">
+    Sign in
+  </button>
+
+</form>

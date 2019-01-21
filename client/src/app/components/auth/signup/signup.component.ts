@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private apollo: Apollo,
     private snackBar: MatSnackBar) { }
 
@@ -55,24 +55,24 @@ export class SignupComponent implements OnInit {
         /* TODO: think how to refactor it */
         catchError(err => {
           console.log(err.networkError);
-          if(err.networkError) {
+          if (err.networkError) {
             const errorMessage = err.networkError.error.errors[0].message;
             this.snackBar.open(
               errorMessage,
               'Dismiss'
-            )
+            );
           }
-          return of([])
+          return of([]);
         })
       )
-      .subscribe( 
+      .subscribe(
         _ => {
           // notify that user registered successfully
           this.snackBar.open(
             'Successfully signed up, you can now sign in'
-          )
+          );
         }
-      )
+      );
   }
 
 }

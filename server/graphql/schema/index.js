@@ -6,14 +6,14 @@ module.exports = buildSchema(`
         name: String!
         email: String!
         password: String
-        company_id: String
+        company_id: String!
     }
 
     type UserData {
         status: String
         email: String!
         name: String!
-        company_id: String
+        company_id: String!
     }
 
     type AuthData {
@@ -25,11 +25,11 @@ module.exports = buildSchema(`
         email: String!
         name: String
         password: String!
-        company_id: String
+        company_name: String!
     }
 
     type RootQuery {
-        getUser: UserData!
+        getUser(_id: String!): UserData!
         login(email: String!, password: String!): AuthData!
     }
 
