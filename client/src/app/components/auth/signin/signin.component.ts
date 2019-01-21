@@ -22,7 +22,7 @@ export const SIGN_IN_USER = gql`
 })
 
 export class SigninComponent implements OnInit {
-
+  isLoginData = true;
   signinForm: FormGroup;
 
   constructor(
@@ -58,6 +58,7 @@ export class SigninComponent implements OnInit {
         catchError(err => {
           console.log(err.networkError);
           if (err.networkError) {
+            this.isLoginData = false;
             const errorMessage = err.networkError.error.errors[0].message;
             this.snackBar.open(
               errorMessage,
@@ -71,9 +72,7 @@ export class SigninComponent implements OnInit {
         response => {
           // notify that user registered successfully
           if (response) {
-            this.snackBar.open(
-              'Successfully signed in'
-            );
+            this.isLoginData = true;
           }
           // else {this.snackBar.open(
           //   'ERROR'

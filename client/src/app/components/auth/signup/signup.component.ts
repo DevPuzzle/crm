@@ -10,7 +10,8 @@ export const SIGN_UP_USER = gql`
   mutation SignUpUser($credentials: UserInputData) {
     createUser(userInput: $credentials){
       _id,
-      email
+      email,
+      company_id
     }
   }
 `;
@@ -22,8 +23,9 @@ export const SIGN_UP_USER = gql`
 })
 
 export class SignupComponent implements OnInit {
-
+  isSignUpData = true;
   signupForm: FormGroup;
+  errorMessage: string;
 
   constructor(
     private fb: FormBuilder,
@@ -37,7 +39,8 @@ export class SignupComponent implements OnInit {
   initAuthForm() {
     this.signupForm = this.fb.group({
       'email': ['', Validators.required],
-      'password': ['', Validators.required]
+      'password': ['', Validators.required],
+      'company_name': ['', Validators.required]
     });
   }
 
@@ -55,22 +58,24 @@ export class SignupComponent implements OnInit {
         /* TODO: think how to refactor it */
         catchError(err => {
           console.log(err.networkError);
+          this.isSignUpData = false;
           if (err.networkError) {
-            const errorMessage = err.networkError.error.errors[0].message;
+            this.errorMessage = err.networkError.error.errors[0].data;
+            console.log(this.errorMessage);
             this.snackBar.open(
-              errorMessage,
+              this.errorMessage,
               'Dismiss'
             );
           }
-          return of([]);
+          return of(null);
         })
       )
       .subscribe(
-        _ => {
+        response => {
           // notify that user registered successfully
-          this.snackBar.open(
-            'Successfully signed up, you can now sign in'
-          );
+          if (response) {
+            this.isSignUpData = true;
+          }
         }
       );
   }

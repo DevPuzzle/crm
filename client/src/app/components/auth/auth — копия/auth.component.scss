@@ -3,18 +3,6 @@
   background: url('../../../../assets/img/starting-page.jpg');
   background-size: cover;
   position: relative;
-  display: flex;
-  align-items: center;
-
-  .logo{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    color: #fff;
-    font-size: 20px;
-    font-family: "Helvetica Neue";
-    font-weight: 100;
-  }
 
   .motto{
     position: absolute;
@@ -22,20 +10,24 @@
     bottom: 0;
     left: 0;
     color: #ffff;
-    font-size: 20px;
+    font-size: 30px;
     padding: 0 20px;
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
     font-family: "Helvetica Neue";
     font-weight: 100;
-    justify-content: center;
   }
 }
 
-.center-panel{
-  display: flex;
-  width: fit-content;
-  padding: 30px;
-  margin: 0 auto;
-  background: #fff;
+.right-panel{
+  padding: 10px;
+  position: relative;
+
+  footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+  }
 }

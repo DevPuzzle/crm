@@ -16,23 +16,35 @@ module.exports = {
       errors.push({message: 'Password too short'});
     }
     if (validator.isEmpty(userInput.company_name) || !validator.isLength(userInput.company_name, { min: 2})) {
-      errors.push({message: 'Company name too short'});
+      errors.push({message: 'Company name too short!'});
     }
-    if (errors.length > 0) {
-      const error = new Error('Invalid input');
-      error.data = errors;
-      error.code = 422;
-      throw error;
-    }
+    // if (errors.length > 0) {
+    //   const error = new Error('Invalid input');
+    //   error.data = errors;
+    //   error.code = 422;
+    //   throw error;
+    // }
     const existingUser = await User.findOne({ email: userInput.email });
     if (existingUser) {
-      const error = new Error('User exists already!');
-      throw error;
+      errors.push({message: 'User exists already!'});
+      // const error = new Error('User exists already!');
+      
+      // throw errors;
     }
+
     const existingCompany = await Company.findOne({ name: userInput.company_name });
     console.log(existingCompany);
     if (existingCompany) {
-      const error = new Error('Company exists already!');
+      errors.push({message: 'Company exists already!!'});
+      // const error = new Error('Company exists already!');
+      // throw errors;
+    }
+    console.log(errors);
+     if (errors.length > 0) {
+      const error = new Error(errors);
+      error.data = errors;
+      error.code = 422;
+      console.log(error);
       throw error;
     }
     const company = new Company({

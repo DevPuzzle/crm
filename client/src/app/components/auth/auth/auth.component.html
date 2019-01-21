@@ -1,32 +1,23 @@
 <div fxLayout="row">
 
-  <div class="image-wrapper" fxFlex="80">
+  <div class="image-wrapper" fxFlex="100">
+      <div class="logo">
+          DevPuzzle
+      </div>
+    <div class="center-panel">
+          <mat-tab-group>
+            <mat-tab label="Signin">
+              <app-signin></app-signin>
+            </mat-tab>
+            <mat-tab label="Signup">
+              <app-signup></app-signup>
+            </mat-tab>
+          </mat-tab-group>
+    </div>
     <div class="motto" fxLayout="row">
       <p>
         Let us help you to remember and foresee each step.
       </p>
     </div>
   </div>
-
-  <div class="right-panel" fxFlex="20">
-    <mat-tab-group>
-      <mat-tab label="Signin"> 
-        <app-signin></app-signin>
-      </mat-tab>
-      <mat-tab label="Signup"> 
-        <app-signup></app-signup>
-      </mat-tab>
-    </mat-tab-group>
-    <!-- <div>
-      <h3>
-        Login to your CRM account
-      </h3>
-    </div>
-     -->
-
-    <footer>
-      DevPuzzle. All rights reserved. &copy;
-    </footer>
-  </div>
-
 </div>
