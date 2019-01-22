@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   isSignUpData = true;
   signupForm: FormGroup;
   errorMessage: string;
-  requiredFieldError = "This is a required field";
+  requiredFieldError = 'This is a required field';
 
   constructor(
     private fb: FormBuilder,
