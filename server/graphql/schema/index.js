@@ -9,6 +9,15 @@ module.exports = buildSchema(`
         company_id: String!
     }
 
+    type Employee {
+        _id: ID!
+        email: String!
+        name: String!
+        last_name: String
+        skills: String
+        company_id: String!
+    }
+
     type UserData {
         status: String
         email: String!
@@ -28,6 +37,13 @@ module.exports = buildSchema(`
         company_name: String!
     }
 
+    input EmployeeInputData {
+        email: String!
+        name: String!
+        last_name: String
+        skills: String
+    }
+
     type RootQuery {
         getUser(_id: String!): UserData!
         login(email: String!, password: String!): AuthData!
@@ -35,6 +51,7 @@ module.exports = buildSchema(`
 
     type RootMutation {
         createUser(userInput: UserInputData): User!
+        createEmployee(employeeInput: EmployeeInputData): Employee!
     }
 
     schema {
