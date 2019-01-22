@@ -39,7 +39,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 })
 /* TODO: check if it can be refactored and put to graphql module not in app module */
 export class AppModule {
-  constructor(
+  /* constructor(
     apollo: Apollo,
     httpLink: HttpLink
   ) {
@@ -59,5 +59,5 @@ export class AppModule {
       cache: new InMemoryCache(),
       link: from([authMiddleware, http]),
     });
-  }
+  } */
 }

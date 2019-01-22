@@ -2,19 +2,33 @@
 
   <mat-form-field>
     <input matInput formControlName="email" type="email" placeholder="Email" required email>
+    <mat-error *ngIf="signupForm.get('email').hasError('required')">
+      {{requiredFieldError}}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('email').hasError('email')">
+      Please enter a valid email
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <input matInput formControlName="password" type="password" placeholder="Password" required>
+    <mat-error *ngIf="signupForm.get('password').hasError('required')">
+      {{requiredFieldError}}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password').hasError('minlength')">
+      Password should be at least 6 haracters long
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
       <input matInput formControlName="company_name" type="text" placeholder="Company name" required>
+      <mat-error *ngIf="signupForm.get('password').hasError('required')">
+        {{requiredFieldError}}
+      </mat-error>
   </mat-form-field>
 
 
-
-  <button mat-flat-button color="primary" [disabled]="signupForm.invalid">
+  <button mat-flat-button color="primary" [disabled]="signupForm.invalid" class="submit-button">
     Sign up
   </button>
   <mat-error *ngFor="let error of errorMessage">{{ error.message }}</mat-error>

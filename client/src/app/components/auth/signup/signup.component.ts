@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
   isSignUpData = true;
   signupForm: FormGroup;
   errorMessage: string;
+  requiredFieldError = "This is a required field";
 
   constructor(
     private fb: FormBuilder,
@@ -33,13 +34,13 @@ export class SignupComponent implements OnInit {
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.initAuthForm();
+    this.initSignupForm();
   }
 
-  initAuthForm() {
+  initSignupForm() {
     this.signupForm = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required],
+      'email': ['', [Validators.required, Validators.email] ],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
       'company_name': ['', Validators.required]
     });
   }
