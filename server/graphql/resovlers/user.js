@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 const Company = require('../../models/company');
@@ -18,26 +17,15 @@ module.exports = {
     if (validator.isEmpty(userInput.company_name) || !validator.isLength(userInput.company_name, { min: 2})) {
       errors.push({message: 'Company name too short!'});
     }
-    // if (errors.length > 0) {
-    //   const error = new Error('Invalid input');
-    //   error.data = errors;
-    //   error.code = 422;
-    //   throw error;
-    // }
     const existingUser = await User.findOne({ email: userInput.email });
     if (existingUser) {
       errors.push({message: 'User exists already!'});
-      // const error = new Error('User exists already!');
-      
-      // throw errors;
     }
 
     const existingCompany = await Company.findOne({ name: userInput.company_name });
     console.log(existingCompany);
     if (existingCompany) {
-      errors.push({message: 'Company exists already!!'});
-      // const error = new Error('Company exists already!');
-      // throw errors;
+      errors.push({message: 'Company exists already!'});
     }
     console.log(errors);
      if (errors.length > 0) {
@@ -70,27 +58,5 @@ module.exports = {
       throw error;
     }
     return user;  
-  },
-  login: async function({ email, password }) {
-    const user = await User.findOne({email: email});
-    if (!user) {
-      const error = new Error('User not found');
-      error.code = 401;
-      throw error;
-    }
-    const isEqual = await bcrypt.compare(password, user.password);
-    if (!isEqual) {
-      const error = new Error('password is incorrect!');
-      error.code = 401;
-      throw error;
-    }
-    const token = jwt.sign({
-      userId: user._id.toString(),
-      email: user.email
-    },
-    'crmdevpuzzlekey',
-    {  expiresIn: '1h' }
-    );
-    return { token: token, userId: user._id.toString() }
   }
 };
