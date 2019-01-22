@@ -39,11 +39,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 })
 /* TODO: check if it can be refactored and put to graphql module not in app module */
 export class AppModule {
-  // constructor(
-  //   apollo: Apollo,
-  //   httpLink: HttpLink
-  // ) {
-  //   const http = httpLink.create({ uri: '/graphql' });
+  /* constructor(
+    apollo: Apollo,
+    httpLink: HttpLink
+  ) {
+    const http = httpLink.create({ uri: '/graphql' });
 
   //   const authMiddleware = new ApolloLink((operation, forward) => {
   //     // add the authorization to the headers
@@ -55,9 +55,9 @@ export class AppModule {
   //     return forward(operation);
   //   });
 
-  //   apollo.create({
-  //     cache: new InMemoryCache(),
-  //     link: from([authMiddleware, http]),
-  //   });
-  // }
+    apollo.create({
+      cache: new InMemoryCache(),
+      link: from([authMiddleware, http]),
+    });
+  } */
 }
