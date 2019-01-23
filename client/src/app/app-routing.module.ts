@@ -42,6 +42,11 @@ const routes: Routes = [
             component: EmployeeInfoComponent
           }
         ]
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'employees'
       }
     ]
   }
