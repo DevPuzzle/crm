@@ -11,7 +11,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule, MatIconModule } from '@angular/material';
+import { MatCardModule, MatListModule } from '@angular/material';
+import {MatDividerModule} from '@angular/material/divider';
 
 // all angular material modules go here
 const MATERIAL_MODULES = [
@@ -26,8 +27,9 @@ const MATERIAL_MODULES = [
   MatSnackBarModule,
   MatTabsModule,
   MatCardModule,
-  MatIconModule
-]
+  MatDividerModule,
+  MatListModule
+];
 
 @NgModule({
   declarations: [],

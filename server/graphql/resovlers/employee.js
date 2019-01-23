@@ -15,7 +15,7 @@ module.exports = {
       if (!validator.isEmail(employeeInput.email)) {
       errors.push({message: 'E-mail is invalid'});
       }
-      if (!validator.isEmpty(employeeInput.email)) {
+      if (validator.isEmpty(employeeInput.email)) {
         errors.push({message: 'E-mail required'});
       }
       if (!validator.isEmpty(employeeInput.name)) {

@@ -14,6 +14,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
 import { ContactMadeComponent } from './components/contact-made/contact-made.component';
 import { ClientsComponent } from './components/clients/clients.component';
+import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
+import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { ClientsComponent } from './components/clients/clients.component';
     HeaderComponent,
     CoverLettersComponent,
     ContactMadeComponent,
-    ClientsComponent
+    ClientsComponent,
+    EmployeeListComponent,
+    EmployeeInfoComponent
   ],
   imports: [
     BrowserModule,
