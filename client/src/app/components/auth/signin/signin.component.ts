@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { catchError } from 'rxjs/operators';
 import { of, throwError } from 'rxjs';
+import { ResponseToken } from 'src/app/shared/interfaces';
+import { Router } from '@angular/router';
 
 export const SIGN_IN_USER = gql`
   query SignInUser($email: String!, $password: String!) {
@@ -28,7 +30,7 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apollo: Apollo,
-    private snackBar: MatSnackBar) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.initAuthForm();
@@ -42,9 +44,8 @@ export class SigninComponent implements OnInit {
   }
 
   onSignIn() {
-    console.log(this.signinForm.value);
     this.apollo
-      .watchQuery({
+      .watchQuery<{login: ResponseToken}>({
         query: SIGN_IN_USER,
         variables: {
           email: this.signinForm.value.email,
@@ -59,26 +60,15 @@ export class SigninComponent implements OnInit {
           console.log(err.networkError);
           if (err.networkError) {
             this.isLoginData = false;
-            const errorMessage = err.networkError.error.errors[0].message;
-            this.snackBar.open(
-              errorMessage,
-              'Dismiss'
-            );
           }
           return of(null);
         })
       )
-      .subscribe(
-        response => {
-          // notify that user registered successfully
-          if (response) {
-            this.isLoginData = true;
-          }
-          // else {this.snackBar.open(
-          //   'ERROR'
-          // ); }
-        }
-      );
+      .subscribe(({ data, loading }) => {
+        const {login} = data;
+        localStorage.setItem('uitoken', login.token);
+        this.router.navigate(['/']);
+      });
   }
 
 }
