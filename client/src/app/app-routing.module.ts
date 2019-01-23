@@ -1,3 +1,4 @@
+import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ContactMadeComponent } from './components/contact-made/contact-made.component';
 import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
@@ -29,9 +30,18 @@ const routes: Routes = [
         component: ClientsComponent
       },
       {
-        path: '',
-        pathMatch: 'full',
-        component: EmployeeComponent
+        path: 'employees',
+        component: EmployeeComponent,
+        children: [
+          {
+            path: 'new',
+            component: EmployeeInfoComponent
+          },
+          {
+            path: 'edit/:employeeId',
+            component: EmployeeInfoComponent
+          }
+        ]
       }
     ]
   }

@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
         icon: 'fas fa-user-tie'
       },
       {
-        link: '/',
+        link: '/employees',
         label: 'Employees',
         icon: 'fas fa-users'
       }

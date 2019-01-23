@@ -1,19 +1,20 @@
 const validator = require('validator');
-
 const Employee = require('../../models/employee');
 const User = require('../../models/user');
 const Company = require('../../models/company');
+const {checkAuth} = require('../../helpers/helpers');
 
 module.exports = {
     createEmployee: async function({ employeeInput }, req) {
-      if (!req.isAuth) {
+      /* if (!req.isAuth) {
         const error = new Error('Not authenticated!');
         error.code = 401;
         throw error;
-      }
+      } */
+      checkAuth(req.isAuth);
       const errors = [];
       if (!validator.isEmail(employeeInput.email)) {
-      errors.push({message: 'E-mail is invalid'});
+        errors.push({message: 'E-mail is invalid'});
       }
       if (validator.isEmpty(employeeInput.email)) {
         errors.push({message: 'E-mail required'});
@@ -32,11 +33,11 @@ module.exports = {
       }
       console.log(errors);
       if (errors.length > 0) {
-      const error = new Error(errors);
-      error.data = errors;
-      error.code = 422;
-      console.log(error);
-      throw error;
+        const error = new Error(errors);
+        error.data = errors;
+        error.code = 422;
+        console.log(error);
+        throw error;
       }
       
       const employee = new Employee({
@@ -50,7 +51,17 @@ module.exports = {
       console.log(createdEmployee);
     
       return { ...createdEmployee._doc };
-      },
+    },
+
+    employees: async function(_, req) {
+      checkAuth(req.isAuth);
+      // get current user
+      const user = await User.findById(req.userId);
+      // find all employees where user.company_id = company_id
+      const employees = await Employee.find({company_id: user.company_id});
+      return employees;
+    },
+
     getEmployee: async function({ _id }) {
       const user = await User.findOne({ _id: _id });
       if (!user) {

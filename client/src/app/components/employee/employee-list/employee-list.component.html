@@ -1,15 +1,18 @@
 <div class="employee-list">
   <mat-card>
-      <mat-card-header>
-          <mat-card-title>Employee list</mat-card-title>
-      </mat-card-header>
-          <mat-list>
-            <mat-list-item>Item 1</mat-list-item>
+    <mat-card-header>
+      <mat-card-title>Employee list</mat-card-title>
+    </mat-card-header>
+      <mat-list>
+        <ng-container *ngFor="let employee of employees">
+          <a [routerLink]="'edit/' + employee._id" class="list-item-link">
+            <mat-list-item (click)="onShowEmployeeInfo(employee._id)" class="list-item">{{employee?.name}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Item 2</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>Item 3</mat-list-item>
-          </mat-list>
+          </a>
+        </ng-container>
+      </mat-list>
   </mat-card>
 </div>
+
+<a routerLink="new" mat-raised-button color="primary">Add</a>
 
