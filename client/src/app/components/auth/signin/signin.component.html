@@ -2,14 +2,25 @@
 
   <mat-form-field>
     <input matInput formControlName="email" type="email" placeholder="Email" required>
-
+    <mat-error *ngIf="signinForm.get('email').hasError('required')">
+      {{requiredFieldError}}
+    </mat-error>
+    <mat-error *ngIf="signinForm.get('email').hasError('email')">
+      Please enter a valid email
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <input matInput formControlName="password" type="password" placeholder="Password" required>
+    <mat-error *ngIf="signinForm.get('password').hasError('required')">
+      {{requiredFieldError}}
+    </mat-error>
+    <mat-error *ngIf="signinForm.get('password').hasError('minlength')">
+      Password should be at least 6 haracters long
+    </mat-error>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" [disabled]="signinForm.invalid">
+  <button mat-flat-button color="primary" [disabled]="signinForm.invalid" class="submit-button">
     Sign in
   </button>
   <mat-error *ngIf="!isLoginData">Login or password are incorrect.</mat-error>

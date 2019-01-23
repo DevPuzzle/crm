@@ -26,6 +26,7 @@ export const SIGN_IN_USER = gql`
 export class SigninComponent implements OnInit {
   isLoginData = true;
   signinForm: FormGroup;
+  requiredFieldError = 'This is a required field';
 
   constructor(
     private fb: FormBuilder,
@@ -38,8 +39,8 @@ export class SigninComponent implements OnInit {
 
   initAuthForm() {
     this.signinForm = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
+      'email': ['', [Validators.required, Validators.email] ],
+      'password': ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
