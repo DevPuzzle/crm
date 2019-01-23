@@ -17,16 +17,13 @@ export function createApollo(httpLink: HttpLink) {
   const middleware = new ApolloLink((operation, forward) => {
 
     // Check for token
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      return forward(operation);
-    }
+    const token = localStorage.getItem('uitoken');
+    if (!token) return forward(operation);
 
     operation.setContext({
       headers: new HttpHeaders().set(
         'Authorization',
-        token,
+        `Bearer ${token}`,
       ),
     });
     return forward(operation);
