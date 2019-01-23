@@ -10,13 +10,21 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthModule } from './components/auth/auth.module';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { HeaderComponent } from './components/header/header.component';
+import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
+import { ContactMadeComponent } from './components/contact-made/contact-made.component';
+import { ClientsComponent } from './components/clients/clients.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    HeaderComponent,
+    CoverLettersComponent,
+    ContactMadeComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,

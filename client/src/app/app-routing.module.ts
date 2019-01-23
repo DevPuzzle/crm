@@ -1,3 +1,6 @@
+import { ClientsComponent } from './components/clients/clients.component';
+import { ContactMadeComponent } from './components/contact-made/contact-made.component';
+import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
@@ -11,11 +14,23 @@ const routes: Routes = [
   },
   {
     path: '',
-    pathMatch: 'full',
     component: MainLayoutComponent,
     children: [
       {
+        path: 'letters',
+        component: CoverLettersComponent
+      },
+      {
+        path: 'contact-made',
+        component: ContactMadeComponent
+      },
+      {
+        path: 'clients',
+        component: ClientsComponent
+      },
+      {
         path: '',
+        pathMatch: 'full',
         component: EmployeeComponent
       }
     ]
