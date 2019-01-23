@@ -10,13 +10,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthModule } from './components/auth/auth.module';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
+import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    EmployeeListComponent,
+    EmployeeInfoComponent
   ],
   imports: [
     BrowserModule,
