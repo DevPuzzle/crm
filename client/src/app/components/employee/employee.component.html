@@ -1,3 +1,16 @@
-<app-employee-list></app-employee-list>
-<!-- <app-employee-info></app-employee-info> -->
-<router-outlet></router-outlet>
+<div class="bounds">
+  <div class="content"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxFlexFill
+    fxLayoutAlign="start"
+    >
+
+    <div fxFlex="33" class="sec1" fxFlex.xs="55" >
+        <app-employee-list></app-employee-list>
+    </div>
+    <div fxFlex="65" class="sec2" fxFlex="65">
+        <app-employee-info></app-employee-info>
+    </div>
+  </div>
+</div>

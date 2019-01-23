@@ -10,12 +10,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthModule } from './components/auth/auth.module';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+<<<<<<< HEAD
+=======
+import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
+import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
+>>>>>>> 7446591e211fc55e0fa92f28b9004d6c9df8076c
 import { HeaderComponent } from './components/header/header.component';
 import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
 import { ContactMadeComponent } from './components/contact-made/contact-made.component';
 import { ClientsComponent } from './components/clients/clients.component';
+<<<<<<< HEAD
 import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
 import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
+=======
+>>>>>>> 7446591e211fc55e0fa92f28b9004d6c9df8076c
 
 
 @NgModule({
@@ -23,12 +31,12 @@ import { EmployeeInfoComponent } from './components/employee/employee-info/emplo
     AppComponent,
     MainLayoutComponent,
     EmployeeComponent,
+    EmployeeListComponent,
+    EmployeeInfoComponent,
     HeaderComponent,
     CoverLettersComponent,
     ContactMadeComponent,
-    ClientsComponent,
-    EmployeeListComponent,
-    EmployeeInfoComponent
+    ClientsComponent
   ],
   imports: [
     BrowserModule,
