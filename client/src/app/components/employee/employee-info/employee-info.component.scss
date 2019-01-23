@@ -1,0 +1,35 @@
+.employee-info {
+  margin-left: 1rem;
+  @media(max-width: 599px){
+    margin-top: 1rem;
+    margin-left: 0;
+  }
+  .mat-card {
+    padding: 0;
+    .mat-card-header {
+      align-content: center;
+      align-items: center;
+      display: flex;
+      justify-content: start;
+      height: 40px;
+      padding: 8px 20px;
+      color: rgba(0,0,0,.54);
+      background: rgba(0,0,0,.03);
+      .mat-card-title {
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+    .employee-info-form {
+      padding: 16px;
+      mat-form-field {
+        width: 100%;
+      }
+      .company {
+        width: auto;
+      }
+    }
+  }
+}
+

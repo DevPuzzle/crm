@@ -1,3 +1,35 @@
-<p>
-  employee-info works!
-</p>
+<div class="employee-info">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Employee info</mat-card-title>
+        </mat-card-header>
+        <form class="employee-info-form">
+            <mat-form-field class="company">
+              <input matInput placeholder="Company" disabled value="DevPuzzle">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="First name" [formControl]="" required>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Last name" [formControl]="" required>
+                <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="E-mail" [formControl]="" required>
+                <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="skills">
+              <textarea matInput placeholder="Skills"></textarea>
+            </mat-form-field>
+
+          </form>
+    </mat-card>
+  </div>
+
+
+
