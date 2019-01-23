@@ -8,19 +8,15 @@ import { GraphQLModule } from './graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthModule } from './components/auth/auth.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-import { Apollo } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular-link-http';
-import { ApolloLink, from } from 'apollo-link';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { EmployeeComponent } from './components/employee/employee.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,
