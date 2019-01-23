@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { setContext } from 'apollo-link-context';
 import { environment } from './../../environments/environment';
 import {NgModule} from '@angular/core';
 import {ApolloModule, APOLLO_OPTIONS, Apollo} from 'apollo-angular';
@@ -19,7 +18,10 @@ export function createApollo(httpLink: HttpLink) {
 
     // Check for token
     const token = localStorage.getItem('token');
-    if (!token) return forward(operation);
+
+    if (!token) {
+      return forward(operation);
+    }
 
     operation.setContext({
       headers: new HttpHeaders().set(

@@ -6,6 +6,7 @@ const graphqlHttp = require('express-graphql');
 
 const graphqlSchema = require('./graphql/schema/index');
 const graphqlResolver = require('./graphql/resovlers/index');
+const auth = require('./middleware/auth');
 
 const app = express();
 
@@ -23,8 +24,8 @@ app.use((req, res, next) => {
     }
     next();
   });
-  
-
+   
+  app.use(auth);
 
   app.use(
     '/graphql',
