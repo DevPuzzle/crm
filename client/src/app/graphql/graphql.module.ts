@@ -18,7 +18,9 @@ export function createApollo(httpLink: HttpLink) {
 
     // Check for token
     const token = localStorage.getItem('uitoken');
-    if (!token) return forward(operation);
+    if (!token) {
+      return forward(operation);
+    }
 
     operation.setContext({
       headers: new HttpHeaders().set(

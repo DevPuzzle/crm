@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthGQLService } from '../services/auth-gql.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-signin',
@@ -19,7 +20,9 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authGQLService: AuthGQLService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit() {
     this.initAuthForm();
@@ -49,5 +52,7 @@ export class SigninComponent implements OnInit {
         }
       );
   }
-
+  closeSignin(): void {
+    this.dialog.closeAll();
+  }
 }
