@@ -11,6 +11,7 @@ module.exports = buildSchema(`
     type RootQuery {
         getUser(_id: String!): UserData!
         employees: [Employee]!
+        employee(_id: String!): Employee!
         login(email: String!, password: String!): AuthData!
     }
 

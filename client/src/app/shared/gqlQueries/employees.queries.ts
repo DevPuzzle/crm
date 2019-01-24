@@ -4,6 +4,16 @@ export const GET_EMPLOYEES_LIST = gql`
   query getEmployees{
     employees{
       _id
+      name
+      last_name
+    }
+  }
+`;
+
+export const GET_EMPLOYEE_BY_ID = gql`
+  query getEmployees($id: String!) {
+    employee(_id: $id){
+      _id
       email
       name
       last_name

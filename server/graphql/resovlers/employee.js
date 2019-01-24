@@ -53,6 +53,18 @@ module.exports = {
       return { ...createdEmployee._doc };
     },
 
+    employee: async function({_id}) {
+      try{
+        const foundEmployee = await Employee.findById(_id);
+        return foundEmployee;
+      }catch(err) {
+        const error = new Error();
+        error.data = 'User was not found';
+        error.code = 422;
+        throw error;
+      }
+    },
+
     employees: async function(_, req) {
       checkAuth(req.isAuth);
       // get current user

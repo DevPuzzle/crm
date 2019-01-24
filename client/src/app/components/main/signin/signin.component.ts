@@ -42,6 +42,7 @@ export class SigninComponent implements OnInit {
         ({ data, loading }) => {
           const {login} = data;
           localStorage.setItem('uitoken', login.token);
+          this.closeSignin();
           this.router.navigate(['/employees']);
         },
         (error) => {
@@ -52,6 +53,7 @@ export class SigninComponent implements OnInit {
         }
       );
   }
+
   closeSignin(): void {
     this.dialog.closeAll();
   }
