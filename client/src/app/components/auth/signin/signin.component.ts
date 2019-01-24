@@ -1,21 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 import { catchError } from 'rxjs/operators';
-import { of, throwError } from 'rxjs';
-import { ResponseToken } from 'src/app/shared/interfaces';
+import { of } from 'rxjs';
 import { Router } from '@angular/router';
-
-export const SIGN_IN_USER = gql`
-  query SignInUser($email: String!, $password: String!) {
-    login(email: $email, password: $password){
-      userId
-      token
-    }
-  }
-`;
+import { AuthGQLService } from '../services/auth-gql.service';
 
 @Component({
   selector: 'app-signin',
@@ -30,7 +18,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private apollo: Apollo,
+    private authGQLService: AuthGQLService,
     private router: Router) { }
 
   ngOnInit() {
@@ -45,31 +33,21 @@ export class SigninComponent implements OnInit {
   }
 
   onSignIn() {
-    this.apollo
-      .watchQuery<{login: ResponseToken}>({
-        query: SIGN_IN_USER,
-        variables: {
-          email: this.signinForm.value.email,
-          password: this.signinForm.value.password
+      this.authGQLService
+      .logUserIn(this.signinForm.value.email, this.signinForm.value.password)
+      .subscribe(
+        ({ data, loading }) => {
+          const {login} = data;
+          localStorage.setItem('uitoken', login.token);
+          this.router.navigate(['/']);
         },
-        errorPolicy: 'all'
-      })
-      .valueChanges
-      .pipe(
-        /* TODO: think how to refactor it */
-        catchError(err => {
-          console.log(err.networkError);
-          if (err.networkError) {
+        (error) => {
+          /* also need to check that this not a server error */
+          if (error.networkError) {
             this.isLoginData = false;
           }
-          return of(null);
-        })
-      )
-      .subscribe(({ data, loading }) => {
-        const {login} = data;
-        localStorage.setItem('uitoken', login.token);
-        this.router.navigate(['/']);
-      });
+        }
+      );
   }
 
 }
