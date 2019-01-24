@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -31,7 +31,9 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apollo: Apollo,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit() {
     this.initSignupForm();
@@ -80,5 +82,7 @@ export class SignupComponent implements OnInit {
         }
       );
   }
-
+  closeSignup(): void {
+    this.dialog.closeAll();
+  }
 }

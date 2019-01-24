@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
-  <a 
-    *ngFor="let link of links" mat-button 
-    [routerLink]="link.link" routerLinkActive="active" 
+  <mat-toolbar-row class="wrapper">
+  <a
+    *ngFor="let link of links" mat-button
+    [routerLink]="link.link" routerLinkActive="active"
     >
     {{link.label}}
     <!-- <i [class]="link.icon" class="nav-icon"></i> -->
   </a>
+</mat-toolbar-row>
 </mat-toolbar>

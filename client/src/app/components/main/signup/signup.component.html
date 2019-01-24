@@ -32,5 +32,6 @@
     Sign up
   </button>
   <mat-error *ngFor="let error of errorMessage">{{ error.message }}</mat-error>
+  <i (click)="closeSignup()" class="fas fa-times"></i>
 
 </form>

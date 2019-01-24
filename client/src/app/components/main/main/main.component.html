@@ -13,8 +13,12 @@
         <div>
           <a mat-button (click)="onScroll(about)">About</a>
           <a mat-button (click)="onScroll(contacts)">Contact us</a>
-          <button mat-button (click)="onShowSigninModal()">Signin</button>
-          <button mat-button (click)="onShowSignupModal()">Signup</button>
+          <button class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
+            <i class="fas fa-sign-in-alt"></i>
+          </button>
+          <button class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
+              <i class="fas fa-user-plus"></i>
+          </button>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
