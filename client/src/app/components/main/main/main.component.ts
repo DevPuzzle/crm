@@ -1,15 +1,6 @@
+import { SignupComponent } from './../signup/signup.component';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-
-/* export const SIGN_IN_USER = gql`
-  query SignInUser($email: String!, $password: String!){
-    login(email: $email, password: $password) {
-      token
-      userId
-    }
-  }
-`; */
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-main',
@@ -22,7 +13,7 @@ export class MainComponent implements OnInit {
   width: number = 100;
   height: number = 100;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
     this.style = {
@@ -56,5 +47,9 @@ export class MainComponent implements OnInit {
 
   onScroll(el: HTMLElement) {
     el.scrollIntoView();
+  }
+
+  onShowSignupModal() {
+    this.dialog.open(SignupComponent);
   }
 }

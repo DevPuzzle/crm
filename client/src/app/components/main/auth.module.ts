@@ -23,6 +23,10 @@ import { ParticlesModule } from 'angular-particle';
     AngularMaterialModule,
     FlexLayoutModule,
     ParticlesModule
+  ],
+  entryComponents: [
+    SigninComponent,
+    SignupComponent
   ]
 })
 export class AuthModule { }

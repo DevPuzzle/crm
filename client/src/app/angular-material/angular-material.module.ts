@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule, MatListModule } from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // all angular material modules go here
 const MATERIAL_MODULES = [
@@ -28,7 +29,8 @@ const MATERIAL_MODULES = [
   MatTabsModule,
   MatCardModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
+  MatDialogModule
 ];
 
 @NgModule({
