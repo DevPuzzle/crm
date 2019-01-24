@@ -7,6 +7,7 @@ import { GraphQLModule } from 'src/app/graphql/graphql.module';
 import { AuthComponent } from './auth/auth.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ParticlesModule } from 'angular-particle';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SignupComponent } from './signup/signup.component';
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ParticlesModule
   ]
 })
 export class AuthModule { }

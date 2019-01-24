@@ -1,41 +1,75 @@
-.wrapper{
-  height: 100vh;
-  background: url('../../../../assets/img/starting-page.jpg');
-  background-size: cover;
-  position: relative;
-  align-items: center;
+$primary: #3f51b5;
 
-  .logo{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    color: #fff;
-    font-size: 20px;
-    font-family: "Helvetica Neue";
-    font-weight: 100;
-  }
-
-  .auth-panel{
-    display: flex;
-    width: fit-content;
-    padding: 30px;
-    margin: 0 auto;
-  }
-
-  .motto{
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    color: #ffff;
-    font-size: 20px;
-    padding: 0 20px;
-    background: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    font-family: "Helvetica Neue";
-    font-weight: 100;
-    justify-content: center;
-  }
+.content-wrapper{
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
 }
 
+.background{
+  background-size: cover;
+  position: relative;
 
+  .main{
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    .header{
+      z-index: 1;
+      justify-content: space-between;
+      padding: 0;
+      
+      margin: 0 auto;
+    }
+
+    .banner-wrapper{
+      height:70vh;
+      width: 100%;
+      background: $primary;
+      position: relative;
+
+      .banner{
+        max-width: 1140px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        top: 30%;
+        .motto{
+          position: absolute;
+          left: 0;
+          max-width: 60%;
+          width: 100%;
+          color: #ffff;
+          .title{
+            font-size: 48px;
+            line-height: 0;
+          }
+          .text{
+            font-size: 22px;
+          }
+        }
+      }
+      .canvas-overlay{
+        position: absolute;
+        bottom: 0;
+        background: url('../../../../assets/img/canvas.svg');
+        background-size: cover;
+        height: 300px;
+        width: 100%;
+        z-index: 1;
+      }
+    }
+  }
+
+  .phone-image-wrapper{
+    position: absolute;
+    right: 0;
+    top: 80px;
+    .phone-image{
+      max-width: 100%;
+      width: 700px;
+      height: auto;
+    }
+    z-index: 2;
+  }
+}

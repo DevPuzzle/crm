@@ -1,8 +1,51 @@
-<div fxLayout="row" class="wrapper">
-  <div class="logo">
-    DevPuzzle
+<div fxLayout="row" class="background mat-primary">
+  
+  <div class="phone-image-wrapper">
+    <img src="assets/img/starting-page-phone.png" alt="" class="phone-image">
   </div>
-  <mat-card class="auth-panel">
+  
+  <div class="main">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row class="header content-wrapper">
+        <div>
+          DevPuzzle
+        </div>
+        <div>
+          <a mat-button (click)="onScroll(about)">About</a>
+          <a mat-button (click)="onScroll(contacts)">Contact us</a>
+          <button mat-button>Signin</button>
+          <button mat-button>Signup</button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <div class="banner-wrapper">
+      <div class="banner content-wrapper">
+        <div class="motto">
+          <p class="title">Best <b>CRM system</b></p>
+          <p class="text">Let us help you to remember and foresee each step.</p>
+        </div>
+      </div>
+      <particles [style]="style" [width]="width" [height]="height" [params]="params"></particles>
+      <div class="canvas-overlay"></div>
+    </div>
+    
+    <div class="wrapper">
+      <div #about style="margin-top: 1000px">
+        about us
+      </div>
+      <div #contacts style="margin-top: 600px">
+        contacts
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+  
+
+  
+  <!-- <mat-card class="auth-panel">
     <mat-tab-group>
       <mat-tab label="Signin">
         <app-signin></app-signin>
@@ -16,5 +59,4 @@
     <p>
       Let us help you to remember and foresee each step.
     </p>
-  </div>
-</div>
+  </div> -->
