@@ -14,11 +14,13 @@ $primary: #3f51b5;
     margin: 0 auto;
     position: relative;
     width: 100%;
+    .toolbar{
+      position: absolute;
+    }
     .header{
       z-index: 1;
       justify-content: space-between;
       padding: 0;
-      
       margin: 0 auto;
     }
 
@@ -51,7 +53,7 @@ $primary: #3f51b5;
       }
       .canvas-overlay{
         position: absolute;
-        bottom: 0;
+        bottom: -1px;
         background: url('../../../../assets/img/canvas.svg');
         background-size: cover;
         height: 300px;
