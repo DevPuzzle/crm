@@ -39,7 +39,7 @@ export class SigninComponent implements OnInit {
         ({ data, loading }) => {
           const {login} = data;
           localStorage.setItem('uitoken', login.token);
-          this.router.navigate(['/']);
+          this.router.navigate(['/employees']);
         },
         (error) => {
           /* also need to check that this not a server error */

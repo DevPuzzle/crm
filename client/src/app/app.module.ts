@@ -16,6 +16,7 @@ import { ContactMadeComponent } from './components/contact-made/contact-made.com
 import { ClientsComponent } from './components/clients/clients.component';
 import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
 import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { EmployeeInfoComponent } from './components/employee/employee-info/emplo
     HeaderComponent,
     CoverLettersComponent,
     ContactMadeComponent,
-    ClientsComponent
+    ClientsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

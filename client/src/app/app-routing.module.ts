@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ContactMadeComponent } from './components/contact-made/contact-made.component';
@@ -49,6 +50,10 @@ const routes: Routes = [
         ]
       },
     ]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 
