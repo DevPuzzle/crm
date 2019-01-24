@@ -1,4 +1,5 @@
 import { SignupComponent } from './../signup/signup.component';
+import { SigninComponent } from './../signin/signin.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
@@ -51,5 +52,8 @@ export class MainComponent implements OnInit {
 
   onShowSignupModal() {
     this.dialog.open(SignupComponent);
+  }
+  onShowSigninModal() {
+    this.dialog.open(SigninComponent);
   }
 }
