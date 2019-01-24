@@ -12,11 +12,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 `; */
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class MainComponent implements OnInit {
   style: object = {};
   params: object = {};
   width: number = 100;
@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
       'right': 0,
       'bottom': 0,
     };
- 
+
     this.params = {
       particles: {
         number: {

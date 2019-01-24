@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AuthModule } from './components/auth/auth.module';
+import { AuthModule } from './components/main/auth.module';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { HeaderComponent } from './components/header/header.component';

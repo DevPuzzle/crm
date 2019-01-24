@@ -5,13 +5,18 @@ import { CoverLettersComponent } from './components/cover-letters/cover-letters.
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-import { AuthComponent } from './components/auth/auth/auth.component';
+import { MainComponent } from './components/main/main/main.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    component: AuthComponent
+    path: 'main',
+    component: MainComponent
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'main'
   },
   {
     path: '',
@@ -43,11 +48,6 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'employees'
-      }
     ]
   }
 ];
