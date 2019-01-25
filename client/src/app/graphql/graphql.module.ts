@@ -1,3 +1,5 @@
+import { AuthGQLService } from './../components/main/services/auth-gql.service';
+import { onError } from 'apollo-link-error';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from './../../environments/environment';
 import {NgModule} from '@angular/core';
@@ -5,16 +7,13 @@ import {ApolloModule, APOLLO_OPTIONS, Apollo} from 'apollo-angular';
 import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import { HttpHeaders, HttpClientModule } from '@angular/common/http';
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink, from } from 'apollo-link';
 
 const uri = `${environment.serverUrl}/graphql`; // <-- add the URL of the GraphQL server here
+
 export function createApollo(httpLink: HttpLink) {
   const http = httpLink.create({ uri });
-
-  /* const auth = setContext(_ => {
-    return {headers: {Authorization: "1234"} }
-  }); */
-  const middleware = new ApolloLink((operation, forward) => {
+  const tokenMiddleware = new ApolloLink((operation, forward) => {
 
     // Check for token
     const token = localStorage.getItem('uitoken');
@@ -30,9 +29,23 @@ export function createApollo(httpLink: HttpLink) {
     });
     return forward(operation);
   });
-  const link = middleware.concat(http);
+
+  const errorHandler = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.map(({ message, locations, path }) => {
+        console.log(message);
+        // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      });
+    if (networkError) {
+      const errorStatus = networkError['error'].errors[0].status;
+      if(errorStatus === 401) {
+        // HOW TO USE SERVICE HERE???
+      }
+    }
+  });
+
   return {
-    link: link,
+    link: from([tokenMiddleware, errorHandler, http]),
     cache: new InMemoryCache(),
   };
 }
