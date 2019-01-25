@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const graphqlHttp = require('express-graphql');
 
 const graphqlSchema = require('./graphql/schema/index');
-const graphqlResolver = require('./graphql/resovlers/index');
+/* const graphqlResolver = require('./graphql/resovlers/index'); */
 const auth = require('./middleware/auth');
 
 const app = express();
@@ -31,7 +31,6 @@ app.use((req, res, next) => {
     '/graphql',
     graphqlHttp({
       schema: graphqlSchema,
-      rootValue: graphqlResolver,
       graphiql: true,
       formatError(err) {
         if (!err.originalError) {

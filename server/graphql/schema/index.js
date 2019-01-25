@@ -1,3 +1,16 @@
+const { mergeSchemas } = require('graphql-tools');
+
+const {UserSchema} = require('../types/User');
+const {AuthSchema} = require('../types/Auth');
+const {EmployeeSchema} = require('../types/Employee');
+
+const schemas = [];
+schemas.push(UserSchema, AuthSchema, EmployeeSchema);
+
+module.exports = mergeSchemas({
+  schemas: schemas
+});
+/* 
 const { buildSchema } = require('graphql');
 const UserTypes = require('./User');
 const EmployeeTypes = require('./Employee');
@@ -24,4 +37,4 @@ module.exports = buildSchema(`
         query: RootQuery
         mutation: RootMutation
     }
-`);
+`); */
