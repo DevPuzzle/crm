@@ -51,4 +51,10 @@ export class EmployeeInfoComponent implements OnInit {
       'skills': [employeeSkills, [] ]
     });
   }
+
+  onSave() {
+    console.log('onSave Work');
+    console.log(this.employeeForm.value);
+    this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
+  }
 }

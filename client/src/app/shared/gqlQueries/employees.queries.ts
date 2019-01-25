@@ -22,3 +22,18 @@ export const GET_EMPLOYEE_BY_ID = gql`
     }
   }
 `;
+
+export const CREATE_EMPLOYEE = gql`
+  mutation createEmployee($emmployeeData: EmployeeInputData){
+    createEmployee(employeeInput: $emmployeeData){
+      _id
+      email
+      name
+      last_name
+      skills
+      company_id
+    }
+  }
+`;
+
+

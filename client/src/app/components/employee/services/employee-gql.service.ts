@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Employee } from 'src/app/shared/interfaces';
 import * as employeesQueries from 'src/app/shared/gqlQueries/employees.queries';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeGQLService {
-
+  errorMessage: string;
   constructor(private apollo: Apollo) { }
 
   getAllEmployees() {
@@ -27,5 +29,34 @@ export class EmployeeGQLService {
       }
     })
     .valueChanges;
+  }
+
+  createEmployee(employeeForm) {
+    console.log('CREATE THIS EMPLOYEE!!!', employeeForm);
+    return this.apollo
+      .mutate({
+        mutation: employeesQueries.CREATE_EMPLOYEE,
+        variables: {
+          emmployeeData: employeeForm
+        },
+        errorPolicy: 'all'
+      })
+      .pipe(
+        catchError(err => {
+          console.log(err.networkError);
+          if (err.networkError) {
+            this.errorMessage = err.networkError.error.errors[0].data;
+            console.log(this.errorMessage);
+          }
+          return of(null);
+        })
+      )
+      .subscribe(
+        response => {
+          if (response) {
+            console.log('mutation succeful');
+          }
+        }
+      );
   }
 }

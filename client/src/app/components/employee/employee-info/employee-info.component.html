@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Employee info</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="employeeForm" class="employee-info-form">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSave()" class="employee-info-form">
       <mat-form-field class="company">
           <input matInput placeholder="Company" disabled>
       </mat-form-field>

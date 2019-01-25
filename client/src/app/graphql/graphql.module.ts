@@ -31,14 +31,15 @@ export function createApollo(httpLink: HttpLink) {
   });
 
   const errorHandler = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
+    if (graphQLErrors) {
       graphQLErrors.map(({ message, locations, path }) => {
         console.log(message);
         // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
       });
+    }
     if (networkError) {
       const errorStatus = networkError['error'].errors[0].status;
-      if(errorStatus === 401) {
+      if (errorStatus === 401) {
         // HOW TO USE SERVICE HERE???
       }
     }
