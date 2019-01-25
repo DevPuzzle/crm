@@ -35,6 +35,9 @@ export class EmployeeGQLService {
     console.log('CREATE THIS EMPLOYEE!!!', employeeForm);
     return this.apollo
       .mutate({
+        refetchQueries: [{
+          query: employeesQueries.GET_EMPLOYEES_LIST
+        }],
         mutation: employeesQueries.CREATE_EMPLOYEE,
         variables: {
           emmployeeData: employeeForm
@@ -43,7 +46,6 @@ export class EmployeeGQLService {
       })
       .pipe(
         catchError(err => {
-          console.log(err.networkError);
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
             console.log(this.errorMessage);
