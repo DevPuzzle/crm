@@ -2,7 +2,7 @@ import { EmployeeGQLService } from './../services/employee-gql.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from 'src/app/shared/interfaces';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-info',
@@ -26,16 +26,29 @@ export class EmployeeInfoComponent implements OnInit {
           .subscribe( ({data, loading}) => {
             const {employee} = data;
             this.employee = employee;
+            this.initEmployeeForm(employee);
           });
       }
     });
   }
 
-  initEmployeeForm() {
+  initEmployeeForm(employee?) {
+    let employeeName = '';
+    let employeeLastname = '';
+    let employeeEmail = '';
+    let employeeSkills = '';
+
+    if (employee) {
+      employeeName = employee.name;
+      employeeLastname = employee.last_name;
+      employeeEmail = employee.email;
+      employeeSkills = employee.skills;
+    }
     this.employeeForm = this.fb.group({
-      'name': ['', [Validators.required] ],
-      'last-name': ['', [Validators.required] ],
-      'email': ['', [Validators.required, Validators.email] ]
+      'name': [employeeName, [Validators.required] ],
+      'last_name': [employeeLastname, [Validators.required] ],
+      'email': [employeeEmail, [Validators.required, Validators.email] ],
+      'skills': [employeeSkills, [] ]
     });
   }
 }

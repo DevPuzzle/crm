@@ -1,6 +1,5 @@
 .employee-list {
-  /* width: 35%; */
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   .mat-card {
     padding: 0;
     .mat-card-header {
@@ -26,5 +25,9 @@
       background: rgba(0,0,0,.08);
     }
   }
+}
+
+.add-button {
+  margin-top: 1rem;
 }
 

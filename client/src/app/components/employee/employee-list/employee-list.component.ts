@@ -23,10 +23,6 @@ export class EmployeeListComponent implements OnInit {
       });
   }
 
-  onShowEmployeeInfo(employeeId: string) {
-    console.log(employeeId);
-  }
-
   onAddEmployee() {
     console.log('add employee');
     this.router.navigate(['new']);
