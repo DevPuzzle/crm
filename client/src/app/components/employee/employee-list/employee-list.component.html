@@ -6,7 +6,7 @@
       <mat-list>
         <ng-container *ngFor="let employee of employees">
           <a [routerLink]="'edit/' + employee._id" class="list-item-link">
-            <mat-list-item (click)="onShowEmployeeInfo(employee._id)" class="list-item">{{employee?.name}}</mat-list-item>
+            <mat-list-item (click)="onShowEmployeeInfo(employee._id)" class="list-item">{{employee?.name}} {{employee?.last_name}}</mat-list-item>
             <mat-divider></mat-divider>
           </a>
         </ng-container>

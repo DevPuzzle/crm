@@ -1,16 +1,11 @@
 const validator = require('validator');
 const Employee = require('../../models/employee');
 const User = require('../../models/user');
-const Company = require('../../models/company');
 const {checkAuth} = require('../../helpers/helpers');
 
 module.exports = {
     createEmployee: async function({ employeeInput }, req) {
-      /* if (!req.isAuth) {
-        const error = new Error('Not authenticated!');
-        error.code = 401;
-        throw error;
-      } */
+      
       checkAuth(req.isAuth);
       const errors = [];
       if (!validator.isEmail(employeeInput.email)) {
@@ -19,16 +14,14 @@ module.exports = {
       if (validator.isEmpty(employeeInput.email)) {
         errors.push({message: 'E-mail required'});
       }
-      if (!validator.isEmpty(employeeInput.name)) {
+      if (validator.isEmpty(employeeInput.name)) {
         errors.push({message: 'Name required'});
       }
 
       const user = await User.findById({ _id: req.userId });
-      
-      const company =  await Company.findById({_id: user.company_id.toString()});
-      const companyId = company._id.toString();
-      
-      if(user === null || company === null) {
+      const companyId = req.companyId;
+      console.log('employeeInput', employeeInput);
+      if(user === null || companyId === null) {
           errors.push({message: 'User or company not found'});
       }
       console.log(errors);

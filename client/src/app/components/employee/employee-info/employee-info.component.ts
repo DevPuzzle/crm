@@ -2,6 +2,7 @@ import { EmployeeGQLService } from './../services/employee-gql.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from 'src/app/shared/interfaces';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-info',
@@ -10,11 +11,14 @@ import { Employee } from 'src/app/shared/interfaces';
 })
 export class EmployeeInfoComponent implements OnInit {
   employee: Employee;
-  constructor(private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService) { }
+  employeeForm: FormGroup;
+  requiredFieldError = 'This is a required field';
+  constructor(private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.initEmployeeForm();
     this.activatedRoute.params.subscribe(params => {
-      if(params.employeeId) {
+      if (params.employeeId) {
         // get user info by id
         // autofill the form
         this.epmloyeeGQLService
@@ -24,7 +28,14 @@ export class EmployeeInfoComponent implements OnInit {
             this.employee = employee;
           });
       }
-    })
+    });
   }
 
+  initEmployeeForm() {
+    this.employeeForm = this.fb.group({
+      'name': ['', [Validators.required] ],
+      'last-name': ['', [Validators.required] ],
+      'email': ['', [Validators.required, Validators.email] ]
+    });
+  }
 }
