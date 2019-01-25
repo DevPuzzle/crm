@@ -1,7 +1,7 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const validator = require('validator');
-const Employee = require('../../models/employee');
-const User = require('../../models/user');
+const Employee = require('../../mongodb/models/employee');
+const User = require('../../mongodb/models/user');
 const {checkAuth} = require('../../helpers/helpers');
 
 const typeDefs = `

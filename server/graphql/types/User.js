@@ -1,8 +1,8 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const User = require('../../models/user');
-const Company = require('../../models/company');
+const User = require('../../mongodb/models/user');
+const Company = require('../../mongodb/models/company');
 
 const typeDefs = `
   type User {
