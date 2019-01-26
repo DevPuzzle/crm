@@ -1,41 +1,13 @@
-const {makeExecutableSchema} = require('graphql-tools');
 const validator = require('validator');
-const Employee = require('../../mongodb/models/employee');
-const User = require('../../mongodb/models/user');
-const {checkAuth} = require('../../helpers/helpers');
+const Employee = require('../mongodb/models/employee');
+const User = require('../mongodb/models/user');
+const {checkAuth} = require('../helpers/helpers');
 
-const typeDefs = `
-  type Employee {
-    _id: ID!
-    email: String!
-    name: String!
-    last_name: String
-    skills: String
-    company_id: String!
-  }
-
-  input EmployeeInputData {
-    email: String!
-    name: String!
-    last_name: String
-    skills: String
-  }
-
-  type Query {
-    employees: [Employee]!
-    employee(_id: String!): Employee!
-  }
-
-  type Mutation {
-    createEmployee(employeeInput: EmployeeInputData): Employee!
-  }
-`;
-
-
-let createEmployee = async function({ employeeInput }, req) {
-      
+async function createEmployee({ employeeInput }, req) {    
   checkAuth(req.isAuth);
+  
   const errors = [];
+  
   if (!validator.isEmail(employeeInput.email)) {
     errors.push({message: 'E-mail is invalid'});
   }
@@ -45,14 +17,13 @@ let createEmployee = async function({ employeeInput }, req) {
   if (validator.isEmpty(employeeInput.name)) {
     errors.push({message: 'Name required'});
   }
-
   const user = await User.findById({ _id: req.userId });
   const companyId = req.companyId;
-  console.log('employeeInput', employeeInput);
+
   if(user === null || companyId === null) {
       errors.push({message: 'User or company not found'});
   }
-  console.log(errors);
+
   if (errors.length > 0) {
     const error = new Error(errors);
     error.data = errors;
@@ -69,12 +40,10 @@ let createEmployee = async function({ employeeInput }, req) {
       company_id: companyId
   });
   const createdEmployee = await employee.save();
-  console.log(createdEmployee);
-
   return { ...createdEmployee._doc };
 }
 
-let getEmployeeById = async function({_id}) {
+async function getEmployeeById (_, {_id}, req) {
   try{
     const foundEmployee = await Employee.findById(_id);
     return foundEmployee;
@@ -86,26 +55,15 @@ let getEmployeeById = async function({_id}) {
   }
 }
 
-let getEmployees = async function(_, req) {
+async function getEmployees(_, req) {
   checkAuth(req.isAuth);
-  // get current user
   const user = await User.findById(req.userId);
-  // find all employees where user.company_id = company_id
   const employees = await Employee.find({company_id: user.company_id});
   return employees;
 }
 
-let resolvers = {
-  Query: {
-    employees: getEmployees,
-    employee: getEmployeeById
-  },
-  Mutation: {
-    createEmployee: createEmployee
-  }
-};
-
-exports.EmployeeSchema = makeExecutableSchema({
-  typeDefs: typeDefs,
-  resolvers: resolvers
-});
+module.exports = {
+  getEmployeeById: getEmployeeById,
+  getEmployees: getEmployees,
+  createEmployee: createEmployee
+}
