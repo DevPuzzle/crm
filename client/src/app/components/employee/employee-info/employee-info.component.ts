@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./employee-info.component.scss']
 })
 export class EmployeeInfoComponent implements OnInit {
-  employee: Employee;
+  isEditing: boolean;
   employeeForm: FormGroup;
   requiredFieldError = 'This is a required field';
   constructor(private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService, private fb: FormBuilder) { }
@@ -19,42 +19,44 @@ export class EmployeeInfoComponent implements OnInit {
     this.initEmployeeForm();
     this.activatedRoute.params.subscribe(params => {
       if (params.employeeId) {
-        // get user info by id
-        // autofill the form
         this.epmloyeeGQLService
           .getEmployeeById(params.employeeId)
           .subscribe( ({data, loading}) => {
             const {employee} = data;
-            this.employee = employee;
-            this.initEmployeeForm(employee);
+            this.isEditing = true;
+            this.fillInForm(employee);
           });
       }
     });
   }
 
-  initEmployeeForm(employee?) {
-    let employeeName = '';
-    let employeeLastname = '';
-    let employeeEmail = '';
-    let employeeSkills = '';
-
-    if (employee) {
-      employeeName = employee.name;
-      employeeLastname = employee.last_name;
-      employeeEmail = employee.email;
-      employeeSkills = employee.skills;
-    }
+  initEmployeeForm() {
     this.employeeForm = this.fb.group({
-      'name': [employeeName, [Validators.required] ],
-      'last_name': [employeeLastname, [Validators.required] ],
-      'email': [employeeEmail, [Validators.required, Validators.email] ],
-      'skills': [employeeSkills, [] ]
+      'name': ['', [Validators.required] ],
+      'last_name': ['', [Validators.required] ],
+      'email': ['', [Validators.required, Validators.email] ],
+      'skills': ['', [] ]
     });
+  }
+
+  fillInForm(employee) {
+    for(const key in employee) {
+      if( employee.hasOwnProperty( key ) ) {
+        this.employeeForm.patchValue({
+          [key]: employee[key]
+        })
+      }
+    }
   }
 
   onSave() {
     console.log('onSave Work');
     console.log(this.employeeForm.value);
-    this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
+    // this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
+    if(this.isEditing) {
+      // request to update user
+    }else{
+      // request to create user
+    }
   }
 }
