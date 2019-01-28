@@ -3,7 +3,8 @@ const Employee = require('../mongodb/models/employee');
 const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
-async function createEmployee({ employeeInput }, req) {    
+async function createEmployee({ employeeInput }, req) {
+  
   checkAuth(req.isAuth);
   
   const errors = [];
@@ -55,7 +56,7 @@ async function getEmployeeById (_, {_id}, req) {
   }
 }
 
-async function getEmployees(_, req) {
+async function getEmployees(req) {
   checkAuth(req.isAuth);
   const user = await User.findById(req.userId);
   const employees = await Employee.find({company_id: user.company_id});

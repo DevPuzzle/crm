@@ -31,7 +31,7 @@ const typeDefs = `
 const resolvers = {
   Query: {
     employee: employeeController.getEmployeeById,
-    employees: employeeController.getEmployees
+    employees: (_, args, req) => employeeController.getEmployees(req)
   },
   Mutation: {
     createEmployee: (_, employeeInput, req) => {
