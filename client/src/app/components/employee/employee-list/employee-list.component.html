@@ -6,7 +6,7 @@
       <mat-list>
         <ng-container *ngFor="let employee of employees">
           <a [routerLink]="'edit/' + employee._id" class="list-item-link">
-            <mat-list-item (click)="onShowEmployeeInfo(employee._id)" class="list-item">{{employee?.name}} {{employee?.last_name}}</mat-list-item>
+            <mat-list-item class="list-item">{{employee?.name}} {{employee?.last_name}}</mat-list-item>
             <mat-divider></mat-divider>
           </a>
         </ng-container>
@@ -14,5 +14,5 @@
   </mat-card>
 </div>
 
-<a routerLink="new" mat-raised-button color="primary">Add</a>
+<a routerLink="new" mat-raised-button color="primary" class="add-button">Add</a>
 
