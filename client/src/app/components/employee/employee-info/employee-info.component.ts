@@ -40,11 +40,11 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   fillInForm(employee) {
-    for(const key in employee) {
-      if( employee.hasOwnProperty( key ) ) {
+    for (const key in employee) {
+      if ( employee.hasOwnProperty( key ) ) {
         this.employeeForm.patchValue({
           [key]: employee[key]
-        })
+        });
       }
     }
   }
@@ -53,9 +53,9 @@ export class EmployeeInfoComponent implements OnInit {
     console.log('onSave Work');
     console.log(this.employeeForm.value);
     // this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
-    if(this.isEditing) {
+    if (this.isEditing) {
       // request to update user
-    }else{
+    } else {
       // request to create user
     }
   }

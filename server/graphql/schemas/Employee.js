@@ -2,13 +2,18 @@ const {makeExecutableSchema} = require('graphql-tools');
 const employeeController = require('../../controllers/employeeController');
 
 const typeDefs = `
+  type Company {
+    _id: ID!
+    name: String!
+  }
+
   type Employee {
     _id: ID!
     email: String!
     name: String!
     last_name: String
     skills: String
-    company_id: String!
+    company: Company
   }
 
   input EmployeeInputData {

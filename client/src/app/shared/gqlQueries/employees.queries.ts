@@ -18,7 +18,10 @@ export const GET_EMPLOYEE_BY_ID = gql`
       name
       last_name
       skills
-      company_id
+      company{
+        id_
+        name
+      }
     }
   }
 `;
