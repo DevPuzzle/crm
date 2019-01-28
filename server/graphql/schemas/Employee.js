@@ -1,5 +1,6 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const employeeController = require('../../controllers/employeeController');
+const companyController = require('../../controllers/companyController');
 
 const typeDefs = `
   type Company {
