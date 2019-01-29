@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserGQLService } from '../services/user-qql.service';
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userGQLService: UserGQLService) { }
 
   ngOnInit() {
+      this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
+      console.log('CLIENTS', data.getAuthorizedUser);
+  });
   }
 
 }
