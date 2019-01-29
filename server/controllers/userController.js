@@ -5,9 +5,15 @@ const jwt = require('jsonwebtoken');
 
 async function getAuthorizedUser (_, res, req) {
     const authHeader = req.get('Authorization');
-    if (!authHeader) {
+    /* if (!authHeader) {
         return next();
-      }
+    } */
+    if(!req.isAuth) {
+        const error = new Error('Not Authenticated!');
+        error.status = 401;
+        console.log(error);
+        throw error;
+    }
     const token = authHeader.split(' ')[1];
     let decodedToken;
     try {

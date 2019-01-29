@@ -4,6 +4,7 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createEmployee({ employeeInput }, req) {
+  
   checkAuth(req.isAuth);
   
   const errors = [];
@@ -56,7 +57,13 @@ async function getEmployeeById (_, {_id}, req) {
 }
 
 async function getEmployees(req) {
-  checkAuth(req.isAuth);
+  console.log(req.isAuth);
+  /* checkAuth(req.isAuth); */
+  if(!req.isAuth) {
+    const error = new Error('Not Authenticated!');
+    error.status = 401;
+    throw error;
+  }
   const user = await User.findById(req.userId);
   const employees = await Employee.find({company_id: user.company_id});
   return employees;

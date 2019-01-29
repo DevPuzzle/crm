@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ResponseToken } from 'src/app/shared/interfaces';
 import { SIGN_IN_USER } from 'src/app/shared/gqlQueries/auth.queries';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { SIGN_IN_USER } from 'src/app/shared/gqlQueries/auth.queries';
 
 export class AuthGQLService {
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo, private router: Router) { }
 
   logUserIn(email: string, password: string) {
     return this.apollo
@@ -22,5 +23,9 @@ export class AuthGQLService {
         errorPolicy: 'all'
       })
       .valueChanges;
+  }
+
+  logout() {
+    this.router.navigate(['/']);
   }
 }
