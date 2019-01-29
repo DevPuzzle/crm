@@ -19,7 +19,6 @@ export interface Employee {
 }
 
 export interface AuthorizedUser {
- // AuthorizedUser: {_id: string, name: string, email: string, company_id: string, company_name: string};
   _id: string;
   name: string;
   email: string;

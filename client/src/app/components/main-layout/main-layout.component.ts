@@ -10,7 +10,7 @@ export class MainLayoutComponent implements OnInit {
   constructor(private userGQLService: UserGQLService) { }
   ngOnInit() {
       this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
-        console.log('MAIN LAYOUT', data.getAuthorizedUser);
+        /* console.log('MAIN LAYOUT', data.getAuthorizedUser); */
     });
   }
 }

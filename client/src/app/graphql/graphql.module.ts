@@ -42,7 +42,7 @@ export function createApollo(httpLink: HttpLink, authGQLService: AuthGQLService)
       const errorStatus = networkError['error'].errors[0].message;
       console.log(errorStatus);
       if (errorStatus === 'Not Authenticated!') {
-        authGQLService.logout();
+        authGQLService.logUserOut();
       }
     }
   });

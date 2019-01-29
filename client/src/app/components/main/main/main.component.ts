@@ -1,7 +1,9 @@
 import { SignupComponent } from './../signup/signup.component';
 import { SigninComponent } from './../signin/signin.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +16,7 @@ export class MainComponent implements OnInit {
   width: number = 100;
   height: number = 100;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.style = {
@@ -44,8 +46,14 @@ export class MainComponent implements OnInit {
         }
       }
     };
-  }
 
+    this.activatedRoute.queryParams
+    .subscribe(params => {
+      if(params.auth) {
+        setTimeout(() => {this.dialog.open(SigninComponent)}, 0);
+      }
+    })
+  }
   onScroll(el: HTMLElement) {
     el.scrollIntoView();
   }
