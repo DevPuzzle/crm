@@ -20,6 +20,7 @@ app.use(
       if (!err.originalError) {
         return err;
       }
+      console.log(err);
       const data = err.originalError.data;
       const message = err.message || 'An error occurred';
       const code = err.originalError.code || 500;

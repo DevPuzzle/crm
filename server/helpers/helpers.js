@@ -3,7 +3,7 @@
 */
 exports.checkAuth = (isAuth) => {
   if(!isAuth) {
-    const error = new Error('Not authenticated!');
+    const error = new Error('Not fasfasfasf!');
     error.code = 401;
     throw error;
   }
