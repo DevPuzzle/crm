@@ -1,5 +1,6 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const User = require('../../mongodb/models/user');
+const userController = require('../../controllers/userController');
 
 const typeDefs = `
   type User {
@@ -17,31 +18,33 @@ const typeDefs = `
     company_id: String!
   }
 
+  type AuthorizedUserData {
+    _id: String!
+    name: String!
+    email: String!
+    company_id: String!
+    company_name: String!
+  }
+
   input UserInputData {
     email: String!
     name: String
     password: String!
     company_name: String!
   }
-`;
-/* type Query {
-    user(_id: String!): UserData!
-  } */
-/* let getUser = async function({ _id }) {
-  const user = await User.findOne({ _id: _id });
-  if (!user) {
-    const error = new Error('User not found');
-    throw error;
-  }
-  return user;  
-}; */
 
-/* const resolvers = {
-  Query: {
-    user: getUser
+  type Query {
+    getAuthorizedUser: AuthorizedUserData!
   }
-}; */
+`;
+
+const resolvers = {
+  Query: {
+    getAuthorizedUser: userController.getAuthorizedUser
+  }
+};
 
 exports.UserSchema = makeExecutableSchema({
-  typeDefs: typeDefs
+  typeDefs: typeDefs,
+  resolvers: resolvers
 });

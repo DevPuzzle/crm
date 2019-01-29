@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserGQLService } from '../services/user-qql.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-
-  constructor() { }
-
+  constructor(private userGQLService: UserGQLService) { }
   ngOnInit() {
+      this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
+    });
   }
-
 }

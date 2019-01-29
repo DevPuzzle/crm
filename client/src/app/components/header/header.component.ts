@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
         label: 'Employees',
         icon: 'fas fa-users'
       }
-    ]
+    ];
   }
 
 }

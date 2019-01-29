@@ -8,13 +8,13 @@ const typeDefs = `
   }
 
   type Query {
-    company(_id: String!): Company!
+    company: Company!
   }
 `;
 
 const resolvers = {
     Query: {
-      company: companyController.getCompany
+      company: (_, arg, req) => companyController.getCompany(req.companyId)
     }
   };
 

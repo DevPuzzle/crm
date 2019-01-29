@@ -15,5 +15,14 @@ export interface Employee {
   name: string;
   last_name: string;
   skills: string;
+  company: {_id: string, name: string};
+}
+
+export interface AuthorizedUser {
+ // AuthorizedUser: {_id: string, name: string, email: string, company_id: string, company_name: string};
+  _id: string;
+  name: string;
+  email: string;
   company_id: string;
+  company_name: string;
 }

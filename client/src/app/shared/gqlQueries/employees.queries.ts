@@ -19,7 +19,7 @@ export const GET_EMPLOYEE_BY_ID = gql`
       last_name
       skills
       company{
-        id_
+        _id
         name
       }
     }
@@ -34,7 +34,6 @@ export const CREATE_EMPLOYEE = gql`
       name
       last_name
       skills
-      company_id
     }
   }
 `;

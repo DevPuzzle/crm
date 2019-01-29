@@ -8,3 +8,17 @@ export const SIGN_IN_USER = gql`
     }
   }
 `;
+
+export const GET_AUTHORIZED_USER = gql`
+  query getAuthorizedUser {
+    getAuthorizedUser{
+      _id
+      name
+      email
+      company_id
+      company_name
+    }
+  }
+`;
+
+

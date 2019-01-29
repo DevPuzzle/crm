@@ -1,6 +1,7 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const employeeController = require('../../controllers/employeeController');
 const companyController = require('../../controllers/companyController');
+const Company = require('../../mongodb/models/company');
 
 const typeDefs = `
   type Company {
@@ -35,6 +36,9 @@ const typeDefs = `
 `;
 
 const resolvers = {
+  Employee: {
+    company: (employee) => companyController.getCompany(employee.company_id)
+  },
   Query: {
     employee: employeeController.getEmployeeById,
     employees: (_, args, req) => employeeController.getEmployees(req)
@@ -45,6 +49,12 @@ const resolvers = {
     }
   }
 };
+
+async function companyByEmployee(companyId) {
+  console.log('from resolver', companyId);
+  const company = await Company.findById(companyId);
+  return company;
+}
 
 exports.EmployeeSchema = makeExecutableSchema({
   typeDefs: typeDefs,

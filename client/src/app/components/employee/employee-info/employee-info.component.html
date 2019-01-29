@@ -1,41 +1,41 @@
 <div class="employee-info">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Employee info</mat-card-title>
-    </mat-card-header>
-    <form [formGroup]="employeeForm" (ngSubmit)="onSave()" class="employee-info-form">
-      <mat-form-field class="company">
-          <input matInput placeholder="Company" disabled>
-      </mat-form-field>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Employee info</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="employeeForm" (ngSubmit)="onSave()" class="employee-info-form">
+        <mat-form-field class="company">
+            <input matInput [placeholder]="company" disabled>
+        </mat-form-field>
 
-      <mat-form-field>
-          <input matInput placeholder="First name" formControlName="name" required>
-          <mat-error *ngIf="employeeForm.get('name').hasError('required')">
-            {{requiredFieldError}}
-          </mat-error>
-      </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="First name" formControlName="name" required>
+            <mat-error *ngIf="employeeForm.get('name').hasError('required')">
+              {{requiredFieldError}}
+            </mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-          <input matInput placeholder="Last name" formControlName="last_name" required>
-          <mat-error *ngIf="employeeForm.get('last_name').hasError('required')">
-            {{requiredFieldError}}
-          </mat-error>
-      </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Last name" formControlName="last_name" required>
+            <mat-error *ngIf="employeeForm.get('last_name').hasError('required')">
+              {{requiredFieldError}}
+            </mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-          <input matInput placeholder="E-mail" formControlName="email" required>
-          <mat-error *ngIf="employeeForm.get('email').hasError('required')">
-            {{requiredFieldError}}
-          </mat-error>
-      </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="E-mail" formControlName="email" required>
+            <mat-error *ngIf="employeeForm.get('email').hasError('required')">
+              {{requiredFieldError}}
+            </mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="skills">
-          <textarea matInput placeholder="Skills" formControlName="skills"></textarea>
-      </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="employeeForm.invalid">Save</button>
-    </form>
-  </mat-card>
-</div>
+        <mat-form-field class="skills">
+            <textarea matInput placeholder="Skills" formControlName="skills"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="employeeForm.invalid">Save</button>
+      </form>
+    </mat-card>
+  </div>
 
 
 

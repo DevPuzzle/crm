@@ -21,7 +21,7 @@ export class EmployeeGQLService {
   }
 
   getEmployeeById(id: string) {
-    console.log(id);
+    // console.log(id);
     return this.apollo.watchQuery<{employee: Employee}>({
       query: employeesQueries.GET_EMPLOYEE_BY_ID,
       variables: {
@@ -32,7 +32,7 @@ export class EmployeeGQLService {
   }
 
   createEmployee(employeeForm) {
-    console.log('CREATE THIS EMPLOYEE!!!', employeeForm);
+    // console.log('CREATE THIS EMPLOYEE!!!', employeeForm);
     return this.apollo
       .mutate({
         refetchQueries: [{

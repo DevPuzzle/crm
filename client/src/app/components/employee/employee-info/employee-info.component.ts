@@ -10,8 +10,9 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./employee-info.component.scss']
 })
 export class EmployeeInfoComponent implements OnInit {
-  isEditing: boolean;
+  EditUserId;
   employeeForm: FormGroup;
+  company;
   requiredFieldError = 'This is a required field';
   constructor(private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService, private fb: FormBuilder) { }
 
@@ -23,7 +24,10 @@ export class EmployeeInfoComponent implements OnInit {
           .getEmployeeById(params.employeeId)
           .subscribe( ({data, loading}) => {
             const {employee} = data;
-            this.isEditing = true;
+            // console.log(employee._id);
+            this.EditUserId = employee._id;
+            this.company = employee.company.name;
+            console.log('this.company', this.company);
             this.fillInForm(employee);
           });
       }
@@ -32,6 +36,7 @@ export class EmployeeInfoComponent implements OnInit {
 
   initEmployeeForm() {
     this.employeeForm = this.fb.group({
+      'company': [''],
       'name': ['', [Validators.required] ],
       'last_name': ['', [Validators.required] ],
       'email': ['', [Validators.required, Validators.email] ],
@@ -40,23 +45,31 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   fillInForm(employee) {
+    // console.log(employee.company.name);
     for (const key in employee) {
       if ( employee.hasOwnProperty( key ) ) {
-        this.employeeForm.patchValue({
-          [key]: employee[key]
-        });
+        if (key === 'company') {
+          this.employeeForm.patchValue({
+            [key]: employee[key].name
+          });
+        } else {
+          this.employeeForm.patchValue({
+            [key]: employee[key]
+          });
+        }
       }
     }
   }
 
   onSave() {
-    console.log('onSave Work');
+    console.log('onSave');
     console.log(this.employeeForm.value);
-    // this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
-    if (this.isEditing) {
-      // request to update user
+    delete this.employeeForm.value['company'];
+    this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
+    if (this.EditUserId) {
+      console.log('UPDATE USER');
     } else {
-      // request to create user
+      console.log('CREATE USER');
     }
   }
 }

@@ -4,7 +4,6 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createEmployee({ employeeInput }, req) {
-  
   checkAuth(req.isAuth);
   
   const errors = [];
