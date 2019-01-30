@@ -25,7 +25,10 @@ export class AuthGQLService {
       .valueChanges;
   }
 
-  logout() {
-    this.router.navigate(['/']);
+  logUserOut() {
+    if(localStorage.getItem('uitoken')) {
+      localStorage.removeItem('uitoken');
+    }
+    this.router.navigate(['/'], {queryParams: {auth: 'authenticate'}});
   }
 }

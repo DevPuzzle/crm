@@ -24,7 +24,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onAddEmployee() {
-    console.log('add employee');
     this.router.navigate(['new']);
   }
 }

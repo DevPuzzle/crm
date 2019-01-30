@@ -8,6 +8,7 @@ import { UserGQLService } from '../services/user-qql.service';
 })
 export class MainLayoutComponent implements OnInit {
   constructor(private userGQLService: UserGQLService) { }
+
   ngOnInit() {
       this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
     });

@@ -21,7 +21,6 @@ export class EmployeeGQLService {
   }
 
   getEmployeeById(id: string) {
-    // console.log(id);
     return this.apollo.watchQuery<{employee: Employee}>({
       query: employeesQueries.GET_EMPLOYEE_BY_ID,
       variables: {
@@ -32,7 +31,6 @@ export class EmployeeGQLService {
   }
 
   createEmployee(employeeForm) {
-    // console.log('CREATE THIS EMPLOYEE!!!', employeeForm);
     return this.apollo
       .mutate({
         refetchQueries: [{
@@ -56,15 +54,12 @@ export class EmployeeGQLService {
       .subscribe(
         response => {
           if (response) {
-            console.log('mutation succeful');
           }
         }
       );
   }
 
-  updateEmployee(employeeForm, EmployeeId) {
-    console.log('UPDATING THIS EMPLOYEE!!!', employeeForm);
-    console.log('ID UPDATING USER', EmployeeId);
+  updateEmployee(employeeForm, id) {
     return this.apollo
       .mutate({
         refetchQueries: [{
@@ -72,7 +67,8 @@ export class EmployeeGQLService {
         }],
         mutation: employeesQueries.UPDATE_EMPLOYEE,
         variables: {
-          emmployeeData: employeeForm
+          emmployeeData: employeeForm,
+          id: id
         },
         errorPolicy: 'all'
       })
@@ -88,7 +84,6 @@ export class EmployeeGQLService {
       .subscribe(
         response => {
           if (response) {
-            console.log('mutation update succeful');
           }
         }
       );

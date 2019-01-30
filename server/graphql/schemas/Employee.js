@@ -32,6 +32,7 @@ const typeDefs = `
 
   type Mutation {
     createEmployee(employeeInput: EmployeeInputData): Employee!
+    updateEmployee(id: String!, employeeInput: EmployeeInputData): Employee!
   }
 `;
 
@@ -46,12 +47,14 @@ const resolvers = {
   Mutation: {
     createEmployee: (_, employeeInput, req) => {
       return employeeController.createEmployee(employeeInput, req);
+    },
+    updateEmployee: (_, inputData, req) => {
+      return employeeController.updateEmployee(inputData, req);
     }
   }
 };
 
 async function companyByEmployee(companyId) {
-  console.log('from resolver', companyId);
   const company = await Company.findById(companyId);
   return company;
 }

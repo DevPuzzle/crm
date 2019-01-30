@@ -1,7 +1,40 @@
+.mat-toolbar-row{
+  justify-content: space-between;
+  position: relative;
+}
 .active{
   border-bottom: 2px solid #ffffff;
   border-radius: 0;
 }
 .nav-icon{
   font-size: 1rem;
+}
+.right-panel{
+  display: flex;
+  align-items: center;
+  .name-company{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-name{
+    font-size: 14px;
+    line-height: 0;
+    font-weight: 100;
+  }
+
+  .company{
+    line-height: 0;
+    font-weight: 100;
+  }
+  .sign-out {
+    font-size: 14px;
+    margin-left: 25px;
+    cursor: pointer;
+  }
+}
+.text-gray{
+  color: #c2c4c6;
+  font-size: 10px;
 }

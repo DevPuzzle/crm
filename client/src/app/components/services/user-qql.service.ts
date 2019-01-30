@@ -11,9 +11,9 @@ export class UserGQLService {
   constructor(private apollo: Apollo) { }
 
   getAuthorizeUser() {
-    console.log('getAuthorizeUser WORK!');
     return this.apollo.watchQuery<{getAuthorizedUser: AuthorizedUser}>({
       query: userQueries.GET_AUTHORIZED_USER
-    }).valueChanges;
+    })
+    .valueChanges;
   }
 }

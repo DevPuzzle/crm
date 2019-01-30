@@ -4,9 +4,7 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createEmployee({ employeeInput }, req) {
-  
   checkAuth(req.isAuth);
-  
   const errors = [];
   
   if (!validator.isEmail(employeeInput.email)) {
@@ -44,10 +42,8 @@ async function createEmployee({ employeeInput }, req) {
   return { ...createdEmployee._doc };
 }
 
-async function updateEmployee({ employeeInput }, req) {
-  
+async function updateEmployee({id, employeeInput}, req) {
   checkAuth(req.isAuth);
-  
   const errors = [];
   
   if (!validator.isEmail(employeeInput.email)) {
@@ -59,30 +55,25 @@ async function updateEmployee({ employeeInput }, req) {
   if (validator.isEmpty(employeeInput.name)) {
     errors.push({message: 'Name required'});
   }
-  const user = await User.findById({ _id: req.userId });
-  const companyId = req.companyId;
-
-  if(user === null || companyId === null) {
-      errors.push({message: 'User or company not found'});
-  }
-
-  if (errors.length > 0) {
-    const error = new Error(errors);
-    error.data = errors;
-    error.code = 422;
-    console.log(error);
+  const employee = await Employee.findById({ _id: id });
+  if (!employee) {
+    const error = new Error('No employee found!');
+    error.code = 404;
     throw error;
   }
-  
-  const employee = new Employee({
-      email: employeeInput.email,
-      name: employeeInput.name,
-      last_name: employeeInput.last_name,
-      skills: employeeInput.skills,
-      company_id: companyId
-  });
-  const createdEmployee = await employee.save();
-  return { ...createdEmployee._doc };
+  if (employee._id.toString() !== id) {
+    const error = new Error('No authorized!');
+    error.code = 403;
+    throw error;
+  }
+  employee.email = employeeInput.email;
+  employee.name = employeeInput.name;
+  employee.last_name = employeeInput.last_name;
+  employee.skills = employeeInput.skills;
+
+  const updatedEmployee = await employee.save();
+  return {...updatedEmployee._doc, _id: updatedEmployee._id.toString()};
+
 }
 
 async function getEmployeeById (_, {_id}, req) {
@@ -98,8 +89,7 @@ async function getEmployeeById (_, {_id}, req) {
 }
 
 async function getEmployees(req) {
-  console.log(req.isAuth);
-  /* checkAuth(req.isAuth); */
+
   if(!req.isAuth) {
     const error = new Error('Not Authenticated!');
     error.status = 401;

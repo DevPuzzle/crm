@@ -48,7 +48,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSignUp() {
-    console.log(this.signupForm.value);
     this.apollo
       .mutate({
         mutation: SIGN_UP_USER,

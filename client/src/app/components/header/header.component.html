@@ -1,11 +1,28 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row class="wrapper">
-  <a
-    *ngFor="let link of links" mat-button
-    [routerLink]="link.link" routerLinkActive="active"
-    >
-    {{link.label}}
-    <!-- <i [class]="link.icon" class="nav-icon"></i> -->
-  </a>
+  <mat-toolbar-row class="header wrapper">
+    <div class="left-panel">
+      <a
+        *ngFor="let link of links" mat-button
+        [routerLink]="link.link" routerLinkActive="active"
+        >
+        {{link.label}}
+        <!-- <i [class]="link.icon" class="nav-icon"></i> -->
+      </a>
+    </div>
+
+    <div class="right-panel">
+      <div class="name-company">
+        <ng-container *ngIf="user">
+          <p class="user-name">
+            Welcome, {{user.name}}!
+          </p>
+          <span class="text-gray company">({{user.company_name}})</span>
+        </ng-container>
+      </div>
+
+      <!-- <button matTooltip="Sign Out" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></button> -->
+      <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
+
+    </div>
 </mat-toolbar-row>
 </mat-toolbar>

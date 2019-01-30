@@ -12,7 +12,6 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit() {
       this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
-      console.log('CLIENTS', data.getAuthorizedUser);
   });
   }
 

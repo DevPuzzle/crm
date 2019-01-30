@@ -66,7 +66,6 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   onSave() {
-    console.log('onSave');
     if (this.EmployeeId) {
       delete this.employeeForm.value['company'];
       this.epmloyeeGQLService.updateEmployee(this.employeeForm.value, this.EmployeeId);
