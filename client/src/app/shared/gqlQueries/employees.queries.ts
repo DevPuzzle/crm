@@ -38,4 +38,15 @@ export const CREATE_EMPLOYEE = gql`
   }
 `;
 
+export const UPDATE_EMPLOYEE = gql`
+  mutation updateEmployee($emmployeeData: EmployeeInputData){
+    updateEmployee(employeeInput: $emmployeeData){
+      email
+      name
+      last_name
+      skills
+    }
+  }
+`;
+
 

@@ -5,7 +5,7 @@
       </mat-card-header>
       <form [formGroup]="employeeForm" (ngSubmit)="onSave()" class="employee-info-form">
         <mat-form-field class="company">
-            <input matInput [placeholder]="company" disabled>
+            <input matInput [placeholder]="user?.company_name" disabled>
         </mat-form-field>
 
         <mat-form-field>

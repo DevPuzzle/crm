@@ -61,4 +61,36 @@ export class EmployeeGQLService {
         }
       );
   }
+
+  updateEmployee(employeeForm, EmployeeId) {
+    console.log('UPDATING THIS EMPLOYEE!!!', employeeForm);
+    console.log('ID UPDATING USER', EmployeeId);
+    return this.apollo
+      .mutate({
+        refetchQueries: [{
+          query: employeesQueries.GET_EMPLOYEES_LIST
+        }],
+        mutation: employeesQueries.UPDATE_EMPLOYEE,
+        variables: {
+          emmployeeData: employeeForm
+        },
+        errorPolicy: 'all'
+      })
+      .pipe(
+        catchError(err => {
+          if (err.networkError) {
+            this.errorMessage = err.networkError.error.errors[0].data;
+            console.log(this.errorMessage);
+          }
+          return of(null);
+        })
+      )
+      .subscribe(
+        response => {
+          if (response) {
+            console.log('mutation update succeful');
+          }
+        }
+      );
+  }
 }
