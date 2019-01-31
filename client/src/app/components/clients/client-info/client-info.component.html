@@ -1,0 +1,42 @@
+<div class="client-info">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Client info</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]=""  class="client-info-form">
+      <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last name" formControlName="last_name">
+    </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="E-mail" formControlName="email" required>
+          <mat-error *ngIf="">
+
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Skype" formControlName="skype" required>
+          <mat-error *ngIf="">
+
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Comment" formControlName="comment" required>
+          <mat-error *ngIf="">
+
+          </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="">Save</button>
+    </form>
+  </mat-card>
+</div>
+
+
+

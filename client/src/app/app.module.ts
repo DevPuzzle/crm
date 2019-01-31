@@ -14,10 +14,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
 import { ContactMadeComponent } from './components/contact-made/contact-made.component';
 import { ClientsComponent } from './components/clients/clients.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
 import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
+import { ClientInfoComponent } from './components/clients/client-info/client-info.component';
+import { ClientListComponent } from './components/clients/client-list/client-list.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     EmployeeComponent,
     EmployeeListComponent,
     EmployeeInfoComponent,
+    ClientsComponent,
+    ClientInfoComponent,
+    ClientListComponent,
     HeaderComponent,
     CoverLettersComponent,
     ContactMadeComponent,
-    ClientsComponent,
     PageNotFoundComponent
   ],
   imports: [

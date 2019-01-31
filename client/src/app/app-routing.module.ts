@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { MainComponent } from './components/main/main/main.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { ClientInfoComponent } from './components/clients/client-info/client-info.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,17 @@ const routes: Routes = [
       },
       {
         path: 'clients',
-        component: ClientsComponent
+        component: ClientsComponent,
+        children: [
+          {
+            path: 'new',
+            component: ClientInfoComponent
+          },
+          {
+            path: 'edit/:clientId',
+            component: ClientInfoComponent
+          }
+        ]
       },
       {
         path: 'employees',
