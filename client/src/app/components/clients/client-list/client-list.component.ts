@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from 'src/app/shared/interfaces';
+import { Router } from '@angular/router';
+import { ClientGQLService } from '../../employee/services/client-qql.service';
 
 @Component({
   selector: 'app-client-list',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-list.component.scss']
 })
 export class ClientListComponent implements OnInit {
-
-  constructor() { }
+  clients: Client[];
+  constructor(private clientGQLService: ClientGQLService, private router: Router) { }
 
   ngOnInit() {
+    this.clientGQLService
+      .getAllClients()
+      .subscribe( ({data, loading}) => {
+        const {clients} = data;
+        this.clients = clients;
+      });
+  }
+
+  onAddClient() {
+    this.router.navigate(['new']);
   }
 
 }

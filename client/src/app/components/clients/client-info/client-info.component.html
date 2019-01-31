@@ -2,10 +2,14 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>Client info</mat-card-title>
+      <i class="far fa-id-card"></i>
     </mat-card-header>
-    <form [formGroup]=""  class="client-info-form">
+    <form [formGroup]="clientForm"  class="client-info-form">
       <mat-form-field>
-          <input matInput placeholder="Name" formControlName="name">
+          <input matInput placeholder="Name" formControlName="name" required>
+          <mat-error *ngIf="clientForm.get('name').hasError('required')">
+            {{requiredFieldError}}
+          </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -14,26 +18,20 @@
 
       <mat-form-field>
           <input matInput placeholder="E-mail" formControlName="email" required>
-          <mat-error *ngIf="">
-
+          <mat-error *ngIf="clientForm.get('email').hasError('required')">
+            {{requiredFieldError}}
           </mat-error>
       </mat-form-field>
 
       <mat-form-field>
           <input matInput placeholder="Skype" formControlName="skype" required>
-          <mat-error *ngIf="">
-
-          </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-          <input matInput placeholder="Comment" formControlName="comment" required>
-          <mat-error *ngIf="">
-
-          </mat-error>
+          <textarea matInput placeholder="Comment" formControlName="comment" required></textarea>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="">Save</button>
+      <button mat-raised-button color="primary" [disabled]="clientForm.invalid">Save</button>
     </form>
   </mat-card>
 </div>

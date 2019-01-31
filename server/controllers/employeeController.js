@@ -89,7 +89,6 @@ async function getEmployeeById (_, {_id}, req) {
 }
 
 async function getEmployees(req) {
-
   if(!req.isAuth) {
     const error = new Error('Not Authenticated!');
     error.status = 401;

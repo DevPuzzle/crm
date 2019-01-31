@@ -18,6 +18,16 @@ export interface Employee {
   company: {_id: string, name: string};
 }
 
+export interface Client {
+  _id: string;
+  name: string;
+  last_name: string;
+  email: string;
+  sype: string;
+  comment: string;
+  company: {_id: string, name: string};
+}
+
 export interface AuthorizedUser {
   _id: string;
   name: string;

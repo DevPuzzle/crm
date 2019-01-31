@@ -5,7 +5,11 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createClient({ clientInput }, req) {
-    // checkAuth(req.isAuth);
+    if(!req.isAuth) {
+        const error = new Error('Not Authenticated!');
+        error.status = 401;
+        throw error;
+    }
     const errors = [];
     
     if (!validator.isEmail(clientInput.email)) {
@@ -41,15 +45,36 @@ async function createClient({ clientInput }, req) {
         company_id: companyId
     });
     const createdClient = await client.save();
-    console.log('User ', client.name, ' CREATED!!!');
+    // console.log('User ', client.name, ' CREATED!!!');
     return { ...createdClient._doc };
     
   }
-  async function getClients(req) {
 
+  async function getClientById (_, {_id}, req) {
+    try{
+      const foundClient = await Client.findById(_id);
+      return foundClient;
+    }catch(err) {
+      const error = new Error();
+      error.data = 'Client was not found';
+      error.code = 422;
+      throw error;
+    }
+  }
+
+  async function getClients(req) {
+    if(!req.isAuth) {
+        const error = new Error('Not Authenticated!');
+        error.status = 401;
+        throw error;
+      }
+      
+    const clients = await Client.find({company_id: req.companyId});
+    return clients;
   }
 
 module.exports = {
     createClient: createClient,
-    getClients: getClients
+    getClients: getClients,
+    getClientById: getClientById
 }

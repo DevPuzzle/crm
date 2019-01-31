@@ -28,6 +28,7 @@ const typeDefs = `
   }
 
   type Query {
+    client(_id: String!): Client!
     clients: [Client]!
   }
 
@@ -37,7 +38,11 @@ const typeDefs = `
 `;
 
 const resolvers = {
+    Client: {
+        company: (client) => companyController.getCompany(client.company_id)
+      },
     Query: {
+        client: clientController.getClientById,
         clients: (_, args, req) => clientController.getClients(req)
       },
     Mutation: {
@@ -47,7 +52,6 @@ const resolvers = {
       }
     }
   };
-
 
   exports.ClientSchema = makeExecutableSchema({
     typeDefs: typeDefs,
