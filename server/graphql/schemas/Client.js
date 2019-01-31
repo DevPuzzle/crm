@@ -27,18 +27,27 @@ const typeDefs = `
     comment: String!
   }
 
+  type Query {
+    clients: [Client]!
+  }
+
   type Mutation {
     createClient(clientInput: ClientInputData): Client!
   }
 `;
 
 const resolvers = {
+    Query: {
+        clients: (_, args, req) => clientController.getClients(req)
+      },
     Mutation: {
-      createCLient: (_, employeeInput, req) => {
-        return employeeController.createEmployee(employeeInput, req);
+      createClient: (_, clientInput, req) => {
+        console.log(clientInput);
+        return clientController.createClient(clientInput, req);
       }
     }
   };
+
 
   exports.ClientSchema = makeExecutableSchema({
     typeDefs: typeDefs,
