@@ -33,6 +33,7 @@ const typeDefs = `
   type Mutation {
     createEmployee(employeeInput: EmployeeInputData): Employee!
     updateEmployee(id: String!, employeeInput: EmployeeInputData): Employee!
+    deleteEmployee(id: ID!): Boolean
   }
 `;
 
@@ -50,6 +51,9 @@ const resolvers = {
     },
     updateEmployee: (_, inputData, req) => {
       return employeeController.updateEmployee(inputData, req);
+    },
+    deleteEmployee: (_, id, req) => {
+      return employeeController.deleteEmployee(id, req);
     }
   }
 };

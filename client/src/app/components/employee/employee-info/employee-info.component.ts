@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from 'src/app/shared/interfaces';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-employee-info',
   templateUrl: './employee-info.component.html',
@@ -18,7 +19,9 @@ export class EmployeeInfoComponent implements OnInit {
   requiredFieldError = 'This is a required field';
   constructor(
     private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService,
-    private userGQLService: UserGQLService, private fb: FormBuilder) { }
+    private userGQLService: UserGQLService, private fb: FormBuilder,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
@@ -74,4 +77,15 @@ export class EmployeeInfoComponent implements OnInit {
       this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
     }
   }
+
+  onDelete() {
+    this.epmloyeeGQLService.deleteEmployee(this.EmployeeId);
+    this.EmployeeId = undefined;
+    this.router.navigate(['/employees']);
+  }
+
+  closeInfo() {
+    this.router.navigate(['/employees']);
+  }
+
 }

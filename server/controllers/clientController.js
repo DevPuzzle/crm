@@ -106,9 +106,26 @@ async function getClients(req) {
   return clients;
 }
 
+async function deleteClient({id}, req) {
+  if(!req.isAuth) {
+    const error = new Error('Not Authenticated!');
+    error.status = 401;
+    throw error;
+  }
+  const client = await Client.findById(id);
+  if(!client) {
+    const error = new Error('No client found!');
+    error.code = 404;
+    throw error;
+  }
+  await Client.findByIdAndRemove(id);
+  return true;
+}
+
 module.exports = {
     createClient: createClient,
     updateClient: updateClient,
+    deleteClient: deleteClient,
     getClients: getClients,
     getClientById: getClientById
 }

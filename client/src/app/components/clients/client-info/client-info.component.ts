@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientGQLService } from '../../employee/services/client-qql.service';
 import { UserGQLService } from '../../services/user-qql.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -20,7 +20,8 @@ export class ClientInfoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private clientGQLService: ClientGQLService,
     private userGQLService: UserGQLService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -76,5 +77,15 @@ export class ClientInfoComponent implements OnInit {
       console.log('CREATE CLIENT');
       this.clientGQLService.createClient(this.clientForm.value);
     }
+  }
+
+  onDelete() {
+    this.clientGQLService.deleteClient(this.ClientId);
+    this.ClientId = undefined;
+    this.router.navigate(['/clients']);
+  }
+
+  closeInfo() {
+    this.router.navigate(['/clients']);
   }
 }

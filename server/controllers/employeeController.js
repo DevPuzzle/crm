@@ -100,9 +100,26 @@ async function getEmployees(req) {
   return employees;
 }
 
+async function deleteEmployee({id}, req) {
+  if(!req.isAuth) {
+    const error = new Error('Not Authenticated!');
+    error.status = 401;
+    throw error;
+  }
+  const employee = await Employee.findById(id);
+  if(!employee) {
+    const error = new Error('No employee found!');
+    error.code = 404;
+    throw error;
+  }
+  await Employee.findByIdAndRemove(id);
+  return true;
+}
+
 module.exports = {
   getEmployeeById: getEmployeeById,
   getEmployees: getEmployees,
   createEmployee: createEmployee,
-  updateEmployee: updateEmployee
+  updateEmployee: updateEmployee,
+  deleteEmployee: deleteEmployee
 }

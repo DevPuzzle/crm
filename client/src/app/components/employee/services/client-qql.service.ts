@@ -90,4 +90,33 @@ export class ClientGQLService {
       );
   }
 
+  deleteClient(id) {
+    return this.apollo
+      .mutate({
+        refetchQueries: [
+          { query: clientsQueries.GET_CLIENTS_LIST }
+        ],
+        mutation: clientsQueries.DELETE_CLIENT,
+        variables: {
+          id: id
+        },
+        errorPolicy: 'all'
+      })
+      .pipe(
+        catchError(err => {
+          if (err.networkError) {
+            this.errorMessage = err.networkError.error.errors[0].data;
+            console.log(this.errorMessage);
+          }
+          return of(null);
+        })
+      )
+      .subscribe(
+        response => {
+          if (response) {
+          }
+        }
+      );
+  }
+
 }

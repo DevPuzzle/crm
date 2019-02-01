@@ -23,7 +23,7 @@ async function signUserIn({email, password}) {
     companyId: user.company_id
   },
   'crmdevpuzzlekey',
-  {  expiresIn: '1h' }
+  {  expiresIn: '2h' }
   );
   return { token: token, userId: user._id.toString() }
 };

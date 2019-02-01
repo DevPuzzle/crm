@@ -1,6 +1,7 @@
 <div class="client-info">
   <mat-card>
     <mat-card-header>
+      <a (click)="closeInfo()" class="closeInfo"><i class="fas fa-times"></i></a>
       <mat-card-title>Client info</mat-card-title>
       <i class="far fa-id-card"></i>
     </mat-card-header>
@@ -31,7 +32,10 @@
           <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="clientForm.invalid">Save</button>
+      <div class="buttons">
+        <button mat-raised-button color="primary" [disabled]="clientForm.invalid">Save</button>
+        <a (click)="onDelete()" mat-raised-button color="warn" *ngIf="ClientId">Delete</a>
+      </div>
     </form>
 
   </mat-card>

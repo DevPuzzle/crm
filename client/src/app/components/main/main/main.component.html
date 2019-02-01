@@ -13,10 +13,14 @@
         <div>
           <a mat-button (click)="onScroll(about)">About</a>
           <a mat-button (click)="onScroll(contacts)">Contact us</a>
-          <button class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
+          <ng-container *ngIf="sign">
+            <a class="user-name">Welcome, {{user?.name}}!</a>
+            <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
+          </ng-container>
+          <button *ngIf="sign===false" class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
             <i class="fas fa-sign-in-alt"></i>
           </button>
-          <button class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
+          <button *ngIf="sign===false" class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
               <i class="fas fa-user-plus"></i>
           </button>
         </div>

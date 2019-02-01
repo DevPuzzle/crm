@@ -2,8 +2,11 @@ import { SignupComponent } from './../signup/signup.component';
 import { SigninComponent } from './../signin/signin.component';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { timeout } from 'rxjs/operators';
+import { UserGQLService } from '../../services/user-qql.service';
+import { AuthorizedUser } from 'src/app/shared/interfaces';
+import { AuthGQLService } from '../services/auth-gql.service';
 
 @Component({
   selector: 'app-main',
@@ -15,10 +18,25 @@ export class MainComponent implements OnInit {
   params: object = {};
   width: number = 100;
   height: number = 100;
+  user: AuthorizedUser;
+  sign: boolean;
 
-  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserGQLService,
+    private authService: AuthGQLService
+      ) { }
 
   ngOnInit() {
+    this.userService.getAuthorizeUser()
+      .subscribe(({data}) => {
+        this.user = data.getAuthorizedUser;
+        this.sign = true;
+      }, err => {
+        this.sign = false;
+        console.log('INIT!!!!');
+      });
     this.style = {
       'position': 'absolute',
       'width': '100%',
@@ -49,10 +67,10 @@ export class MainComponent implements OnInit {
 
     this.activatedRoute.queryParams
     .subscribe(params => {
-      if(params.auth) {
-        setTimeout(() => {this.dialog.open(SigninComponent)}, 0);
+      if (params.auth) {
+        setTimeout(() => { this.dialog.open(SigninComponent); }, 0);
       }
-    })
+    });
   }
   onScroll(el: HTMLElement) {
     el.scrollIntoView();
@@ -63,5 +81,9 @@ export class MainComponent implements OnInit {
   }
   onShowSigninModal() {
     this.dialog.open(SigninComponent);
+  }
+  onSignout() {
+    this.sign = false;
+    this.authService.logUserOut();
   }
 }
