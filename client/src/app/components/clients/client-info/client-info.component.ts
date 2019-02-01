@@ -27,7 +27,7 @@ export class ClientInfoComponent implements OnInit {
     this.userGQLService.getAuthorizeUser().subscribe(({data}) => {
       this.user = data.getAuthorizedUser;
     });
-    this.initEmployeeForm();
+    this.initClientForm();
     this.activatedRoute.params.subscribe(params => {
       if (params.clientId) {
         this.clientGQLService
@@ -42,7 +42,7 @@ export class ClientInfoComponent implements OnInit {
     });
   }
 
-  initEmployeeForm() {
+  initClientForm() {
     this.clientForm = this.fb.group({
       'name': ['', [Validators.required] ],
       'last_name': ['', [] ],
@@ -65,6 +65,16 @@ export class ClientInfoComponent implements OnInit {
           });
         }
       }
+    }
+  }
+
+  onSave() {
+    if (this.ClientId) {
+      console.log('UPDATE CLIENT');
+      this.clientGQLService.updateClient(this.clientForm.value, this.ClientId);
+    } else {
+      console.log('CREATE CLIENT');
+      this.clientGQLService.createClient(this.clientForm.value);
     }
   }
 }

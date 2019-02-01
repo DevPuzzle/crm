@@ -5,76 +5,110 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createClient({ clientInput }, req) {
-    if(!req.isAuth) {
-        const error = new Error('Not Authenticated!');
-        error.status = 401;
-        throw error;
-    }
-    const errors = [];
+  if(!req.isAuth) {
+    const error = new Error('Not Authenticated!');
+    error.status = 401;
+    throw error;
+  }
+  const errors = [];
+  
+  if (!validator.isEmail(clientInput.email)) {
+    errors.push({message: 'E-mail is invalid'});
+  }
+  if (validator.isEmpty(clientInput.email)) {
+    errors.push({message: 'E-mail required'});
+  }
+  if (validator.isEmpty(clientInput.name)) {
+    errors.push({message: 'Name required'});
+  }
+
+  const user = await User.findById({ _id: req.userId });
+  const companyId = user.company_id;
+  
+  if(user === null || companyId === null) {
+      errors.push({message: 'User or company not found'});
+  }
+
+  if (errors.length > 0) {
+    const error = new Error(errors);
+    error.data = errors;
+    error.code = 422;
+    console.log(error);
+    throw error;
+  }
     
-    if (!validator.isEmail(clientInput.email)) {
-      errors.push({message: 'E-mail is invalid'});
-    }
-    if (validator.isEmpty(clientInput.email)) {
-      errors.push({message: 'E-mail required'});
-    }
-    if (validator.isEmpty(clientInput.name)) {
-      errors.push({message: 'Name required'});
-    }
-    const user = await User.findById({ _id: '5c45e7e893d7c013fa02d9c3' });
-    const companyId = '5c45a3cadcb89f0c2e23a691';
+  const client = new Client({
+      name: clientInput.name,
+      last_name: clientInput.last_name,
+      email: clientInput.email,
+      skype: clientInput.skype,
+      comment: clientInput.comment,
+      company_id: companyId
+  });
+  const createdClient = await client.save();
+  return { ...createdClient._doc };
+}
+
+async function updateClient({id, clientInput}, req) {
+  checkAuth(req.isAuth);
+  const errors = [];
   
-    if(user === null || companyId === null) {
-        errors.push({message: 'User or company not found'});
-    }
-  
-    if (errors.length > 0) {
-      const error = new Error(errors);
-      error.data = errors;
-      error.code = 422;
-      console.log(error);
+  if (!validator.isEmail(clientInput.email)) {
+    errors.push({message: 'E-mail is invalid'});
+  }
+  if (validator.isEmpty(clientInput.email)) {
+    errors.push({message: 'E-mail required'});
+  }
+  if (validator.isEmpty(clientInput.name)) {
+    errors.push({message: 'Name required'});
+  }
+  const client = await Client.findById({ _id: id });
+  if (!client) {
+    const error = new Error('No client found!');
+    error.code = 404;
+    throw error;
+  }
+  if (client._id.toString() !== id) {
+    const error = new Error('No authorized!');
+    error.code = 403;
+    throw error;
+  }
+  client.name = clientInput.name;
+  client.last_name = clientInput.last_name;
+  client.email = clientInput.email;
+  client.skype = clientInput.skype;
+  client.comment = clientInput.comment;
+
+  const updatedClient = await client.save();
+  return {...updatedClient._doc, _id: updatedClient._id.toString()};
+}
+
+async function getClientById (_, {_id}, req) {
+  try{
+    const foundClient = await Client.findById(_id);
+    return foundClient;
+  }catch(err) {
+    const error = new Error();
+    error.data = 'Client was not found';
+    error.code = 422;
+    throw error;
+  }
+}
+
+async function getClients(req) {
+  if(!req.isAuth) {
+      const error = new Error('Not Authenticated!');
+      error.status = 401;
       throw error;
     }
     
-    const client = new Client({
-        name: clientInput.name,
-        last_name: clientInput.last_name,
-        email: clientInput.email,
-        skype: clientInput.skype,
-        comment: clientInput.comment,
-        company_id: companyId
-    });
-    const createdClient = await client.save();
-    // console.log('User ', client.name, ' CREATED!!!');
-    return { ...createdClient._doc };
-    
-  }
-
-  async function getClientById (_, {_id}, req) {
-    try{
-      const foundClient = await Client.findById(_id);
-      return foundClient;
-    }catch(err) {
-      const error = new Error();
-      error.data = 'Client was not found';
-      error.code = 422;
-      throw error;
-    }
-  }
-
-  async function getClients(req) {
-    if(!req.isAuth) {
-        const error = new Error('Not Authenticated!');
-        error.status = 401;
-        throw error;
-      }
-      
-    const clients = await Client.find({company_id: req.companyId});
-    return clients;
-  }
+  const clients = await Client.find({company_id: req.companyId});
+  return clients;
+}
 
 module.exports = {
     createClient: createClient,
+    updateClient: updateClient,
     getClients: getClients,
     getClientById: getClientById
 }

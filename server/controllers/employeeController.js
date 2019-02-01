@@ -71,9 +71,10 @@ async function updateEmployee({id, employeeInput}, req) {
   employee.last_name = employeeInput.last_name;
   employee.skills = employeeInput.skills;
 
+  console.log('THIS IS UPDATED EMPLOYEE', employee);
+
   const updatedEmployee = await employee.save();
   return {...updatedEmployee._doc, _id: updatedEmployee._id.toString()};
-
 }
 
 async function getEmployeeById (_, {_id}, req) {

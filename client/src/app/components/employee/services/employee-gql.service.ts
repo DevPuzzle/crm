@@ -62,9 +62,10 @@ export class EmployeeGQLService {
   updateEmployee(employeeForm, id) {
     return this.apollo
       .mutate({
-        refetchQueries: [{
-          query: employeesQueries.GET_EMPLOYEES_LIST
-        }],
+        refetchQueries: [
+          { query: employeesQueries.GET_EMPLOYEE_BY_ID,  variables: {id: id} },
+          { query: employeesQueries.GET_EMPLOYEES_LIST }
+        ],
         mutation: employeesQueries.UPDATE_EMPLOYEE,
         variables: {
           emmployeeData: employeeForm,

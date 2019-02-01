@@ -26,3 +26,28 @@ export const GET_CLIENT_BY_ID = gql`
     }
   }
 `;
+
+export const CREATE_CLIENT = gql`
+  mutation createClient($clientData: ClientInputData){
+    createClient(clientInput: $clientData){
+      _id
+      name
+      last_name
+      email
+      skype
+      comment
+    }
+  }
+`;
+
+export const UPDATE_CLIENT = gql`
+  mutation updateClient($id: String!, $clientData: ClientInputData){
+    updateClient(id: $id, clientInput: $clientData){
+      name
+      last_name
+      email
+      skype
+      comment
+    }
+  }
+`;

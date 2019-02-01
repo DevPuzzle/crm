@@ -34,6 +34,7 @@ const typeDefs = `
 
   type Mutation {
     createClient(clientInput: ClientInputData): Client!
+    updateClient(id: String!, clientInput: ClientInputData): Client!
   }
 `;
 
@@ -49,6 +50,9 @@ const resolvers = {
       createClient: (_, clientInput, req) => {
         console.log(clientInput);
         return clientController.createClient(clientInput, req);
+      },
+      updateClient: (_, inputData, req) => {
+        return clientController.updateClient(inputData, req);
       }
     }
   };
