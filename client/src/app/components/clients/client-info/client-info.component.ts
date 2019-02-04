@@ -15,6 +15,7 @@ export class ClientInfoComponent implements OnInit {
   company;
   user;
   requiredFieldError = 'This is a required field';
+  panelOpenState = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -71,10 +72,8 @@ export class ClientInfoComponent implements OnInit {
 
   onSave() {
     if (this.ClientId) {
-      console.log('UPDATE CLIENT');
       this.clientGQLService.updateClient(this.clientForm.value, this.ClientId);
     } else {
-      console.log('CREATE CLIENT');
       this.clientGQLService.createClient(this.clientForm.value);
     }
   }

@@ -3,12 +3,14 @@ import { Apollo } from 'apollo-angular';
 import { ResponseToken } from 'src/app/shared/interfaces';
 import { SIGN_IN_USER } from 'src/app/shared/gqlQueries/auth.queries';
 import { Router } from '@angular/router';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthGQLService {
+  isAuthoRized = new BehaviorSubject<any>(null);
 
   constructor(private apollo: Apollo, private router: Router) { }
 
@@ -29,6 +31,7 @@ export class AuthGQLService {
     if (localStorage.getItem('uitoken')) {
       localStorage.removeItem('uitoken');
     }
+    this.isAuthoRized.next(false);
     this.router.navigate(['/']);
   }
 }

@@ -38,5 +38,40 @@
       justify-content: space-between;
     }
   }
+  .contact-made {
+    h2 {
+      align-items: center;
+      display: flex;
+      height: 40px;
+      padding: 0px 20px;
+      color: #2a2a2a;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    mat-panel-description {
+      display: flex;
+      justify-content: flex-end;
+      flex-grow: 0;
+      .finished {
+        color: #00b500;
+      }
+      .indev {
+        color: #ea973c;
+      }
+      .discussed {
+        color: #6878c6;
+      }
+    }
+    mat-list {
+      a {
+        text-decoration: none;
+        color: rgba(0,0,0,.87);
+        font-size: 16px;
+      }
+      .project-field {
+        font-weight: 500;
+      }
+    }
+  }
 }
 

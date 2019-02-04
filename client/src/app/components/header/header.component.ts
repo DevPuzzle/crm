@@ -2,6 +2,8 @@ import { UserGQLService } from './../services/user-qql.service';
 import { AuthGQLService } from './../main/services/auth-gql.service';
 import { Component, OnInit } from '@angular/core';
 import { HeaderLink, AuthorizedUser } from 'src/app/shared/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,22 @@ import { HeaderLink, AuthorizedUser } from 'src/app/shared/interfaces';
 export class HeaderComponent implements OnInit {
   links: HeaderLink[];
   user: AuthorizedUser;
+  // sign: boolean;
+  // isSing: any;
+  // subscription: Subscription;
 
-  constructor(private authService: AuthGQLService, private userService: UserGQLService) { }
+  constructor(
+    private authService: AuthGQLService,
+    private userService: UserGQLService,
+    private activatedRoute: ActivatedRoute
+    ) { }
 
   ngOnInit() {
+    this.userService.getAuthorizeUser()
+    .subscribe(({data}) => {
+      this.user = data.getAuthorizedUser;
+    });
+
     this.links = [
       {
         link: '/letters',
@@ -37,10 +51,6 @@ export class HeaderComponent implements OnInit {
         icon: 'fas fa-users'
       }
     ];
-    this.userService.getAuthorizeUser()
-      .subscribe(({data}) => {
-        this.user = data.getAuthorizedUser;
-      });
   }
 
   onSignout() {

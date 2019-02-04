@@ -1,12 +1,12 @@
 import { SignupComponent } from './../signup/signup.component';
 import { SigninComponent } from './../signin/signin.component';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { timeout } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { UserGQLService } from '../../services/user-qql.service';
 import { AuthorizedUser } from 'src/app/shared/interfaces';
 import { AuthGQLService } from '../services/auth-gql.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -14,28 +14,40 @@ import { AuthGQLService } from '../services/auth-gql.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  sign: boolean;
   style: object = {};
   params: object = {};
-  width: number = 100;
-  height: number = 100;
+  width = 100;
+  height = 100;
   user: AuthorizedUser;
-  sign: boolean;
+  subscription: Subscription;
 
   constructor(
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private userService: UserGQLService,
     private authService: AuthGQLService
-      ) { }
+    ) {
+      this.subscription =  this.authService.isAuthoRized
+        .subscribe
+        (isAuthoRized => {
+        // console.log('isAuthoRized', isAuthoRized);
+        // this.sign = isAuthoRized;
+        // console.log('this.sign', this.sign);
+        if (isAuthoRized === null) {
+          this.sign = false;
+        } else { this.sign = true; }
+    });
+    }
 
   ngOnInit() {
-    this.userService.getAuthorizeUser()
+      this.userService.getAuthorizeUser()
       .subscribe(({data}) => {
         this.user = data.getAuthorizedUser;
         this.sign = true;
       }, err => {
         this.sign = false;
-        console.log('INIT!!!!');
+        console.log('not user');
       });
     this.style = {
       'position': 'absolute',
@@ -72,6 +84,7 @@ export class MainComponent implements OnInit {
       }
     });
   }
+
   onScroll(el: HTMLElement) {
     el.scrollIntoView();
   }
@@ -82,8 +95,8 @@ export class MainComponent implements OnInit {
   onShowSigninModal() {
     this.dialog.open(SigninComponent);
   }
+
   onSignout() {
-    this.sign = false;
     this.authService.logUserOut();
   }
 }

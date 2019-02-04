@@ -14,6 +14,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule, MatListModule, MatTooltipModule } from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 // all angular material modules go here
@@ -32,7 +33,8 @@ const MATERIAL_MODULES = [
   MatDividerModule,
   MatListModule,
   MatDialogModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatExpansionModule
 ];
 
 @NgModule({

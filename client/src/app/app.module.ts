@@ -19,6 +19,7 @@ import { EmployeeListComponent } from './components/employee/employee-list/emplo
 import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
 import { ClientInfoComponent } from './components/clients/client-info/client-info.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
+import { AuthGQLService } from './components/main/services/auth-gql.service';
 
 @NgModule({
   declarations: [
