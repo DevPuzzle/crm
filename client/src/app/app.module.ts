@@ -20,6 +20,7 @@ import { EmployeeInfoComponent } from './components/employee/employee-info/emplo
 import { ClientInfoComponent } from './components/clients/client-info/client-info.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { AuthGQLService } from './components/main/services/auth-gql.service';
+import { ProjectComponent } from './components/contact-made/project/project.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthGQLService } from './components/main/services/auth-gql.service';
     HeaderComponent,
     CoverLettersComponent,
     ContactMadeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
