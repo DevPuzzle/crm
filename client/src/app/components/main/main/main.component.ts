@@ -2,7 +2,7 @@ import { SignupComponent } from './../signup/signup.component';
 import { SigninComponent } from './../signin/signin.component';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, Data } from '@angular/router';
 import { UserGQLService } from '../../services/user-qql.service';
 import { AuthorizedUser } from 'src/app/shared/interfaces';
 import { AuthGQLService } from '../services/auth-gql.service';
@@ -26,17 +26,13 @@ export class MainComponent implements OnInit {
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private userService: UserGQLService,
-    private authService: AuthGQLService
+    private authService: AuthGQLService,
+    private router: Router
     ) {
       this.subscription =  this.authService.isAuthoRized
         .subscribe
         (isAuthoRized => {
-        // console.log('isAuthoRized', isAuthoRized);
-        // this.sign = isAuthoRized;
-        // console.log('this.sign', this.sign);
-        if (isAuthoRized === null) {
-          this.sign = false;
-        } else { this.sign = true; }
+        this.sign = isAuthoRized;
     });
     }
 
@@ -95,7 +91,9 @@ export class MainComponent implements OnInit {
   onShowSigninModal() {
     this.dialog.open(SigninComponent);
   }
-
+  onCrmSystem() {
+    this.router.navigate(['/employees']);
+  }
   onSignout() {
     this.authService.logUserOut();
   }

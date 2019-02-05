@@ -1,71 +1,72 @@
 <div fxLayout="row" class="background mat-primary">
 
-  <div class="phone-image-wrapper">
-    <img src="assets/img/starting-page-phone.png" alt="" class="phone-image">
-  </div>
-
-  <div class="main">
-    <mat-toolbar color="primary" class="toolbar">
-      <mat-toolbar-row class="header content-wrapper">
-        <div>
-          DevPuzzle
-        </div>
-        <div>
-          <a mat-button (click)="onScroll(about)">About</a>
-          <a mat-button (click)="onScroll(contacts)">Contact us</a>
-          <!-- <a>{{sign}}</a> -->
-          <ng-container *ngIf="sign">
-            <a class="user-name">Welcome, {{user?.name}}!</a>
-            <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
-          </ng-container>
-          <button *ngIf="sign===false" class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
-            <i class="fas fa-sign-in-alt"></i>
-          </button>
-          <button *ngIf="sign===false" class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
-              <i class="fas fa-user-plus"></i>
-          </button>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-
-    <div class="banner-wrapper">
-      <div class="banner content-wrapper">
-        <div class="motto">
-          <p class="title">Best <b>CRM system</b></p>
-          <p class="text">Let us help you to remember and foresee each step.</p>
-        </div>
-      </div>
-      <particles [style]="style" [width]="width" [height]="height" [params]="params"></particles>
-      <div class="canvas-overlay"></div>
+    <div class="phone-image-wrapper">
+      <img src="assets/img/starting-page-phone.png" alt="" class="phone-image">
     </div>
 
-    <div class="wrapper">
-      <div #about style="margin-top: 1000px">
-        about us
+    <div class="main">
+      <mat-toolbar color="primary" class="toolbar">
+        <mat-toolbar-row class="header content-wrapper">
+          <div>
+            <img src="assets/img/logo.png" alt="logo" class="logo">
+          </div>
+          <div>
+            <a mat-button (click)="onScroll(about)">About</a>
+            <a mat-button (click)="onScroll(contacts)">Contact us</a>
+            <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a>
+            <!-- <a>{{sign}}</a> -->
+            <ng-container *ngIf="sign">
+              <a class="user-name">Welcome, {{user?.name}}!</a>
+              <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
+            </ng-container>
+            <button *ngIf="sign===false" class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
+              <i class="fas fa-sign-in-alt"></i>
+            </button>
+            <button *ngIf="sign===false" class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
+                <i class="fas fa-user-plus"></i>
+            </button>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <div class="banner-wrapper">
+        <div class="banner content-wrapper">
+          <div class="motto">
+            <p class="title">Best <b>CRM system</b></p>
+            <p class="text">Let us help you to remember and foresee each step.</p>
+          </div>
+        </div>
+        <particles [style]="style" [width]="width" [height]="height" [params]="params"></particles>
+        <div class="canvas-overlay"></div>
       </div>
-      <div #contacts style="margin-top: 600px">
-        contacts
+
+      <div class="wrapper">
+        <div #about style="margin-top: 1000px">
+          about us
+        </div>
+        <div #contacts style="margin-top: 600px">
+          contacts
+        </div>
       </div>
+
     </div>
-
   </div>
-</div>
 
 
 
 
-  <!-- <mat-card class="auth-panel">
-    <mat-tab-group>
-      <mat-tab label="Signin">
-        <app-signin></app-signin>
-      </mat-tab>
-      <mat-tab label="Signup">
-        <app-signup></app-signup>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-  <div class="motto" fxLayout="row">
-    <p>
-      Let us help you to remember and foresee each step.
-    </p>
-  </div> -->
+    <!-- <mat-card class="auth-panel">
+      <mat-tab-group>
+        <mat-tab label="Signin">
+          <app-signin></app-signin>
+        </mat-tab>
+        <mat-tab label="Signup">
+          <app-signup></app-signup>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+    <div class="motto" fxLayout="row">
+      <p>
+        Let us help you to remember and foresee each step.
+      </p>
+    </div> -->

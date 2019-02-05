@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="header wrapper">
     <div class="left-panel">
+      <a mat-button routerLink="/"><img src="assets/img/logo.png" alt="" class="logo"></a>
       <a
         *ngFor="let link of links" mat-button
         [routerLink]="link.link" routerLinkActive="active"
@@ -20,7 +21,7 @@
         </ng-container>
       </div>
 
-      <a href="/" matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></a>
+      <a href="/" matTooltip="Sign Out"  matTooltipPosition="right" (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></a>
 
     </div>
 </mat-toolbar-row>

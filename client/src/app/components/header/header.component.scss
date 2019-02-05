@@ -9,6 +9,11 @@
 .nav-icon{
   font-size: 1rem;
 }
+.left-panel {
+  .logo {
+    height: 64px;
+  }
+}
 .right-panel{
   display: flex;
   align-items: center;
@@ -31,6 +36,8 @@
   }
   .sign-out {
     font-size: 14px;
+    color: #fff;
+    margin-left: 15px;
     cursor: pointer;
   }
 }
