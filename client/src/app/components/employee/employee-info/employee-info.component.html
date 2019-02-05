@@ -35,8 +35,8 @@
           <textarea matInput placeholder="Skills" formControlName="skills"></textarea>
       </mat-form-field>
       <div class="buttons">
-        <button mat-raised-button color="primary" [disabled]="employeeForm.invalid">Save</button>
-        <a (click)="onDelete()" *ngIf="EmployeeId" mat-raised-button color="warn">Delete</a>
+          <button mat-raised-button color="primary" [disabled]="employeeForm.invalid">Save</button>
+          <a (click)="onDelete()" *ngIf="EmployeeId" mat-raised-button color="warn">Delete</a>
       </div>
     </form>
   </mat-card>

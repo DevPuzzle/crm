@@ -1,0 +1,32 @@
+.project {
+  form {
+    .wrapper-columns {
+      display: flex;
+      justify-content: center;
+      .left {
+        padding: 16px 30px;
+      }
+      .right {
+        padding: 16px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .data{
+          .time {
+            width: 204px;
+            display: flex;
+            justify-content: space-between;
+            mat-form-field {
+              width: 45%;
+            }
+          }
+        }
+        .buttons {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 1.25em;
+        }
+      }
+    }
+  }
+}

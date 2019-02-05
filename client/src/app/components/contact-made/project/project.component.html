@@ -1,70 +1,119 @@
 <div class="project">
     <form>
-      <div class="left">
-          <div class="field">
-              <mat-form-field>
-                <mat-select placeholder="Client">
-                  <mat-option>
-                    test
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+      <div class="wrapper-columns">
+        <div class="left">
+            <div class="field">
+                <mat-form-field>
+                  <mat-select placeholder="Client">
+                    <mat-option>
+                      test
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="field">
+                <mat-form-field>
+                  <mat-select placeholder="employee">
+                    <mat-option>
+                      test
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="field">
+                <mat-form-field>
+                  <mat-select placeholder="platform">
+                    <mat-option>
+                      test
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="field">
+                <h4>Project info</h4>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="title" [(ngModel)]="value">
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="link" [(ngModel)]="value">
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <textarea matInput placeholder="info" [(ngModel)]="value"></textarea>
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <div class="field">
+                <mat-form-field>
+                  <mat-select placeholder="status">
+                    <mat-option>
+                      test
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="data">
+            <h4>Notification</h4>
+            <div class="field">
+                <mat-form-field>
+                    <mat-select placeholder="type">
+                      <mat-option>
+                          Notification
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field><br>
+
+                  <mat-form-field>
+                      <textarea matInput placeholder="comment" [(ngModel)]="value"></textarea>
+                      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                  </mat-form-field>
+
+                  <h5>when to remind?</h5>
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="picker" placeholder="choose a date">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field><br>
+
+                  <div class="time">
+                      <mat-form-field>
+                          <mat-select placeholder="hours">
+                            <mat-option>
+                                Notification
+                            </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                          <mat-select placeholder="minutes">
+                            <mat-option>
+                                Notification
+                            </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+                </div>
           </div>
-
-          <div class="field">
-              <mat-form-field>
-                <mat-select placeholder="Employee">
-                  <mat-option>
-                    test
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+          <div class="buttons">
+              <button mat-raised-button color="primary">Save</button>
+              <a mat-raised-button color="warn">Delete</a>
           </div>
-
-          <div class="field">
-              <mat-form-field>
-                <mat-select placeholder="Platform">
-                  <mat-option>
-                    test
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div>
-
-          <div class="field">
-              <h4>Project info</h4>
-              <mat-form-field>
-                  <input matInput type="text" placeholder="Title" [(ngModel)]="value">
-                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                    <mat-icon>close</mat-icon>
-                  </button>
-              </mat-form-field><br>
-              <mat-form-field>
-                  <input matInput type="text" placeholder="Link" [(ngModel)]="value">
-                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                    <mat-icon>close</mat-icon>
-                  </button>
-              </mat-form-field><br>
-              <mat-form-field>
-                  <textarea matInput placeholder="Comment" [(ngModel)]="value"></textarea>
-                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                    <mat-icon>close</mat-icon>
-                  </button>
-              </mat-form-field>
-          </div>
-
-          <div class="field">
-              <mat-form-field>
-                <mat-select placeholder="Status">
-                  <mat-option>
-                    test
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div>
-
-
-
+        </div>
       </div>
   </form>
   </div>
