@@ -1,6 +1,11 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const projectController = require('../../controllers/projectController');
 const companyController = require('../../controllers/companyController');
+const employeeController = require('../../controllers/companyController');
+const clientController = require('../../controllers/companyController');
+const Platform = require('../../mongodb/models/platform');
+const Status = require('../../mongodb/models/status');
+const NotificationType = require('../../mongodb/models/notification-type');
 
 
 const typeDefs = `
@@ -37,6 +42,41 @@ const typeDefs = `
       notification: Notification
     }
 
+    type Client {
+      _id: ID!
+      name: String!
+      last_name: String
+    }
+
+    type Employee {
+      _id: ID!
+      name: String!
+      last_name: String
+    }
+
+    type Platform {
+      _id: ID!
+      name: String!
+    }
+
+    type Status {
+      _id: ID!
+      name: String!
+    }
+
+    type NotificationType {
+      _id: ID!
+      name: String!
+    }
+
+    type AllData {
+      clients: [Client]
+      employees: [Employee]
+      platforms: [Platform]
+      statuses: [Status]
+      not_types: [NotificationType]
+    }
+
     input ProjectInputData {
         title: String!
         client: String
@@ -51,6 +91,7 @@ const typeDefs = `
     type Query {
       project(_id: String!): Project!
       projects: [Project]!
+      getAllData: [AllData]!
     }
 
     type Mutation {
@@ -61,12 +102,18 @@ const typeDefs = `
 `;
 
 const resolvers = {
-    Project: {
-      company: (project) => companyController.getProject(project.company_id)
+    AllData: {
+      // company: (project) => companyController.getCompany(project.company_id),
+      clients: (project) => clientController.getClientById(project),
+      employees: (project) => employeeController.getEmployeeById(project),
+      platforms: async (project) => await Platform.find(),
+      statuses: async(project) => await Status.find(),
+      not_types: async (project) => await NotificationType.find()
     },
     Query: {
       project: projectController.getProjectById,
-      projects: (_, args, req) => projectController.getProjects(req)
+      projects: (_, args, req) => projectController.getProjects(req),
+      getAllData: (_, args, req) => projectController.getAllData(req)
     },
     Mutation: {
       createProject: (_, projectInput, req) => {

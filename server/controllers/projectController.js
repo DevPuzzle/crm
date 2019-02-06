@@ -1,5 +1,10 @@
 const validator = require('validator');
 const Project = require('../mongodb/models/project');
+const Employee = require('../mongodb/models/employee');
+const Client = require('../mongodb/models/client');
+const Platform = require('../mongodb/models/platform');
+const Status = require('../mongodb/models/status');
+const NotificationType = require('../mongodb/models/notification-type');
 const User = require('../mongodb/models/user');
 
 
@@ -56,9 +61,31 @@ async function updateProject({ clientInput }, req) {}
 async function getProjects({ clientInput }, req) {}
 async function getProjectById({ clientInput }, req) {}
 
+async function getAllData(req) {
+  const user = await User.findById('5c45a3cadcb89f0c2e23a692');
+  const employees = await Employee.find({company_id: user.company_id});
+  const clients = await Client.find({company_id: user.company_id});
+  const platforms = await Platform.find();
+  const notificationTypes = await NotificationType.find();
+  const statuses = await Status.find();
+
+  const allData = {
+    employees: employees,
+    clients: clients,
+    platforms: platforms,
+    statuses: statuses,
+    not_types: notificationTypes
+};
+
+  console.log('\r\n', '<<___allData___>>','\r\n','\r\n', allData);
+  return allData;
+
+}
+
   module.exports = {
     createProject: createProject,
     updateProject: updateProject,
     getProjects: getProjects,
-    getProjectById: getProjectById
+    getProjectById: getProjectById,
+    getAllData: getAllData
 }
