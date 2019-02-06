@@ -11,7 +11,13 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        .data{
+        .date{
+          .choose-date {
+            color: #000;
+            :disabled{
+              color: #000;
+            }
+          }
           .time {
             width: 204px;
             display: flex;
@@ -20,6 +26,7 @@
               width: 45%;
             }
           }
+
         }
         .buttons {
           display: flex;

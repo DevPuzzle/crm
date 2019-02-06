@@ -6,11 +6,11 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createProject({ projectInput }, req) {
-    if(!req.isAuth) {
-      const error = new Error('Not Authenticated!');
-      error.status = 401;
-      throw error;
-    }
+    // if(!req.isAuth) {
+    //   const error = new Error('Not Authenticated!');
+    //   error.status = 401;
+    //   throw error;
+    // }
     const errors = [];
     
     if (validator.isEmpty(projectInput.title)) {
@@ -31,6 +31,10 @@ async function createProject({ projectInput }, req) {
       console.log(error);
       throw error;
     }
+    let time = projectInput.notification.hours + ':' + projectInput.notification.minutes;
+    delete projectInput.notification.hours;
+    delete projectInput.notification.minutes;
+    projectInput.notification.time = time;
 
     const project = new Project({
         title: projectInput.title,
@@ -46,7 +50,7 @@ async function createProject({ projectInput }, req) {
 
     const createdProject = await project.save();
     return { ...createdProject._doc };
-    // console.log('\r\n', '<<___PROJECT___>>','\r\n','\r\n', projecttest);
+   // console.log('\r\n', '<<___projectInput.notification___>>','\r\n','\r\n', projectInput.notification);
   }
 async function updateProject({ clientInput }, req) {}
 async function getProjects({ clientInput }, req) {}

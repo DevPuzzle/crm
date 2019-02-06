@@ -13,12 +13,15 @@ const typeDefs = `
         type: String
         comment: String
         date: String
+        time: String
     }
 
     input NotificationInputData {
         type: String
         comment: String
         date: String
+        hours: String
+        minutes: String
     }
 
     type Project {

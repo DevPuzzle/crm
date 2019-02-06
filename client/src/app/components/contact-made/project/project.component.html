@@ -66,7 +66,7 @@
         </div>
 
         <div class="right">
-            <div class="data">
+            <div class="date">
             <h4>Notification</h4>
             <div class="field">
                 <mat-form-field>
@@ -86,24 +86,24 @@
 
                   <h5>when to remind?</h5>
                   <mat-form-field>
-                      <input matInput [matDatepicker]="picker" placeholder="choose a date">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field><br>
+                      <input matInput [matDatepicker]="dp3" placeholder="choose a date" class="choose-date" disabled>
+                      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field><br>
 
                   <div class="time">
                       <mat-form-field>
                           <mat-select placeholder="hours">
-                            <mat-option>
-                                Notification
-                            </mat-option>
+                              <mat-option *ngFor="let hour of hours" [value]="hour.value">
+                                  {{hour.viewValue}}
+                              </mat-option>
                           </mat-select>
                       </mat-form-field>
                       <mat-form-field>
                           <mat-select placeholder="minutes">
-                            <mat-option>
-                                Notification
-                            </mat-option>
+                              <mat-option *ngFor="let minute of minutes" [value]="minute.value">
+                                  {{minute.viewValue}}
+                              </mat-option>
                           </mat-select>
                       </mat-form-field>
                   </div>
