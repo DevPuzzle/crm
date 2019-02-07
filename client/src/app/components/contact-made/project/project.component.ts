@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Hour } from 'src/app/shared/interfaces';
+import { Minute } from 'src/app/shared/interfaces';
+import { StaticData } from 'src/app/shared/interfaces';
+import { ContactMadeGQLService } from '../services/contact-made-qql.service';
 
-export interface Hour {
-  value: string;
-  viewValue: string;
-}
 
-export interface Minute {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-project',
@@ -18,12 +14,20 @@ export interface Minute {
 export class ProjectComponent implements OnInit {
   hours: Hour[] = [];
   minutes: Minute[] = [];
+  staticData: StaticData[];
 
-  constructor() { }
+  constructor(
+    private contactMadeGQLService: ContactMadeGQLService
+  ) { }
 
   ngOnInit() {
     this.initTime();
-
+    console.log('INIT!!!!!!!!!!');
+    this.contactMadeGQLService
+      .getDataForSelect()
+      .subscribe( ({data, loading}) => {
+        console.log('DATA FROM PROJECT INIT', data);
+      });
   }
 
   initTime() {

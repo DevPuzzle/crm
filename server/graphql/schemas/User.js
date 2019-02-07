@@ -1,5 +1,6 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const User = require('../../mongodb/models/user');
+const authController = require('../../controllers/authController');
 const userController = require('../../controllers/userController');
 
 const typeDefs = `
@@ -35,13 +36,18 @@ const typeDefs = `
 
   type Query {
     getAuthorizedUser: AuthorizedUserData!
+    user(_id: String!): User!
   }
 `;
 
 const resolvers = {
   Query: {
-    getAuthorizedUser: userController.getAuthorizedUser
-  }
+    getAuthorizedUser: (_, args, req) => userController.getAuthorizedUser(args, req),
+    user: (_, args, req) => userController.getUserById(args, req)
+  },
+  // Mutation: {
+  //   createUser: (_, args, req) => authController.createUser(args, req)
+  // }
 };
 
 exports.UserSchema = makeExecutableSchema({

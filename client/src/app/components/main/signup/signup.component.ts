@@ -5,12 +5,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { AuthGQLService } from '../services/auth-gql.service';
+import { Router } from '@angular/router';
 
 export const SIGN_UP_USER = gql`
-  mutation SignUpUser($credentials: UserInputData) {
-    createUser(userInput: $credentials){
-      _id,
-      email,
+  mutation SignUpUser($credentials: SignupInputData) {
+    signup(signupInput: $credentials){
+      _id
+      name
+      email
       company_id
     }
   }
@@ -32,7 +35,9 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private apollo: Apollo,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private authGQLService: AuthGQLService
     ) { }
 
   ngOnInit() {
@@ -41,6 +46,7 @@ export class SignupComponent implements OnInit {
 
   initSignupForm() {
     this.signupForm = this.fb.group({
+      'name': ['', [Validators.required, Validators.minLength(2)] ],
       'email': ['', [Validators.required, Validators.email] ],
       'password': ['', [Validators.required, Validators.minLength(6)]],
       'company_name': ['', Validators.required]
@@ -77,6 +83,22 @@ export class SignupComponent implements OnInit {
           // notify that user registered successfully
           if (response) {
             this.isSignUpData = true;
+            this.closeSignup();
+            this.authGQLService
+      .logUserIn(this.signupForm.value.email, this.signupForm.value.password)
+      .subscribe(
+        ({ data, loading }) => {
+          const {login} = data;
+          console.log('login.token', login.token);
+          localStorage.setItem('uitoken', login.token);
+          this.router.navigate(['/employees']);
+        },
+        (error) => {
+          /* also need to check that this not a server error */
+          if (error.networkError) {
+          }
+        }
+      );
           }
         }
       );

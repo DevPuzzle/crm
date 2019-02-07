@@ -96,12 +96,7 @@ async function getClientById (_, {_id}, req) {
 }
 
 async function getClients(req) {
-  if(!req.isAuth) {
-      const error = new Error('Not Authenticated!');
-      error.status = 401;
-      throw error;
-    }
-    
+  checkAuth(req.isAuth);
   const clients = await Client.find({company_id: req.companyId});
   return clients;
 }

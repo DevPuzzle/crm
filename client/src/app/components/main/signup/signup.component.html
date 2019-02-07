@@ -1,12 +1,16 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSignUp()" fxLayout="column" class="signup-form">
 
   <mat-form-field>
+    <input matInput formControlName="name" type="name" placeholder="Name" required>
+    <mat-error *ngIf="signupForm.get('name').hasError('required')">
+      {{requiredFieldError}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
     <input matInput formControlName="email" type="email" placeholder="Email" required email>
     <mat-error *ngIf="signupForm.get('email').hasError('required')">
       {{requiredFieldError}}
-    </mat-error>
-    <mat-error *ngIf="signupForm.get('email').hasError('email')">
-      Please enter a valid email
     </mat-error>
   </mat-form-field>
 

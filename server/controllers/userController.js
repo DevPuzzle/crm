@@ -1,19 +1,21 @@
 const Company = require('../mongodb/models/company');
 const User = require('../mongodb/models/user');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
+const {checkAuth} = require('../helpers/helpers');
 
-
-async function getAuthorizedUser (_, res, req) {
+async function getAuthorizedUser (args, req) {
     const authHeader = req.get('Authorization');
-    /* if (!authHeader) {
+    if (!authHeader) {
         return next();
-    } */
+    }
     if(!req.isAuth) {
         const error = new Error('Not Authenticated!');
         error.status = 401;
         console.log(error);
         throw error;
     }
+    
     const token = authHeader.split(' ')[1];
     let decodedToken;
     try {
@@ -33,9 +35,20 @@ async function getAuthorizedUser (_, res, req) {
         company_id: decodedToken.companyId,
         company_name: company.name
     }
+
     return AuthorizedUser;
 }
 
+async function getUserById ( { _id }) {
+    const user = await User.findOne({ _id: _id });
+	    if (!user) {
+	      const error = new Error('User not found');
+	      throw error;
+	    }
+	    return user;  
+}
+
 module.exports = {
-    getAuthorizedUser: getAuthorizedUser
+    getAuthorizedUser: getAuthorizedUser,
+    getUserById: getUserById
 }

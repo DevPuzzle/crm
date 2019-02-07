@@ -35,3 +35,36 @@ export interface AuthorizedUser {
   company_id: string;
   company_name: string;
 }
+
+export interface Platform {
+  _id: string;
+  name: string;
+}
+
+export interface Status {
+  _id: string;
+  name: string;
+}
+
+export interface NotificationType {
+  _id: string;
+  name: string;
+}
+
+export interface StaticData {
+  clients: Client[];
+  employees: Employee[];
+  platforms: Platform[];
+  statuses: Status[];
+  not_types: NotificationType[];
+}
+
+export interface Hour {
+  value: string;
+  viewValue: string;
+}
+
+export interface Minute {
+  value: string;
+  viewValue: string;
+}

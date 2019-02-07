@@ -3,10 +3,6 @@ const projectController = require('../../controllers/projectController');
 const companyController = require('../../controllers/companyController');
 const employeeController = require('../../controllers/employeeController');
 const clientController = require('../../controllers/clientController');
-const Platform = require('../../mongodb/models/platform');
-const Status = require('../../mongodb/models/status');
-const NotificationType = require('../../mongodb/models/notification-type');
-
 
 
 const typeDefs = `
@@ -15,24 +11,6 @@ const typeDefs = `
       name: String!
     }
 
-    type Client {
-      _id: ID!
-      name: String!
-      last_name: String!
-      email: String!
-      skype: String!
-      comment: String!
-      company: Company
-    }
-
-    type Employee {
-      _id: ID!
-      email: String!
-      name: String!
-      last_name: String
-      skills: String
-      company: Company
-    }
 
     type Notification {
         type: String
@@ -40,10 +18,6 @@ const typeDefs = `
         date: String
         time: String
     }
-
-    extend type Client {
-      _empty: String
-    } 
 
     input NotificationInputData {
         type: String
@@ -59,7 +33,7 @@ const typeDefs = `
       client: String
       employee: String
       company: Company
-      platform_id: String
+      platform: String
       info: String
       link: String
       status: String
@@ -81,14 +55,6 @@ const typeDefs = `
       name: String!
     }
 
-    type AllData {
-      clients: [Client]
-      employees: [Employee]
-      platforms: [Platform]
-      statuses: [Status]
-      not_types: [NotificationType]
-    }
-
     input ProjectInputData {
         title: String!
         client: String
@@ -103,7 +69,6 @@ const typeDefs = `
     type Query {
       project(_id: String!): Project!
       projects: [Project]!
-      getAllData: AllData!
     }
 
     type Mutation {
@@ -113,23 +78,35 @@ const typeDefs = `
     }
 `;
 
+
+// """
+// type AllData {
+//   platforms: [Platform]
+//   statuses: [Status]
+//   not_types: [NotificationType]
+// }
+// """
+
 const resolvers = {
-    AllData: {
-      
-      clients: (project) => clientController.getClients(project),
-      employees: (project) => employeeController.getEmployees(project),
-      platforms: async (project) => await Platform.find(),
-      statuses: async(project) => await Status.find(),
-      not_types: async (project) => await NotificationType.find()
-    },
+    //AllData: {
+      // company: (project) => companyController.getCompany(project.company_id),
+      // clients: (project) => clientController.getClients(project.company_id),
+      // employees: (project) => employeeController.getEmployees(project.company_id),
+      //platforms: async (project) => await Platform.find(),
+     // statuses: async(project) => await Status.find(),
+      //not_types: async (project) => await NotificationType.find()
+   // },
     Project: {
-      company: (project) => companyController.getCompany(project.company_id),
+      company: (project) => {
+        console.log('project', project);
+        companyController.getCompany(project.company_id)
+      },
       notification: (project) => companyController.getCompany(project.company_id)
     },
     Query: {
       project: projectController.getProjectById,
       projects: (_, args, req) => projectController.getProjects(req),
-      getAllData: (_, args, req) => projectController.getAllData(req)
+      // getAllData: (_, args, req) => projectController.getAllData(req)
     },
     Mutation: {
       createProject: (_, projectInput, req) => {

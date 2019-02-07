@@ -41,6 +41,7 @@ export class SigninComponent implements OnInit {
       .subscribe(
         ({ data, loading }) => {
           const {login} = data;
+          console.log('login.token', login.token);
           localStorage.setItem('uitoken', login.token);
           this.closeSignin();
           this.router.navigate(['/employees']);

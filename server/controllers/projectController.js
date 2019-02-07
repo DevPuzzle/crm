@@ -7,15 +7,10 @@ const Status = require('../mongodb/models/status');
 const NotificationType = require('../mongodb/models/notification-type');
 const User = require('../mongodb/models/user');
 
-
 const {checkAuth} = require('../helpers/helpers');
 
 async function createProject({ projectInput }, req) {
-    // if(!req.isAuth) {
-    //   const error = new Error('Not Authenticated!');
-    //   error.status = 401;
-    //   throw error;
-    // }
+    checkAuth(req.isAuth);
     const errors = [];
     
     if (validator.isEmpty(projectInput.title)) {
@@ -62,6 +57,8 @@ async function getProjects({ clientInput }, req) {}
 async function getProjectById({ clientInput }, req) {}
 
 async function getAllData(req) {
+  checkAuth(req.isAuth);
+  
   const user = await User.findById('5c45a3cadcb89f0c2e23a692');
   const employees = await Employee.find({company_id: user.company_id});
   const clients = await Client.find({company_id: user.company_id});
@@ -77,7 +74,7 @@ async function getAllData(req) {
     not_types: notificationTypes
 };
 
-  console.log('\r\n', '<<___allData___>>','\r\n','\r\n', allData);
+  // console.log('\r\n', '<<___allData___>>','\r\n','\r\n', allData);
   return allData;
 
 }

@@ -48,6 +48,7 @@ async function signUserUp({ signupInput }) {
   if (existingCompany) {
     errors.push({message: 'Company exists already!'});
   }
+  console.log('errors', errors);
    if (errors.length > 0) {
     const error = new Error(errors);
     error.data = errors;
@@ -62,12 +63,13 @@ async function signUserUp({ signupInput }) {
   
   const hashedPw = await bcrypt.hash(signupInput.password, 12);
   const user = new User({
-    email: signupInput.email,
     name: signupInput.name,
+    email: signupInput.email,
     company_id: company._id.toString(),
     password: hashedPw
   });
   const createdUser = await user.save();
+  console.log('_______createdUser_______', createdUser);
   return { ...createdUser._doc, _id: createdUser._id.toString() };
 };
 
