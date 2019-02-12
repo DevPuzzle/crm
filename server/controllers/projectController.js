@@ -14,10 +14,10 @@ async function createProject({ projectInput }, req) {
     const errors = [];
     
     if (validator.isEmpty(projectInput.title)) {
-      errors.push({message: 'E-mail required'});
+      errors.push({message: 'title required'});
     }  
-    // const user = await User.findById({ _id: req.userId });
-    const user = await User.findById('5c45e7e893d7c013fa02d9c3');
+
+    const user = await User.findById({ _id: req.userId });
     const companyId = user.company_id;
     
     if(user === null || companyId === null) {
@@ -31,10 +31,14 @@ async function createProject({ projectInput }, req) {
       console.log(error);
       throw error;
     }
-    let time = projectInput.notification.hours + ':' + projectInput.notification.minutes;
-    delete projectInput.notification.hours;
-    delete projectInput.notification.minutes;
-    projectInput.notification.time = time;
+
+    let DateTime;
+    if (projectInput.date === undefined) {
+      DateTime = undefined;
+    } else {
+      const newDate = new Date(projectInput.date);
+      DateTime = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), projectInput.time);
+    }
 
     const project = new Project({
         title: projectInput.title,
@@ -45,12 +49,15 @@ async function createProject({ projectInput }, req) {
         client: projectInput.client,
         company_id: companyId,
         status: projectInput.status,
-        notification: projectInput.notification
+        notification: {
+          type: projectInput.type,
+          comment: projectInput.comment,
+          date: DateTime
+        }
     });
 
     const createdProject = await project.save();
     return { ...createdProject._doc };
-   // console.log('\r\n', '<<___projectInput.notification___>>','\r\n','\r\n', projectInput.notification);
   }
 async function updateProject({ clientInput }, req) {}
 async function getProjects({ clientInput }, req) {}

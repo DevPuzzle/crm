@@ -11,11 +11,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule, MatListModule, MatTooltipModule, MatSelectModule, MatIconModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatCardModule,
+  MatListModule,
+  MatTooltipModule,
+  MatSelectModule,
+  MatIconModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSlideToggleModule} from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
-
 
 // all angular material modules go here
 const MATERIAL_MODULES = [
@@ -38,7 +44,8 @@ const MATERIAL_MODULES = [
   MatSelectModule,
   MatIconModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

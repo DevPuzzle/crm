@@ -51,20 +51,7 @@ export interface NotificationType {
   name: string;
 }
 
-export interface StaticData {
-  clients: Client[];
-  employees: Employee[];
-  platforms: Platform[];
-  statuses: Status[];
-  not_types: NotificationType[];
-}
-
-export interface Hour {
-  value: string;
-  viewValue: string;
-}
-
-export interface Minute {
+export interface Time {
   value: string;
   viewValue: string;
 }

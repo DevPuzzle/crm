@@ -1,6 +1,6 @@
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +21,11 @@ import { ClientInfoComponent } from './components/clients/client-info/client-inf
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { AuthGQLService } from './components/main/services/auth-gql.service';
 import { ProjectComponent } from './components/contact-made/project/project.component';
+import { MatNativeDateModule, NativeDateModule, MatDatepickerModule } from '@angular/material';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+
 
 @NgModule({
   declarations: [
@@ -48,13 +53,19 @@ import { ProjectComponent } from './components/contact-made/project/project.comp
     AngularMaterialModule,
     FlexLayoutModule,
     /* custom modules */
-    AuthModule
+    AuthModule,
+    MatNativeDateModule,
+    NativeDateModule,
+    MatDatepickerModule,
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+  ],
   bootstrap: [AppComponent]
 })
 /* TODO: check if it can be refactored and put to graphql module not in app module */
 export class AppModule {
+  constructor(private adapter: DateAdapter<any>) {}
   /* constructor(
     apollo: Apollo,
     httpLink: HttpLink

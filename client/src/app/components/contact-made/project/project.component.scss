@@ -5,25 +5,54 @@
       justify-content: center;
       .left {
         padding: 16px 30px;
+        .field {
+          width: 100%;
+          .mat-form-field-style {
+            width: 350px;
+          }
+        }
       }
       .right {
         padding: 16px 30px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        .field {
+          width: 100%;
+          .mat-form-field-style {
+            width: 350px;
+          }
+        }
         .date{
+          .notificationHeader {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            h4 {
+              margin: 0;
+            }
+          }
           .choose-date {
             color: #000;
             :disabled{
               color: #000;
             }
           }
+
           .time {
             width: 204px;
             display: flex;
             justify-content: space-between;
+
             mat-form-field {
               width: 45%;
+            }
+            .hours {
+              font-size: 16px;
+              color: rgb(128, 128, 128);
+              position: absolute;
+              right: -5%;
+              top: 29%;
             }
           }
 

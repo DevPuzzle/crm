@@ -23,8 +23,6 @@ const typeDefs = `
         type: String
         comment: String
         date: String
-        hours: String
-        minutes: String
     }
 
     type Project {
@@ -63,7 +61,10 @@ const typeDefs = `
         info: String
         link: String
         status: String
-        notification: NotificationInputData
+        type: String
+        comment: String
+        date: String
+        time: String
     }
 
     type Query {
@@ -105,8 +106,7 @@ const resolvers = {
     },
     Query: {
       project: projectController.getProjectById,
-      projects: (_, args, req) => projectController.getProjects(req),
-      // getAllData: (_, args, req) => projectController.getAllData(req)
+      projects: (_, args, req) => projectController.getProjects(req)
     },
     Mutation: {
       createProject: (_, projectInput, req) => {

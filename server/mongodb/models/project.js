@@ -31,7 +31,8 @@ const projectSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Status'
     },
     notification: {
-        type: Object
+        type: Object,
+        default: null
     }
   });
   
