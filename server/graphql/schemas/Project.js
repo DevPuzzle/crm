@@ -1,41 +1,14 @@
 const {makeExecutableSchema} = require('graphql-tools');
 const projectController = require('../../controllers/projectController');
 const companyController = require('../../controllers/companyController');
+const typeController = require('../../controllers/typeController');
 const employeeController = require('../../controllers/employeeController');
 const clientController = require('../../controllers/clientController');
-
 
 const typeDefs = `
     type Company {
       _id: ID!
       name: String!
-    }
-
-
-    type Notification {
-        type: String
-        comment: String
-        date: String
-        time: String
-    }
-
-    input NotificationInputData {
-        type: String
-        comment: String
-        date: String
-    }
-
-    type Project {
-      _id: ID!
-      title: String!
-      client: String
-      employee: String
-      company: Company
-      platform: String
-      info: String
-      link: String
-      status: String
-      notification: Notification
     }
 
     type Platform {
@@ -47,10 +20,56 @@ const typeDefs = `
       _id: ID!
       name: String!
     }
-
+    
     type NotificationType {
       _id: ID!
       name: String!
+    }
+
+    type Notification {
+        type: NotificationType
+        comment: String
+        date: String
+        time: String
+    }
+
+    input NotificationInputData {
+        type: String
+        comment: String
+        date: String
+        time: String
+    }
+
+    type Employee {
+      _id: ID!
+      email: String!
+      name: String!
+      last_name: String
+      skills: String
+      company: Company
+    }
+
+    type Client {
+      _id: ID!
+      name: String!
+      last_name: String!
+      email: String!
+      skype: String!
+      comment: String!
+      company: Company
+    }
+
+    type Project {
+      _id: ID!
+      title: String!
+      client: Client
+      employee: Employee
+      company: Company
+      platform: Platform
+      info: String
+      link: String
+      status: Status
+      notification: Notification
     }
 
     input ProjectInputData {
@@ -70,6 +89,7 @@ const typeDefs = `
     type Query {
       project(_id: String!): Project!
       projects: [Project]!
+      projectsByEmployee(_id: String!): [Project]!
     }
 
     type Mutation {
@@ -79,34 +99,30 @@ const typeDefs = `
     }
 `;
 
-
-// """
-// type AllData {
-//   platforms: [Platform]
-//   statuses: [Status]
-//   not_types: [NotificationType]
-// }
-// """
-
 const resolvers = {
-    //AllData: {
-      // company: (project) => companyController.getCompany(project.company_id),
-      // clients: (project) => clientController.getClients(project.company_id),
-      // employees: (project) => employeeController.getEmployees(project.company_id),
-      //platforms: async (project) => await Platform.find(),
-     // statuses: async(project) => await Status.find(),
-      //not_types: async (project) => await NotificationType.find()
-   // },
     Project: {
-      company: (project) => {
-        console.log('project', project);
-        companyController.getCompany(project.company_id)
+      company: (project) => companyController.getCompany(project.company_id),
+      platform: (project) => typeController.getPlatform(project.platform),
+      status: (project) => typeController.getStatus(project.status),
+      employee : (project) => {
+        let _id = project.employee;
+        return employeeController.getEmployeeById('', {_id}, '');
       },
-      notification: (project) => companyController.getCompany(project.company_id)
+      client: (project) => {
+        let _id = project.client;
+        return clientController.getClientById('', {_id}, '');
+      }
+
+    },
+    Notification: {
+      type: (project) => typeController.getNotType(project.type),
     },
     Query: {
       project: projectController.getProjectById,
-      projects: (_, args, req) => projectController.getProjects(req)
+      projects: (_, args, req) => projectController.getProjects(req),
+      projectsByEmployee: (_, _id, req) => {
+        return projectController.getProjectsByEmployeeId({_id}, req)
+      }
     },
     Mutation: {
       createProject: (_, projectInput, req) => {

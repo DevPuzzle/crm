@@ -18,9 +18,13 @@ import { MatCardModule,
   MatIconModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSlideToggleModule} from '@angular/material';
+  MatSlideToggleModule,
+  MatTableModule,
+  MatProgressSpinnerModule,
+  MatPaginatorModule,
+  MatSortModule} from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogConfig} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 // all angular material modules go here
@@ -45,7 +49,11 @@ const MATERIAL_MODULES = [
   MatIconModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTableModule,
+  MatProgressSpinnerModule,
+  MatPaginatorModule,
+  MatSortModule
 ];
 
 @NgModule({

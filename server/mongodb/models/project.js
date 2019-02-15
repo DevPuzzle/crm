@@ -9,26 +9,36 @@ const projectSchema = new Schema({
         required: true
     },
     client: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Client'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Client',
+        required: false,
+        default: null
     },
     employee: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Employee'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Employee',
+        required: false,
+        default: null
       },
     company_id: {
         type: String,
         required: true
     },
     platform: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Platform'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Platform',
+        required: false,
+        default: null
     },
     info: {
-        type: String
+        type: String,
+        default: null
     },
     link: {
-        type: String
+        type: String,
+        default: null
     },
     status: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Status'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Status',
+        required: false,
+        default: null
     },
     notification: {
         type: Object,

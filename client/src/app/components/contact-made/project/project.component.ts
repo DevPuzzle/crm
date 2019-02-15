@@ -3,6 +3,9 @@ import { Time } from 'src/app/shared/interfaces';
 import { ContactMadeGQLService } from '../services/contact-made-qql.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {FormControl} from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import { Inject } from '@angular/core';
 
 
 
@@ -16,17 +19,27 @@ export class ProjectComponent implements OnInit {
   time: Time[] = [];
   projectForm: FormGroup;
   stateCtrl = new FormControl();
-  onOff = true;
+  onOff = false;
   dataForSelect;
   requiredFieldError = 'This is a required field';
 
   constructor(
     private fb: FormBuilder,
-    private contactMadeGQLService: ContactMadeGQLService
+    private contactMadeGQLService: ContactMadeGQLService,
+    @Inject(MAT_DIALOG_DATA) public dataProject: any,
+    public dialogRef: MatDialogRef<ProjectComponent>
   ) { }
 
   ngOnInit() {
     this.initProjectForm();
+    if (this.dataProject) {
+      // console.log('редактировка');
+      this.fillInForm(this.dataProject);
+      this.onChangeNotification(this.onOff);
+      // console.log('заполненная форма', this.projectForm.value);
+    } else {
+      // console.log('создание');
+    }
     this.initTime();
     this.contactMadeGQLService
       .getDataForSelect()
@@ -36,9 +49,19 @@ export class ProjectComponent implements OnInit {
   }
 
   onSave() {
-    console.log('1_on save form', this.projectForm.value);
     delete this.projectForm.value['enable'];
-    this.contactMadeGQLService.createProject(this.projectForm.value);
+    if (this.dataProject) {
+      console.log('this.projectForm.value', this.projectForm.value);
+      this.contactMadeGQLService.updateProject(this.projectForm.value, this.dataProject._id);
+    } else {
+      this.contactMadeGQLService.createProject(this.projectForm.value);
+    }
+    this.onClose();
+  }
+
+  onClose() {
+    this.projectForm.reset();
+    this.dialogRef.close();
   }
 
   onChangeNotification(enable: boolean) {
@@ -60,18 +83,18 @@ export class ProjectComponent implements OnInit {
 
   initProjectForm() {
     this.projectForm = this.fb.group({
-      'enable': false,
-      'client': [''],
-      'employee': [''],
-      'platform': [''],
+      'enable': this.onOff,
+      'client': [null],
+      'employee': [null],
+      'platform': [null, Validators.required],
       'title': ['', Validators.required],
       'link': [''],
       'info': [''],
-      'status': [''],
+      'status': [null],
       'type': [{
         value: null,
         disabled: true,
-      }, [Validators.required]],
+      }, Validators.required],
       'comment': [{
         value: null,
         disabled: true,
@@ -79,13 +102,47 @@ export class ProjectComponent implements OnInit {
       'date': [{
         value: null,
         disabled: true,
-      }, [Validators.required]],
+      }, Validators.required],
       'time': [{
         value: null,
         disabled: true,
-      }, [Validators.required]],
+      }, Validators.required],
     });
   }
+
+fillInForm(dataProject) {
+  // let enable;
+  if (this.dataProject.notification) {
+    // enable = true;
+    this.onOff = true;
+    this.projectForm.patchValue({
+      type: dataProject.notification.type._id,
+      comment: dataProject.notification.comment,
+      date: dataProject.notification.date,
+      time: dataProject.notification.time
+    });
+  } else {
+    this.onOff = false;
+  }
+
+  if (dataProject.client !== null) {
+    this.projectForm.patchValue({client: dataProject.client._id});
+  }
+  if (dataProject.employee !== null) {
+    this.projectForm.patchValue({client: dataProject.employee._id});
+  }
+  if (dataProject.status !== null) {
+    this.projectForm.patchValue({client: dataProject.status._id});
+  }
+
+  this.projectForm.patchValue({
+    platform: dataProject.platform._id,
+    title: dataProject.title,
+    link: dataProject.link,
+    info: dataProject.info,
+    enable: this.onOff
+  });
+}
 
   initTime() {
     for (let i = 0; i < 24; i++) {

@@ -28,6 +28,23 @@ export interface Client {
   company: {_id: string, name: string};
 }
 
+export interface Project {
+  _id: string;
+  title: string;
+  info: string;
+  link: string;
+  platform: Platform;
+  employee: Employee;
+  client: Client;
+  status: Status;
+  company: {_id: string, name: string};
+  notification: {
+    type: { _id: string, name: string },
+    comment: string,
+    date: Date
+  };
+}
+
 export interface AuthorizedUser {
   _id: string;
   name: string;

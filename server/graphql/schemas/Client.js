@@ -49,7 +49,7 @@ const resolvers = {
       },
     Mutation: {
       createClient: (_, clientInput, req) => {
-        console.log(clientInput);
+        // console.log(clientInput);
         return clientController.createClient(clientInput, req);
       },
       updateClient: (_, inputData, req) => {

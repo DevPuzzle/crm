@@ -10,6 +10,7 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createProject({ projectInput }, req) {
+    console.log('projectInput', projectInput);
     checkAuth(req.isAuth);
     const errors = [];
     
@@ -31,15 +32,7 @@ async function createProject({ projectInput }, req) {
       console.log(error);
       throw error;
     }
-
-    let DateTime;
-    if (projectInput.date === undefined) {
-      DateTime = undefined;
-    } else {
-      const newDate = new Date(projectInput.date);
-      DateTime = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), projectInput.time);
-    }
-
+    console.log('ТИП ДАННЫХ projectInput.employee', typeof projectInput.employee);
     const project = new Project({
         title: projectInput.title,
         info: projectInput.info,
@@ -52,38 +45,80 @@ async function createProject({ projectInput }, req) {
         notification: {
           type: projectInput.type,
           comment: projectInput.comment,
-          date: DateTime
+          date: projectInput.date,
+          time: projectInput.time
         }
     });
 
     const createdProject = await project.save();
     return { ...createdProject._doc };
   }
-async function updateProject({ clientInput }, req) {}
-async function getProjects({ clientInput }, req) {}
-async function getProjectById({ clientInput }, req) {}
+async function updateProject({id, projectInput}, req) {
+  checkAuth(req.isAuth);
+    const errors = [];
+    
+    if (validator.isEmpty(projectInput.title)) {
+      errors.push({message: 'title required'});
+    }
+    
+  const project = await Project.findById({ _id: id });
+  if (!project) {
+    const error = new Error('No project found!');
+    error.code = 404;
+    throw error;
+  }
+  if (project._id.toString() !== id) {
+    const error = new Error('No authorized!');
+    error.code = 403;
+    throw error;
+  }
+  const user = await User.findById({ _id: req.userId });
+  const companyId = user.company_id;
+  
+  if(user === null || companyId === null) {
+      errors.push({message: 'User or company not found'});
+  }
 
-async function getAllData(req) {
+  project.title = projectInput.title;
+  project.info = projectInput.info;
+  project.link = projectInput.link;
+  project.platform = projectInput.platform;
+  project.employee = projectInput.employee;
+  project.company_id = companyId;
+  project.status = projectInput.status;
+
+  if(projectInput.type) {
+    project.notification = {
+      type: projectInput.type,
+      comment: projectInput.comment,
+      date: projectInput.date,
+      time: projectInput.time
+    }
+  } else {
+    if (project.notification) {
+      for ( var i in project.notification ) {
+            delete project.notification[i];
+    }
+      project.notification = undefined;
+    }
+  }
+
+  const updatedProject = await project.save();
+  return {...updatedProject._doc, _id: updatedProject._id.toString()};
+}
+async function getProjectById({ _id }, req) {}
+async function getProjects(req) {
   checkAuth(req.isAuth);
   
-  const user = await User.findById('5c45a3cadcb89f0c2e23a692');
-  const employees = await Employee.find({company_id: user.company_id});
-  const clients = await Client.find({company_id: user.company_id});
-  const platforms = await Platform.find();
-  const notificationTypes = await NotificationType.find();
-  const statuses = await Status.find();
-
-  const allData = {
-    employees: employees,
-    clients: clients,
-    platforms: platforms,
-    statuses: statuses,
-    not_types: notificationTypes
-};
-
-  // console.log('\r\n', '<<___allData___>>','\r\n','\r\n', allData);
-  return allData;
-
+  const projects = await Project.find({company_id: req.companyId});
+  return projects;
+}
+async function getProjectsByEmployeeId({_id},req) {
+  // console.log('THIS PROJECT CONTROLLER _ID', _id);
+  // console.log('THIS PROJECT CONTROLLER req', req);
+  const projects = await Project.find({employee: _id});
+  // console.log('___________id form getProjectsByEmployeeId___________', _id);
+  return projects;
 }
 
   module.exports = {
@@ -91,5 +126,5 @@ async function getAllData(req) {
     updateProject: updateProject,
     getProjects: getProjects,
     getProjectById: getProjectById,
-    getAllData: getAllData
+    getProjectsByEmployeeId: getProjectsByEmployeeId
 }

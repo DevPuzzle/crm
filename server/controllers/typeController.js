@@ -15,8 +15,27 @@ async function getNotTypes() {
     return notificationTypes;
 }
 
+async function getNotType(typeId) {
+  const notType = await NotificationType.findById(typeId);
+  return notType;
+}
+
+async function getPlatform(platformId) {
+    const platform = await Platform.findById(platformId);
+    return platform;
+  }
+
+  async function getStatus(statusId) {
+    const status = await Status.findById(statusId);
+    return status;
+  }  
+
 module.exports = {
     getPlatforms: getPlatforms,
     getStatuses: getStatuses,
-    getNotTypes: getNotTypes
+    getNotTypes: getNotTypes,
+    getNotType: getNotType,
+    getPlatform: getPlatform,
+    getStatus: getStatus,
+    getStatus: getStatus
   }

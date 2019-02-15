@@ -1,6 +1,7 @@
 const validator = require('validator');
 const Employee = require('../mongodb/models/employee');
 const User = require('../mongodb/models/user');
+const Project = require('../mongodb/models/project');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createEmployee({ employeeInput }, req) {
@@ -78,6 +79,8 @@ async function updateEmployee({id, employeeInput}, req) {
 }
 
 async function getEmployeeById (_, {_id}, req) {
+  // console.log('_', _);
+  // console.log('_id', _id);
   try{
     const foundEmployee = await Employee.findById(_id);
     return foundEmployee;
@@ -113,6 +116,12 @@ async function deleteEmployee({id}, req) {
     throw error;
   }
   await Employee.findByIdAndRemove(id);
+  // await Employee.findByIdAndRemove(id, function(err) {
+  //   Project.findOneAndUpdate({'employee': id}, {$pull:{'employee': null}}, function(err){ 
+  //     if(err){res.send(err);} 
+  //     res.json({status:'deleted'});
+  // });
+  // });
   return true;
 }
 

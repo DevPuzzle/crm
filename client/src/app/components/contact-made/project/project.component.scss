@@ -1,4 +1,12 @@
 .project {
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    h3 {
+      margin: 0;
+    }
+  }
   form {
     .wrapper-columns {
       display: flex;
@@ -28,6 +36,14 @@
             display: flex;
             justify-content: space-between;
             padding: 12px 0;
+            mat-slide-toggle {
+              i {
+                margin-left: 8px;
+              }
+              .off-icon {
+                color: #b1b1b1;
+              }
+            }
             h4 {
               margin: 0;
             }

@@ -24,6 +24,7 @@ import { ProjectComponent } from './components/contact-made/project/project.comp
 import { MatNativeDateModule, NativeDateModule, MatDatepickerModule } from '@angular/material';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { ProjectTableComponent } from './components/contact-made/project-table/project-table.component';
 
 
 
@@ -41,7 +42,8 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
     CoverLettersComponent,
     ContactMadeComponent,
     PageNotFoundComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectTableComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ProjectComponent]
 })
 /* TODO: check if it can be refactored and put to graphql module not in app module */
 export class AppModule {
