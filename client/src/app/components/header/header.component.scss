@@ -11,7 +11,10 @@
 }
 .left-panel {
   .logo {
-    height: 64px;
+    padding-left: 0 !important;
+    img {
+      height: 64px;
+    }
   }
 }
 .right-panel{

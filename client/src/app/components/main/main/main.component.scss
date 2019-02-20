@@ -1,7 +1,14 @@
 $primary: #3f51b5;
+$h2color: #484e6b;
+$h2fz: 36px;
+$textcolor: #7d8b9b;
+$textSize: 16px;
+$textLineHeight: 27px;
+$maxWitdh : 1140px;
+$sectionPadding: 150px 0;
 
 .content-wrapper{
-  max-width: 1140px;
+  max-width: $maxWitdh;
   width: 100%;
   margin: 0 auto;
 }
@@ -20,12 +27,17 @@ $primary: #3f51b5;
     .header{
       z-index: 1;
       justify-content: space-between;
-      padding: 0;
       margin: 0 auto;
+      padding: 0 16px !important;
 
-      .logo {
+      .logo-wrapper {
+        width: 100%;
         height: 64px;
-        width: auto;
+
+        .logo {
+          height: 64px;
+          width: auto;
+        }
       }
 
       .user-name{
@@ -46,13 +58,10 @@ $primary: #3f51b5;
         margin-left: 9px;
         cursor: pointer;
       }
-      .signin-button {
-        background: #40b93b;
-        margin-left: 5px;
-      }
-      .signup-button {
-        background: #f7b71a;
-        margin-left: 5px;
+      .sign-desktop {
+        @media screen and (max-width: 576px) {
+          display: none;
+        }
       }
       .logout-button {
         background: #d63245;
@@ -67,26 +76,78 @@ $primary: #3f51b5;
       position: relative;
 
       .banner{
-        max-width: 1140px;
+        max-width: $maxWitdh;
         width: 100%;
         margin: 0 auto;
         position: relative;
         top: 30%;
-        .motto{
+        @media screen and (max-width: 576px) {
+          top: 40%;
+          display: flex;
+          justify-content: center;
+        }
+        .body-title{
           position: absolute;
-          left: 0;
+          left: 16px;
           max-width: 60%;
           width: 100%;
           color: #ffff;
+          @media screen and (max-width: 576px) {
+            position: relative;
+            left: 0;
+          }
+
           .title{
             font-size: 48px;
             line-height: 0;
+            @media screen and (max-width: 992px) {
+              font-size: 35px;
+            }
+            @media screen and (max-width: 576px) {
+              font-size: 11.4vw;
+            }
           }
+
           .text{
             font-size: 22px;
+            font-weight: 100;
+            max-width: 440px;
+            @media screen and (max-width: 992px) {
+              font-size: 14px;
+              max-width: 320px;
+            }
+            @media screen and (max-width: 768px) {
+              font-size: 14px;
+              max-width: 280px;
+            }
+            @media screen and (max-width: 576px) {
+              max-width: 100%;
+            }
+          }
+
+          .sign-mobile {
+            z-index: 999;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            @media screen and (min-width: 576px) {
+              display: none;
+              border: 4px solid black;
+            }
+
+            .signin-button {
+              margin-left: 0 !important;
+              width: 48%;
+            }
+
+            .signup-button {
+              margin-left: 0 !important;
+              width: 48%;
           }
         }
+        }
       }
+
       .canvas-overlay{
         position: absolute;
         bottom: -1px;
@@ -103,12 +164,229 @@ $primary: #3f51b5;
     position: absolute;
     right: 0;
     top: 80px;
+
     .phone-image{
       max-width: 100%;
-      width: 700px;
+      width: 75vh;
+      transition: 0.5s;
       height: auto;
+      @media screen and (max-width: 1200px) {
+        width: 40vh;
+      }
+      @media screen and (max-width: 768px) {
+        width: 30vh;
+      }
+      @media screen and (max-width: 576px) {
+        display: none;
+      }
     }
     z-index: 2;
   }
 }
 
+.futures {
+  padding: 110px 0;
+
+  .futures-title {
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0) url('../../../../assets/img/path.png') no-repeat scroll center top;
+    background-size: 189px auto;
+
+    .futures-badge {
+      background-color: rgba(92, 93, 232, 0.1);
+      color: #4a5ebb;
+    }
+
+    h2 {
+      font-size: $h2fz;
+      text-align: center;
+      margin: 14px 0;
+      color: $h2color;
+    }
+  }
+  .futures-item {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    background: rgba(0, 0, 0, 0) url('../../../../assets/img/icon-bg.png') no-repeat scroll center top;
+
+    i {
+      font-size: 60px;
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+    }
+
+    h5 {
+      margin-bottom: 1.5rem;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      color: $h2color;
+    }
+
+    p {
+      color: $textcolor;
+      font-size: $textSize;
+      line-height: $textLineHeight;
+      margin-top: 0;
+      text-align: center;
+    }
+  }
+}
+
+.screenshots-section {
+  padding: $sectionPadding;
+  background: #f2f5fa none repeat scroll 0 0;
+
+  .screenshots-title {
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .screenshots-badge {
+      background-color: rgba(23, 160, 184, 0.17);
+      color: #17a2b8;
+    }
+
+    h2 {
+      font-size: $h2fz;
+      color: #fff;
+      font-weight: 500;
+      color: $h2color;
+      margin: 14px 0;
+    }
+
+    p {
+      color: $textcolor;
+      font-size: $textSize;
+      line-height: $textLineHeight;
+    }
+  }
+}
+
+.features-mid-wrapper {
+
+  padding: $sectionPadding;
+
+  .features-mid-block {
+
+    .features-mid-img {
+      text-align: left;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .features-mid-description {
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      padding-top: 1.5rem;
+      h2 {
+        color: $h2color;
+        font-size: $h2fz;
+        margin: 14px 0;
+      }
+      p {
+        color: $textcolor;
+        font-size: $textSize;
+        line-height: $textLineHeight;
+      }
+    }
+  }
+}
+
+.contact-us {
+  padding: $sectionPadding;
+  background: #f2f5fa;
+
+  .contact-us-title {
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0) url('../../../../assets/img/path.png') no-repeat scroll center top;
+    background-size: 189px auto;
+
+    .contact-us-badge {
+      background-color: rgba(0, 216, 200, 0.09);
+      color: #00d8c8;
+    }
+
+    h2 {
+      font-size: $h2fz;
+      text-align: center;
+      margin: 14px 0;
+      color: $h2color;
+    }
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20%;
+
+    .contact-form-colspan {
+      display: flex;
+      justify-content: space-between;
+      mat-form-field {
+        width: 48%;
+      }
+    }
+  }
+}
+
+footer {
+
+  .social-incons {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: $textSize;
+
+    a {
+      border-radius: 50px;
+      box-shadow: 2px 2px 5px rgba(91, 94, 222, 0.16);
+      color: $h2color;
+      display: inline-block;
+      height: 40px;
+      margin: 0 2px;
+      line-height: 42px;
+      width: 40px;
+      text-decoration: none;
+    }
+  }
+
+  .copyright {
+    color: $textcolor;
+    font-size: 14px;
+    line-height: $textLineHeight;
+    text-align: center;
+  }
+
+  .made-by {
+    color: #3f345f;
+    font-size: 12px;
+    text-align: center;
+  }
+}

@@ -9,9 +9,9 @@
       </button>
     </mat-form-field>
   </div>
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8 projectTable">
     <mat-table [dataSource]="projectsData" matSort>
-      <ng-container matColumnDef="title">
+      <ng-container matColumnDef="title" sticky>
         <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element?.title}}</mat-cell>
       </ng-container>
@@ -23,7 +23,9 @@
 
       <ng-container matColumnDef="employee">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Employe</mat-header-cell>
-        <mat-cell *matCellDef="let element"><span *ngIf="element.employee?.name">{{element.employee?.name}}</span><span *ngIf="element.employee?.last_name">{{'&nbsp;'+ element.employee?.last_name}}</span></mat-cell>
+        <mat-cell *matCellDef="let element"><span *ngIf="element?.employee?.name">{{element?.employee?.name}}</span><span *ngIf="element.employee?.last_name">{{'&nbsp;'+ element.employee?.last_name}}</span></mat-cell>
+
+       <!-- <mat-cell *matCellDef="let element"><span *ngIf="element?.employee?.name">{{element?.employee?.name}}</span><span *ngIf="element.employee?.last_name">{{'&nbsp;'+ element.employee?.last_name}}</span></mat-cell> -->
       </ng-container>
 
       <ng-container matColumnDef="status">
@@ -45,7 +47,7 @@
       <ng-container matColumnDef="link">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Link</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a *ngIf="element?.link" matTooltip="{{element?.link}}" href="{{element?.link}}" target="_blank"><i class="fas fa-link"></i></a>
+            <a class="link" *ngIf="element?.link" matTooltip="{{element?.link}}" href="{{element?.link}}" target="_blank"><i class="fas fa-link"></i></a>
             <!-- {{element.link}} -->
           </mat-cell>
       </ng-container>
@@ -54,7 +56,7 @@
           <mat-header-cell *matHeaderCellDef>Info</mat-header-cell>
           <!-- <mat-cell *matCellDef="let element">{{element.info}}</mat-cell> -->
           <mat-cell *matCellDef="let element">
-                <button *ngIf="element?.info"  mat-button
+                <button class="show-info-button" *ngIf="element?.info"  mat-button
                         matTooltip="{{element?.info}}"
                         aria-label="Button that displays a tooltip with a custom message">
                   show info ...
@@ -80,8 +82,8 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <button mat-button color="primary" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
-            <button mat-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+            <button class="aciton-button" mat-button color="primary" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+            <button class="aciton-button" mat-button color="warn"><mat-icon>delete_outline</mat-icon></button>
         </mat-cell>
       </ng-container>
 

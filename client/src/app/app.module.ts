@@ -25,6 +25,9 @@ import { MatNativeDateModule, NativeDateModule, MatDatepickerModule } from '@ang
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { ProjectTableComponent } from './components/contact-made/project-table/project-table.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselHolderComponent } from './components/main/main/carousel-holder/carousel-holder.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 
@@ -43,7 +46,8 @@ import { ProjectTableComponent } from './components/contact-made/project-table/p
     ContactMadeComponent,
     PageNotFoundComponent,
     ProjectComponent,
-    ProjectTableComponent
+    ProjectTableComponent,
+    // CarouselHolderComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,8 @@ import { ProjectTableComponent } from './components/contact-made/project-table/p
     MatNativeDateModule,
     NativeDateModule,
     MatDatepickerModule,
+    BrowserAnimationsModule,
+    // CarouselModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},

@@ -1,3 +1,32 @@
+.search-div {
+  .search-form-field {
+    width: 50%;
+    margin-left: 20px;
+    }
+}
+
+.projectTable {
+  .link {
+    color: black !important;
+  }
+  .finished {
+    color: #00b500;
+  }
+  .indev {
+    color: #ea973c;
+  }
+  .discussed {
+    color: #6878c6;
+  }
+  .show-info-button {
+    padding: 0;
+  }
+  .aciton-button {
+    padding: 0 5px;
+    min-width: 20px;
+  }
+}
+
 .hide {
   display: none;
 }
@@ -10,19 +39,4 @@ mat-footer-row {
 mat-footer-cell {
   justify-content: center;
   font-style: italic;
-}
-td.mat-column-star {
-  width: 20px;
-  padding-right: 8px;
-}
-
-th.mat-column-position, td.mat-column-position {
-  padding-left: 8px;
-}
-.mat-table-sticky:first-child {
-  border-right: 1px solid #e0e0e0;
-}
-
-.mat-table-sticky:last-child {
-  border-left: 1px solid #e0e0e0;
 }

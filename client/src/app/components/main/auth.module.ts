@@ -8,12 +8,15 @@ import { MainComponent } from './main/main.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ParticlesModule } from 'angular-particle';
+import { CarouselHolderComponent } from './main/carousel-holder/carousel-holder.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
     MainComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    CarouselHolderComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { ParticlesModule } from 'angular-particle';
     ReactiveFormsModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    ParticlesModule
+    ParticlesModule,
+    CarouselModule
   ],
   entryComponents: [
     SigninComponent,

@@ -8,6 +8,8 @@ import { AuthorizedUser } from 'src/app/shared/interfaces';
 import { AuthGQLService } from '../services/auth-gql.service';
 import { Subscription } from 'rxjs';
 
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -82,7 +84,9 @@ export class MainComponent implements OnInit {
   }
 
   onScroll(el: HTMLElement) {
-    el.scrollIntoView();
+    el.scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 
   onShowSignupModal() {

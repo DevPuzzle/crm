@@ -26,10 +26,17 @@ export class ProjectTableComponent implements OnInit {
     this.contactMadeGQLService
       .getProjects()
       .subscribe( ({data, loading}) => {
-        console.log(data);
+        // console.log(data);
         const {projects} = data;
         this.projects = projects;
         this.projectsData = new MatTableDataSource(this.projects);
+        for (const item of this.projectsData.filteredData ) {
+          for (const field in item) {
+            if (item[field] == null) {
+              item[field] = '';
+            }
+          }
+        }
         this.projectsData.sortingDataAccessor = (item, property) => {
           switch (property) {
             case 'client': return item.client.name;
