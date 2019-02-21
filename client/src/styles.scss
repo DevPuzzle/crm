@@ -60,9 +60,7 @@
 /* End custom carousel */
 
 html, body { height: 100%; }
-.container{
-  padding: 1rem;
-}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 h1{
   font-size: 48px;
@@ -118,8 +116,6 @@ h1{
 .container {
   max-width: 1140px;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -127,6 +123,7 @@ h1{
 .row {
   display: flex;
   justify-content: center;
-  margin-right: -15px;
-  margin-left: -15px;
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 }

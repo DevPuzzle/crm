@@ -1,178 +1,236 @@
 <div fxLayout="row" class="background mat-primary">
 
-  <div class="phone-image-wrapper">
-    <img src="assets/img/starting-page-phone.png" alt="" class="phone-image">
-  </div>
 
-  <div class="main">
-    <mat-toolbar color="primary" class="toolbar">
-      <mat-toolbar-row class="header content-wrapper">
-        <div class="logo-wrapper">
-          <img src="assets/img/logo.png" alt="logo" class="logo">
-        </div>
-        <div>
-          <a mat-button (click)="onScroll(about)">About</a>
-          <a mat-button (click)="onScroll(contacts)">Contact us</a>
-          <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a>
-          <!-- <a>{{sign}}</a> -->
-          <ng-container *ngIf="sign">
-            <a class="user-name">Welcome, {{user?.name}}!</a>
-            <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
-          </ng-container>
-          <button *ngIf="sign===false" class="signin-button sign-desktop" mat-button (click)="onShowSigninModal()">SignIn
-            <i class="fas fa-sign-in-alt"></i>
-          </button>
-          <button *ngIf="sign===false" class="signup-button sign-desktop" mat-button (click)="onShowSignupModal()">SignUp
-              <i class="fas fa-user-plus"></i>
-          </button>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
 
-    <div class="banner-wrapper">
-      <div class="banner content-wrapper">
-        <div class="body-title">
-          <p class="title"><b>ArgosyCRM</b></p>
-          <p class="text">Let us help you to remember and foresee each step.</p>
-          <div class="sign-mobile">
-              <button *ngIf="sign===false" class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
+    <div class="main">
+      <!-- <mat-toolbar color="primary" class="toolbar">
+        <mat-toolbar-row class="header content-wrapper">
+          <div class="logo-wrapper">
+            <img src="assets/img/logo.png" alt="logo" class="logo">
+          </div>
+          <div>
+            <a mat-button (click)="onScroll(about)">About</a>
+            <a mat-button (click)="onScroll(contacts)">Contact us</a>
+            <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a> -->
+            <!-- <a>{{sign}}</a> -->
+            <!-- <ng-container *ngIf="sign">
+              <a class="user-name">Welcome, {{user?.name}}!</a>
+              <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
+            </ng-container>
+            <button *ngIf="sign===false" class="signin-button sign-desktop" mat-button (click)="onShowSigninModal()">SignIn
+              <i class="fas fa-sign-in-alt"></i>
+            </button>
+            <button *ngIf="sign===false" class="signup-button sign-desktop" mat-button (click)="onShowSignupModal()">SignUp
+                <i class="fas fa-user-plus"></i>
+            </button>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar> -->
+
+          <mat-toolbar color="primary" class="toolbar toolbar-desktop">
+            <mat-toolbar-row class="header content-wrapper">
+              <div class="logo-wrapper">
+                <img src="assets/img/logo.png" alt="logo" class="logo">
+              </div>
+              <div>
+                <a mat-button (click)="onScroll(about)">About</a>
+                <a mat-button (click)="onScroll(contacts)">Contact us</a>
+                <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a>
+
+                <ng-container *ngIf="sign">
+                  <a class="user-name">Welcome, {{user?.name}}!</a>
+                  <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
+                </ng-container>
+                <button *ngIf="sign===false" class="signin-button sign-desktop" mat-button (click)="onShowSigninModal()">SignIn
                   <i class="fas fa-sign-in-alt"></i>
                 </button>
-                <button *ngIf="sign===false" class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
+                <button *ngIf="sign===false" class="signup-button sign-desktop" mat-button (click)="onShowSignupModal()">SignUp
                     <i class="fas fa-user-plus"></i>
                 </button>
+              </div>
+            </mat-toolbar-row>
+          </mat-toolbar>
+          <!-- end desktop toolbar -->
+
+          <mat-toolbar color="primary" class="toolbar-mobile">
+            <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+            <div class="logo-wrapper">
+                <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-        </div>
+          </mat-toolbar>
 
-      </div>
-      <particles [style]="style" [width]="width" [height]="height" [params]="params"></particles>
-      <div class="canvas-overlay"></div>
-    </div>
+          <!-- end mobile toolbar -->
 
-    <div class="futures">
-      <div class="container">
-        <div class="futures-title">
-          <span class="futures-badge badge">
-            Features
-          </span>
-          <h2>Cool futures</h2>
-          <span class=section-title-line></span>
-        </div>
-        <div class="row">
-          <div class="futures-item">
-            <i class="fas fa-hand-holding-usd"></i>
-            <h5>Is free</h5>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-          </div>
-          <div class="futures-item">
-            <i class="fas fa-user-graduate"></i>
-            <h5>Easy to use</h5>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-          </div>
-          <div class="futures-item">
-            <i class="fas fa-tablet-alt"></i>
-            <h5>Responsive Design</h5>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end futures section -->
-    <div class="screenshots-section" #about>
-      <div class="contaiter-fluid">
-        <div class="screenshots-title">
-          <span class="screenshots-badge badge">previews</span>
-          <h2>Screenshot In Detalis</h2>
-          <span class="section-title-line"></span>
-        </div>
-        <app-carousel-holder></app-carousel-holder>
-      </div>
-    </div> -->
-    <!-- end screen shots-->
-   <section class="features-mid-wrapper">
-      <div class="features-mid-block">
-        <div class="container">
-          <div class="row">
-            <div class="features-mid-img">
-              <img src="assets/img/features-mid-block1.png" alt="">
+          <mat-sidenav-container class="sidenav-container">
+            <mat-sidenav class="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                         [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+              <div *ngIf="sign" class="welcomeUsermobile">
+                <a class="user-name">Welcome, {{user?.name}}!</a>
+                <mat-divider></mat-divider>
+                <button matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out" mat-icon-button color="primary">
+                  <mat-icon aria-label="Example icon-button with a heart icon">exit_to_app</mat-icon>
+                </button>
+                <!-- <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div> -->
+              </div>
+
+              <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a>
+              <mat-nav-list>
+                  <mat-list-item (click)="onScroll(about)">About</mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item (click)="onScroll(contacts)">Contact us</mat-list-item>
+
+              </mat-nav-list>
+          </mat-sidenav>
+
+
+
+          <mat-sidenav-content>
+            <div class="phone-image-wrapper">
+               <img src="assets/img/starting-page-phone.png" alt="" class="phone-image">
+             </div>
+            <div class="banner-wrapper">
+              <div class="banner content-wrapper">
+                <div class="body-title">
+                  <p class="title"><b>ArgosyCRM</b></p>
+                  <p class="text">Let us help you to remember and foresee each step.</p>
+                  <div class="sign-mobile">
+                      <button *ngIf="sign===false" class="signin-button" mat-button (click)="onShowSigninModal()">SignIn
+                          <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                        <button *ngIf="sign===false" class="signup-button" mat-button (click)="onShowSignupModal()">SignUp
+                            <i class="fas fa-user-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+              </div>
+              <particles [style]="style" [width]="width" [height]="height" [params]="params"></particles>
+              <div class="canvas-overlay"></div>
             </div>
-            <div class="features-mid-description">
-              <h2>Lorem ipsum</h2>
-              <span class="section-title-line"></span>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
-              <button mat-raised-button color="primary">Create account</button>
+
+            <div class="futures">
+              <div class="container">
+                <div class="futures-title">
+                  <span class="futures-badge badge">
+                    Features
+                  </span>
+                  <h2>Cool futures</h2>
+                  <span class=section-title-line></span>
+                </div>
+                <div class="row">
+                  <div class="futures-item">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h5>Is free</h5>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                  </div>
+                  <div class="futures-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <h5>Easy to use</h5>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                  </div>
+                  <div class="futures-item">
+                    <i class="fas fa-tablet-alt"></i>
+                    <h5>Responsive Design</h5>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+            <!-- end futures section -->
+            <div class="screenshots-section" #about>
+              <div class="contaiter-fluid">
+                <div class="screenshots-title">
+                  <span class="screenshots-badge badge">previews</span>
+                  <h2>Screenshot In Detalis</h2>
+                  <span class="section-title-line"></span>
+                </div>
+                <app-carousel-holder></app-carousel-holder>
+              </div>
+            </div>
+            <!-- end screen shots-->
+            <section class="features-mid-wrapper">
+              <div class="features-mid-block">
+                <div class="container">
+                  <div class="row">
+                    <div class="features-mid-img">
+                      <img src="assets/img/features-mid-block1.png" alt="">
+                    </div>
+                    <div class="features-mid-description">
+                      <h2>Lorem ipsum</h2>
+                      <span class="section-title-line"></span>
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
+                      <button mat-raised-button color="primary">Create account</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    <!-- end futures mid 1-->
+            <!-- end futures mid 1-->
 
-      <div class="features-mid-block">
-        <div class="container">
-          <div class="row">
-            <div class="features-mid-description">
-                <h2>Lorem ipsum</h2>
+              <div class="features-mid-block">
+                <div class="container">
+                  <div class="row">
+                    <div class="features-mid-description">
+                        <h2>Lorem ipsum</h2>
+                        <span class="section-title-line"></span>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
+                        <button mat-raised-button color="primary">Read more</button>
+                    </div>
+                    <div class="features-mid-img">
+                      <img src="assets/img/features-mid-block2.png" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end futures mid 2-->
+          </section>
+          <!-- end futures mid wrapper section-->
+
+          <section class="contact-us" #contacts>
+            <div class="container">
+              <div class="contact-us-title">
+                <span class="contact-us-badge badge">
+                  send email
+                </span>
+                <h2>Contact us</h2>
                 <span class="section-title-line"></span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
-                <button mat-raised-button color="primary">Read more</button>
+              </div>
+              <div class="row">
+                <form class="contact-form">
+                    <mat-form-field>
+                      <input matInput placeholder="Your Name">
+                    </mat-form-field>
+
+                    <div class="contact-form-colspan">
+                        <mat-form-field>
+                          <input matInput placeholder="Your Email">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <input matInput placeholder="Phone Number">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                      <textarea matInput placeholder="Textarea"></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">Send message</button>
+              </form>
+              </div>
             </div>
-            <div class="features-mid-img">
-              <img src="assets/img/features-mid-block2.png" alt="">
+          </section>
+
+        <footer>
+          <div class="container">
+            <div class="social-incons">
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-facebook-square"></i></a>
+              <a href="#"><i class="fab fa-skype"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
+            <p class="copyright">&#9400; Copyright 2019. All Rights Reserved</p>
+            <p class="made-by">Made by <b>DevPuzzle</b></p>
           </div>
-        </div>
-      </div>
-      <!-- end futures mid 2-->
-  </section>
-  <!-- end futures mid wrapper section-->
-
-  <section class="contact-us" #contacts>
-    <div class="container">
-      <div class="contact-us-title">
-        <span class="contact-us-badge badge">
-          send email
-        </span>
-        <h2>Contact us</h2>
-        <span class="section-title-line"></span>
-      </div>
-      <div class="row">
-        <form class="contact-form">
-            <mat-form-field>
-              <input matInput placeholder="Your Name">
-            </mat-form-field>
-
-            <div class="contact-form-colspan">
-                <mat-form-field>
-                  <input matInput placeholder="Your Email">
-                </mat-form-field>
-
-                <mat-form-field>
-                  <input matInput placeholder="Phone Number">
-                </mat-form-field>
-            </div>
-
-            <mat-form-field>
-              <textarea matInput placeholder="Textarea"></textarea>
-            </mat-form-field>
-            <button mat-raised-button color="primary">Send message</button>
-      </form>
-      </div>
-    </div>
-  </section>
-
-  </div>
-</div>
-
-<footer>
-  <div class="container">
-    <div class="social-incons">
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fab fa-facebook-square"></i></a>
-      <a href="#"><i class="fab fa-skype"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-    </div>
-    <p class="copyright">&#9400; Copyright 2019. All Rights Reserved</p>
-    <p class="made-by">Made by <b>DevPuzzle</b></p>
-  </div>
-</footer>
+        </footer>
+          </mat-sidenav-content>
+</mat-sidenav-container>

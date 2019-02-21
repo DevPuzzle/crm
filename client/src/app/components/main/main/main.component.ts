@@ -1,12 +1,13 @@
 import { SignupComponent } from './../signup/signup.component';
 import { SigninComponent } from './../signin/signin.component';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router, Data } from '@angular/router';
 import { UserGQLService } from '../../services/user-qql.service';
 import { AuthorizedUser } from 'src/app/shared/interfaces';
 import { AuthGQLService } from '../services/auth-gql.service';
 import { Subscription } from 'rxjs';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 
 
@@ -15,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   sign: boolean;
   style: object = {};
   params: object = {};
@@ -23,18 +24,28 @@ export class MainComponent implements OnInit {
   height = 100;
   user: AuthorizedUser;
   subscription: Subscription;
+  mobileQuery: MediaQueryList;
+
+  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+
+  private _mobileQueryListener: () => void;
 
   constructor(
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private userService: UserGQLService,
     private authService: AuthGQLService,
-    private router: Router
+    private router: Router,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
     ) {
       this.subscription =  this.authService.isAuthoRized
         .subscribe
         (isAuthoRized => {
         this.sign = isAuthoRized;
+        this.mobileQuery = media.matchMedia('(max-width: 768px)');
+        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+        this.mobileQuery.addListener(this._mobileQueryListener);
     });
     }
 
@@ -101,4 +112,9 @@ export class MainComponent implements OnInit {
   onSignout() {
     this.authService.logUserOut();
   }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
 }
