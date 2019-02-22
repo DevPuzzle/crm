@@ -84,6 +84,7 @@ async function updateProject({id, projectInput}, req) {
   project.link = projectInput.link;
   project.platform = projectInput.platform;
   project.employee = projectInput.employee;
+  project.client = projectInput.client;
   project.company_id = companyId;
   project.status = projectInput.status;
 
@@ -121,10 +122,29 @@ async function getProjectsByEmployeeId({_id},req) {
   return projects;
 }
 
+async function deleteProject({id}, req) {
+  if(!req.isAuth) {
+    const error = new Error('Not Authenticated!');
+    error.status = 401;
+    throw error;
+  }
+
+  const project = await Project.findById(id);
+  if(!project) {
+    const error = new Error('No project found!');
+    error.code = 404;
+    throw error;
+  }
+
+  await Project.findByIdAndRemove(id);
+  return true;
+}
+
   module.exports = {
     createProject: createProject,
     updateProject: updateProject,
     getProjects: getProjects,
     getProjectById: getProjectById,
-    getProjectsByEmployeeId: getProjectsByEmployeeId
+    getProjectsByEmployeeId: getProjectsByEmployeeId,
+    deleteProject: deleteProject
 }

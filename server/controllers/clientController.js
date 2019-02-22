@@ -113,8 +113,11 @@ async function deleteClient({id}, req) {
     error.code = 404;
     throw error;
   }
-  await Client.findByIdAndRemove(id);
-  return true;
+  await Client.findByIdAndRemove(id, function(err) {
+    Project.updateMany({client: id}, { $set: {client: null}} , function(err, res){ 
+      
+    });
+  });
 }
 
 module.exports = {

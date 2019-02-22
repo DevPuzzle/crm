@@ -3,38 +3,16 @@
 
 
     <div class="main">
-      <!-- <mat-toolbar color="primary" class="toolbar">
-        <mat-toolbar-row class="header content-wrapper">
-          <div class="logo-wrapper">
-            <img src="assets/img/logo.png" alt="logo" class="logo">
-          </div>
-          <div>
-            <a mat-button (click)="onScroll(about)">About</a>
-            <a mat-button (click)="onScroll(contacts)">Contact us</a>
-            <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a> -->
-            <!-- <a>{{sign}}</a> -->
-            <!-- <ng-container *ngIf="sign">
-              <a class="user-name">Welcome, {{user?.name}}!</a>
-              <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div>
-            </ng-container>
-            <button *ngIf="sign===false" class="signin-button sign-desktop" mat-button (click)="onShowSigninModal()">SignIn
-              <i class="fas fa-sign-in-alt"></i>
-            </button>
-            <button *ngIf="sign===false" class="signup-button sign-desktop" mat-button (click)="onShowSignupModal()">SignUp
-                <i class="fas fa-user-plus"></i>
-            </button>
-          </div>
-        </mat-toolbar-row>
-      </mat-toolbar> -->
-
           <mat-toolbar color="primary" class="toolbar toolbar-desktop">
             <mat-toolbar-row class="header content-wrapper">
               <div class="logo-wrapper">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
               </div>
               <div>
+                <a mat-button (click)="onScroll(features)">Features</a>
+                <a mat-button (click)="onScroll(previews)">Previews</a>
                 <a mat-button (click)="onScroll(about)">About</a>
-                <a mat-button (click)="onScroll(contacts)">Contact us</a>
+                <a mat-button (click)="onScroll(contact)">Contact us</a>
                 <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a>
 
                 <ng-container *ngIf="sign">
@@ -65,24 +43,34 @@
             <mat-sidenav class="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                          [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
               <div *ngIf="sign" class="welcomeUsermobile">
-                <a class="user-name">Welcome, {{user?.name}}!</a>
+                <p class="user-name">{{user?.name}}</p>
+                <p class="user-email">{{user?.email}}</p>
+                <p class="user-company">{{user?.company_name}}</p>
+                <!-- <p class="user-name">Welcome, {{user?.}}!</p> -->
+                <div class="sign-bottom">
+                  <!-- <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a> -->
+                  <button mat-button tabindex="-1" (click)="onCrmSystem()">CRM system</button>
+                  <button tabindex="-1" matTooltip="Sign Out" matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out" color="primary">
+                    Sign out
+                    <mat-icon>exit_to_app</mat-icon>
+                  </button>
+                </div>
                 <mat-divider></mat-divider>
-                <button matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out" mat-icon-button color="primary">
-                  <mat-icon aria-label="Example icon-button with a heart icon">exit_to_app</mat-icon>
-                </button>
                 <!-- <div matTooltip="Sign Out"  matTooltipPosition="right" mat-button (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></div> -->
               </div>
 
-              <a mat-button *ngIf="sign" (click)="onCrmSystem()">CRM system</a>
+
               <mat-nav-list>
-                  <mat-list-item (click)="onScroll(about)">About</mat-list-item>
+                  <mat-list-item (click)="onScroll(features)"><mat-icon>keyboard_arrow_right</mat-icon>Features</mat-list-item>
                   <mat-divider></mat-divider>
-                  <mat-list-item (click)="onScroll(contacts)">Contact us</mat-list-item>
+                  <mat-list-item (click)="onScroll(previews)"><mat-icon>keyboard_arrow_right</mat-icon>Previews</mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item (click)="onScroll(about)"><mat-icon>keyboard_arrow_right</mat-icon>About</mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item (click)="onScroll(contact)"><mat-icon>keyboard_arrow_right</mat-icon>Contact us</mat-list-item>
 
               </mat-nav-list>
           </mat-sidenav>
-
-
 
           <mat-sidenav-content>
             <div class="phone-image-wrapper">
@@ -108,27 +96,27 @@
               <div class="canvas-overlay"></div>
             </div>
 
-            <div class="futures">
+            <div class="features" #features>
               <div class="container">
-                <div class="futures-title">
-                  <span class="futures-badge badge">
+                <div class="features-title">
+                  <span class="features-badge badge">
                     Features
                   </span>
-                  <h2>Cool futures</h2>
+                  <h2>Cool features</h2>
                   <span class=section-title-line></span>
                 </div>
                 <div class="row">
-                  <div class="futures-item">
+                  <div class="features-item">
                     <i class="fas fa-hand-holding-usd"></i>
                     <h5>Is free</h5>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                   </div>
-                  <div class="futures-item">
+                  <div class="features-item">
                     <i class="fas fa-user-graduate"></i>
                     <h5>Easy to use</h5>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                   </div>
-                  <div class="futures-item">
+                  <div class="features-item">
                     <i class="fas fa-tablet-alt"></i>
                     <h5>Responsive Design</h5>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
@@ -137,7 +125,7 @@
               </div>
             </div>
             <!-- end futures section -->
-            <div class="screenshots-section" #about>
+            <div class="screenshots-section" #previews>
               <div class="contaiter-fluid">
                 <div class="screenshots-title">
                   <span class="screenshots-badge badge">previews</span>
@@ -148,7 +136,7 @@
               </div>
             </div>
             <!-- end screen shots-->
-            <section class="features-mid-wrapper">
+            <section class="features-mid-wrapper" #about>
               <div class="features-mid-block">
                 <div class="container">
                   <div class="row">
@@ -156,9 +144,9 @@
                       <img src="assets/img/features-mid-block1.png" alt="">
                     </div>
                     <div class="features-mid-description">
-                      <h2>Lorem ipsum</h2>
+                      <h2>Lorem ipsum 1</h2>
                       <span class="section-title-line"></span>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
+                      <p>Lorem ipsum 1 dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
                       <button mat-raised-button color="primary">Create account</button>
                     </div>
                   </div>
@@ -170,10 +158,10 @@
               <div class="features-mid-block">
                 <div class="container">
                   <div class="row">
-                    <div class="features-mid-description">
-                        <h2>Lorem ipsum</h2>
+                    <div class="features-mid-description second-description">
+                        <h2>Lorem ipsum 2</h2>
                         <span class="section-title-line"></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
+                        <p>Lorem ipsum 2 dolor sit amet consectetur adipisicing elit. Nostrum ipsum, est commodi nam odio itaque ullam. Fugit ut neque consequatur omnis, expedita fuga necessitatibus iste nobis, maxime sequi qui quaerat.</p>
                         <button mat-raised-button color="primary">Read more</button>
                     </div>
                     <div class="features-mid-img">
@@ -186,7 +174,7 @@
           </section>
           <!-- end futures mid wrapper section-->
 
-          <section class="contact-us" #contacts>
+          <section class="contact-us" #contact>
             <div class="container">
               <div class="contact-us-title">
                 <span class="contact-us-badge badge">

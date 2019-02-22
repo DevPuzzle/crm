@@ -178,3 +178,9 @@ export const GET_DATA_FOR_SELECT = gql`
     }
   }
 `;
+
+export const DELETE_PROJECT = gql`
+  mutation deleteProject($id: ID!){
+    deleteProject(id: $id)
+  }
+`;

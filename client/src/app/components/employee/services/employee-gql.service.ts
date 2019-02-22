@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Employee } from 'src/app/shared/interfaces';
 import * as employeesQueries from 'src/app/shared/gqlQueries/employees.queries';
+import * as contactMadeQueries from 'src/app/shared/gqlQueries/contact-made.queries';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 

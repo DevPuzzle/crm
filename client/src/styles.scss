@@ -127,3 +127,8 @@ h1{
     flex-wrap: wrap;
   }
 }
+
+.confirm-dialog-container .mat-dialog-container {
+  padding: 0;
+  border-radius: .25em .25em .4em .4em
+}

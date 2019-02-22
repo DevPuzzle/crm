@@ -28,6 +28,11 @@ import { ProjectTableComponent } from './components/contact-made/project-table/p
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselHolderComponent } from './components/main/main/carousel-holder/carousel-holder.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
+import { CoverListComponent } from './components/cover-letters/cover-list/cover-list.component';
+import { LetterListComponent } from './components/cover-letters/letter-list/letter-list.component';
+import { LetterInfoComponent } from './components/cover-letters/letter-info/letter-info.component';
+
 
 
 
@@ -47,6 +52,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     PageNotFoundComponent,
     ProjectComponent,
     ProjectTableComponent,
+    MatConfirmDialogComponent,
+    CoverListComponent,
+    LetterListComponent,
+    LetterInfoComponent,
     // CarouselHolderComponent
   ],
   imports: [
@@ -70,7 +79,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ProjectComponent]
+  entryComponents: [ProjectComponent, MatConfirmDialogComponent]
 })
 /* TODO: check if it can be refactored and put to graphql module not in app module */
 export class AppModule {

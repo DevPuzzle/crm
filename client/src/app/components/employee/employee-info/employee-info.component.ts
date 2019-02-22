@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from 'src/app/shared/interfaces';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class EmployeeInfoComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService,
     private userGQLService: UserGQLService, private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private dialogService: DialogService
     ) { }
 
   ngOnInit() {
@@ -75,13 +79,19 @@ export class EmployeeInfoComponent implements OnInit {
     } else {
       delete this.employeeForm.value['company'];
       this.epmloyeeGQLService.createEmployee(this.employeeForm.value);
+      this.router.navigate(['/employees']);
     }
   }
 
   onDelete() {
-    this.epmloyeeGQLService.deleteEmployee(this.EmployeeId);
-    this.EmployeeId = undefined;
-    this.router.navigate(['/employees']);
+    this.dialogService.openConfirmDialog('Are you sure to delete this employee?')
+    .afterClosed().subscribe(res => {
+      if (res) {
+        this.epmloyeeGQLService.deleteEmployee(this.EmployeeId);
+        this.EmployeeId = undefined;
+        this.router.navigate(['/employees']);
+      }
+    });
   }
 
   closeInfo() {

@@ -5,6 +5,7 @@
       <i class="fas fa-code"></i>
     </mat-card-header>
       <mat-list>
+        <mat-list-item *ngIf="employees?.length == 0">Not yet</mat-list-item>
         <ng-container *ngFor="let employee of employees">
           <a [routerLink]="'edit/' + employee._id" class="list-item-link">
             <mat-list-item class="list-item">{{employee?.name}} {{employee?.last_name}}</mat-list-item>

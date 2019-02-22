@@ -65,7 +65,7 @@
       </ng-container>
 
       <ng-container matColumnDef="notification">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Notification</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Notification</mat-header-cell>
           <mat-cell *matCellDef="let element">
               <div *ngIf="element.notification; else elseBlock">
                 <div *ngIf="element.notification.type.name === 'phone'; else elseBlock2">
@@ -83,7 +83,7 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
             <button class="aciton-button" mat-button color="primary" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
-            <button class="aciton-button" mat-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+            <button class="aciton-button" mat-button color="warn" (click)="onDelete(row._id)"><mat-icon>delete_outline</mat-icon></button>
         </mat-cell>
       </ng-container>
 

@@ -3,6 +3,8 @@ import { ClientGQLService } from '../../employee/services/client-qql.service';
 import { UserGQLService } from '../../services/user-qql.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 @Component({
   selector: 'app-client-info',
@@ -22,7 +24,9 @@ export class ClientInfoComponent implements OnInit {
     private clientGQLService: ClientGQLService,
     private userGQLService: UserGQLService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -35,11 +39,20 @@ export class ClientInfoComponent implements OnInit {
         this.clientGQLService
           .getClientById(params.clientId).
           subscribe( ({data, loading}) => {
+            console.log(data);
             const {client} = data;
             this.ClientId = client._id;
             this.company = client.company.name;
             this.fillInForm(client);
           });
+          // this.clientGQLService.ProjectsByClient(params.clientId).
+          // subscribe( ({data, loading}) => {
+          //   // const {client} = data;
+          //   console.log(loading);
+          //   // this.ClientId = client._id;
+          //   // this.company = client.company.name;
+          //   // this.fillInForm(client);
+          // });
       }
     });
   }
@@ -75,13 +88,19 @@ export class ClientInfoComponent implements OnInit {
       this.clientGQLService.updateClient(this.clientForm.value, this.ClientId);
     } else {
       this.clientGQLService.createClient(this.clientForm.value);
+      this.router.navigate(['/clients']);
     }
   }
 
   onDelete() {
-    this.clientGQLService.deleteClient(this.ClientId);
-    this.ClientId = undefined;
-    this.router.navigate(['/clients']);
+    this.dialogService.openConfirmDialog('Are you sure to delete this client?')
+    .afterClosed().subscribe(res => {
+      if (res) {
+        this.clientGQLService.deleteClient(this.ClientId);
+        this.ClientId = undefined;
+        this.router.navigate(['/clients']);
+      }
+    });
   }
 
   closeInfo() {

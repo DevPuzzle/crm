@@ -115,13 +115,15 @@ async function deleteEmployee({id}, req) {
     error.code = 404;
     throw error;
   }
-  await Employee.findByIdAndRemove(id);
-  // await Employee.findByIdAndRemove(id, function(err) {
-  //   Project.findOneAndUpdate({'employee': id}, {$pull:{'employee': null}}, function(err){ 
-  //     if(err){res.send(err);} 
-  //     res.json({status:'deleted'});
-  // });
-  // });
+  // await Employee.findByIdAndRemove(id);
+  await Employee.findByIdAndRemove(id, function(err) {
+    Project.updateMany({employee: id}, { $set: {employee: null}} , function(err, res){ 
+      if (err) {
+        console.log(err);
+      }
+    });
+  });
+
   return true;
 }
 

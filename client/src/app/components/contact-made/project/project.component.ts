@@ -3,9 +3,10 @@ import { Time } from 'src/app/shared/interfaces';
 import { ContactMadeGQLService } from '../services/contact-made-qql.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {FormControl} from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import { Inject } from '@angular/core';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 
 
@@ -27,7 +28,9 @@ export class ProjectComponent implements OnInit {
     private fb: FormBuilder,
     private contactMadeGQLService: ContactMadeGQLService,
     @Inject(MAT_DIALOG_DATA) public dataProject: any,
-    public dialogRef: MatDialogRef<ProjectComponent>
+    public dialogRef: MatDialogRef<ProjectComponent>,
+    private dialogService: DialogService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -62,6 +65,16 @@ export class ProjectComponent implements OnInit {
   onClose() {
     this.projectForm.reset();
     this.dialogRef.close();
+  }
+
+  onDelete() {
+    this.dialogService.openConfirmDialog('Are you sure to delete this project?')
+    .afterClosed().subscribe(res => {
+      if (res) {
+        this.contactMadeGQLService.deleteProject(this.dataProject._id);
+        this.onClose();
+      }
+    });
   }
 
   onChangeNotification(enable: boolean) {
@@ -111,9 +124,7 @@ export class ProjectComponent implements OnInit {
   }
 
 fillInForm(dataProject) {
-  // let enable;
   if (this.dataProject.notification) {
-    // enable = true;
     this.onOff = true;
     this.projectForm.patchValue({
       type: dataProject.notification.type._id,
@@ -125,14 +136,14 @@ fillInForm(dataProject) {
     this.onOff = false;
   }
 
-  if (dataProject.client !== null) {
+  if (dataProject.client._id !== undefined) {
     this.projectForm.patchValue({client: dataProject.client._id});
   }
-  if (dataProject.employee !== null) {
-    this.projectForm.patchValue({client: dataProject.employee._id});
+  if (dataProject.employee._id !== undefined) {
+    this.projectForm.patchValue({employee: dataProject.employee._id});
   }
-  if (dataProject.status !== null) {
-    this.projectForm.patchValue({client: dataProject.status._id});
+  if (dataProject.status._id !== undefined) {
+    this.projectForm.patchValue({status: dataProject.status._id});
   }
 
   this.projectForm.patchValue({

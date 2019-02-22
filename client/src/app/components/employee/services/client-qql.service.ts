@@ -30,6 +30,16 @@ export class ClientGQLService {
     .valueChanges;
   }
 
+  // ProjectsByClient(id: string) {
+  //   return this.apollo.watchQuery<{client: Client}>({
+  //     query: clientsQueries.GET_PROJECTS_BY_CLIENT,
+  //     variables: {
+  //       id: id
+  //     }
+  //   })
+  //   .valueChanges;
+  // }
+
   createClient(clientForm) {
     return this.apollo
       .mutate({

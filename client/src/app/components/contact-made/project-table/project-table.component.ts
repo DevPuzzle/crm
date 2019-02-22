@@ -3,6 +3,7 @@ import { Project } from 'src/app/shared/interfaces';
 import { ContactMadeGQLService } from '../services/contact-made-qql.service';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
 import { ProjectComponent } from '../project/project.component';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 @Component({
   selector: 'app-project-table',
@@ -19,7 +20,8 @@ export class ProjectTableComponent implements OnInit {
 
   constructor(
     private contactMadeGQLService: ContactMadeGQLService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogService: DialogService
     ) { }
 
   ngOnInit() {
@@ -82,6 +84,15 @@ export class ProjectTableComponent implements OnInit {
       disableClose: false,
       autoFocus: true,
       data: row
+    });
+  }
+
+  onDelete(id) {
+    this.dialogService.openConfirmDialog('Are you sure to delete this project?')
+    .afterClosed().subscribe(res => {
+      if (res) {
+        this.contactMadeGQLService.deleteProject(id);
+      }
     });
   }
 
