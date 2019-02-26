@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const nodemon = require('../nodemon');
+// const nodemon = require('../nodemon');
 
 module.exports = (req, res, next) => {
     const authHeader = req.get('Authorization');
@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     const token = authHeader.split(' ')[1];
     let decodedToken;
     try {
-        decodedToken = jwt.verify(token, `${nodemon.env.JWT_KEY}`);
+        decodedToken = jwt.verify(token, `${process.env.JWT_KEY}`);
     } catch (err) {
         req.isAuth = false;
         return next();

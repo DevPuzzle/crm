@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../mongodb/models/user');
 const Company = require('../mongodb/models/company');
-const nodemon = require('../nodemon');
+// const nodemon = require('../nodemon');
 
 async function signUserIn({email, password}) {
   const user = await User.findOne({email: email});
@@ -23,7 +23,7 @@ async function signUserIn({email, password}) {
     email: user.email,
     companyId: user.company_id
   },
-  `${nodemon.env.JWT_KEY}`,
+  `${process.env.JWT_KEY}`,
   {  expiresIn: '2h' }
   );
   return { token: token, userId: user._id.toString() }

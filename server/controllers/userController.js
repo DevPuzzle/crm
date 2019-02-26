@@ -3,7 +3,7 @@ const User = require('../mongodb/models/user');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const {checkAuth} = require('../helpers/helpers');
-const nodemon = require('../nodemon');
+// const nodemon = require('../nodemon');
 
 async function getAuthorizedUser (args, req) {
     const authHeader = req.get('Authorization');
@@ -22,7 +22,7 @@ async function getAuthorizedUser (args, req) {
     let decodedToken;
     
     try {
-        decodedToken = jwt.verify(token, `${nodemon.env.JWT_KEY}`);
+        decodedToken = jwt.verify(token, `${process.env.JWT_KEY}`);
     } catch (err) {
         return next();
       }
