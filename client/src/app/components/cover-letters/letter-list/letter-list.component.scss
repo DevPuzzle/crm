@@ -1,0 +1,33 @@
+.letter-list {
+  margin-top: 1rem;
+  .mat-card {
+    padding: 0;
+    .mat-card-header {
+      align-content: center;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      padding: 8px 20px;
+      color: #fff;
+      background: #5c6bc0;
+      .mat-card-title {
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+    .letter-item-link{
+      text-decoration: none;
+    }
+    .letter-item:hover{
+      cursor: pointer;
+      background: rgba(0,0,0,.08);
+    }
+  }
+}
+
+.add-button {
+  margin-top: 1rem;
+}
+

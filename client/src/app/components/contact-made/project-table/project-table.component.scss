@@ -1,0 +1,42 @@
+.search-div {
+  .search-form-field {
+    width: 50%;
+    margin-left: 20px;
+    }
+}
+
+.projectTable {
+  .link {
+    color: black !important;
+  }
+  .finished {
+    color: #00b500;
+  }
+  .indev {
+    color: #ea973c;
+  }
+  .discussed {
+    color: #6878c6;
+  }
+  .show-info-button {
+    padding: 0;
+  }
+  .aciton-button {
+    padding: 0 5px;
+    min-width: 20px;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+mat-footer-row {
+  justify-content: center;
+  font-style: italic;
+}
+
+mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}

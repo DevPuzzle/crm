@@ -1,0 +1,108 @@
+<div class="search-div">
+    <button mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>Create
+    </button>
+    <mat-form-field class="search-form-field" floatLabel ="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8 projectTable">
+    <mat-table [dataSource]="projectsData" matSort>
+      <ng-container matColumnDef="title" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element?.title}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span *ngIf="element.client?.name">{{element.client?.name}}</span><span *ngIf="element.client?.last_name">{{'&nbsp;' + element.client?.last_name}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="employee">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Employe</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span *ngIf="element?.employee?.name">{{element?.employee?.name}}</span><span *ngIf="element.employee?.last_name">{{'&nbsp;'+ element.employee?.last_name}}</span></mat-cell>
+
+       <!-- <mat-cell *matCellDef="let element"><span *ngIf="element?.employee?.name">{{element?.employee?.name}}</span><span *ngIf="element.employee?.last_name">{{'&nbsp;'+ element.employee?.last_name}}</span></mat-cell> -->
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span> {{element.status?.name}}
+            <span *ngIf="element.status?.name === 'finished'" class="finished">&nbsp;<i class="fas fa-check"></i></span>
+            <span *ngIf="element.status?.name === 'in dev'"  class="indev">&nbsp;<i class="fas fa-spinner"></i></span>
+            <span *ngIf="element.status?.name === 'discussed'" class="discussed">&nbsp;<i class="fas fa-comments"></i></span>
+          </span>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="platform">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Platform</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.platform.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="link">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Link</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a class="link" *ngIf="element?.link" matTooltip="{{element?.link}}" href="{{element?.link}}" target="_blank"><i class="fas fa-link"></i></a>
+            <!-- {{element.link}} -->
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="info">
+          <mat-header-cell *matHeaderCellDef>Info</mat-header-cell>
+          <!-- <mat-cell *matCellDef="let element">{{element.info}}</mat-cell> -->
+          <mat-cell *matCellDef="let element">
+                <button class="show-info-button" *ngIf="element?.info"  mat-button
+                        matTooltip="{{element?.info}}"
+                        aria-label="Button that displays a tooltip with a custom message">
+                  show info ...
+                </button>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="notification">
+          <mat-header-cell *matHeaderCellDef>Notification</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <div *ngIf="element.notification; else elseBlock">
+                <div *ngIf="element.notification.type.name === 'phone'; else elseBlock2">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <ng-template #elseBlock2>
+                  <i class="fas fa-envelope"></i>
+                </ng-template>
+              </div>
+              <ng-template #elseBlock></ng-template>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button class="aciton-button" mat-button color="primary" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+            <button class="aciton-button" mat-button color="warn" (click)="onDelete(row._id)"><mat-icon>delete_outline</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide' : projectsData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide' : !(projectsData!=null && projectsData.data.length==0)}"></mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  </div>

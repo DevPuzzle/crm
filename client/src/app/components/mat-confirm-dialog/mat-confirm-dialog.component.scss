@@ -1,0 +1,39 @@
+
+.content-container {
+  margin: 5px 5px 15px 5px;
+  display: flex;
+}
+
+#close-icon {
+  margin-left: auto;
+  order: 2;
+}
+
+#close-icon {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#no-button {
+  height: 50px;
+  width: 50%;
+  color: #fff;
+  background: #E91E63;
+  border-radius: 0;
+}
+
+#yes-button {
+  height: 50px;
+  width: 50%;
+  color: #fff;
+  background: #4CAF50;
+  border-radius: 0;
+}
+
+.content-span {
+  padding: 35px 16px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 100;
+}

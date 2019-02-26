@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="header wrapper">
+    <div class="left-panel">
+      <a mat-button routerLink="/" class="logo"><img src="assets/img/logo.png" alt=""></a>
+      <a
+        *ngFor="let link of links" mat-button
+        [routerLink]="link.link" routerLinkActive="active"
+        >
+        {{link.label}}
+        <!-- <i [class]="link.icon" class="nav-icon"></i> -->
+      </a>
+    </div>
+
+    <div class="right-panel">
+      <div class="name-company">
+        <ng-container *ngIf="user">
+          <p class="user-name">
+            Welcome, {{user.name}}!
+          </p>
+          <span class="text-gray company">({{user.company_name}})</span>
+        </ng-container>
+      </div>
+
+      <a href="/" matTooltip="Sign Out"  matTooltipPosition="right" (click)="onSignout()" class="sign-out"><i class="fas fa-sign-out-alt"></i></a>
+
+    </div>
+</mat-toolbar-row>
+</mat-toolbar>

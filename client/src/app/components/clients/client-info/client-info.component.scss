@@ -1,0 +1,78 @@
+.client-info {
+  margin-top: 1rem;
+  @media(max-width: 599px){
+    margin-top: 1rem;
+    margin-left: 0;
+  }
+  .mat-card {
+    padding: 0;
+    .mat-card-header {
+      align-content: center;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      padding: 8px 20px;
+      color: #fff;
+      background: #5c6bc0;
+      .closeInfo {
+        position: absolute;
+        right: 5px;
+        top: 2px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .mat-card-title {
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+    .client-info-form {
+      padding: 16px;
+      mat-form-field {
+        width: 100%;
+      }
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .contact-made {
+    h2 {
+      align-items: center;
+      display: flex;
+      height: 40px;
+      padding: 0px 20px;
+      color: #2a2a2a;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    mat-panel-description {
+      display: flex;
+      justify-content: flex-end;
+      flex-grow: 0;
+      .finished {
+        color: #00b500;
+      }
+      .indev {
+        color: #ea973c;
+      }
+      .discussed {
+        color: #6878c6;
+      }
+    }
+    mat-list {
+      a {
+        text-decoration: none;
+        color: rgba(0,0,0,.87);
+        font-size: 16px;
+      }
+      .project-field {
+        font-weight: 500;
+      }
+    }
+  }
+}
+

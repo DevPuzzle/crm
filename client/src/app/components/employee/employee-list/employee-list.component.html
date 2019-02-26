@@ -1,0 +1,20 @@
+<div class="employee-list">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Employee list</mat-card-title>
+      <i class="fas fa-code"></i>
+    </mat-card-header>
+      <mat-list>
+        <mat-list-item *ngIf="employees?.length == 0">Not yet</mat-list-item>
+        <ng-container *ngFor="let employee of employees">
+          <a [routerLink]="'edit/' + employee._id" class="list-item-link">
+            <mat-list-item class="list-item">{{employee?.name}} {{employee?.last_name}}</mat-list-item>
+            <mat-divider></mat-divider>
+          </a>
+        </ng-container>
+      </mat-list>
+  </mat-card>
+</div>
+
+<a routerLink="new" mat-raised-button color="primary" class="add-button">Add</a>
+

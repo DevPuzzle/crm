@@ -1,1 +1,134 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+/* Custom carousel */
+.owl-next {
+  position: absolute;
+  right: 20px;
+  top: 33%;
+  font-size: 14px;
+  margin: 5px;
+  padding: 4px 7px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50% !important;
+  background: #fff none repeat scroll 0 0 !important;
+  box-shadow: -1px 92px 99px -62px rgba(0, 0, 0, 0.68), 0 25px 65px 0 rgba(0, 0, 0, 0.27);
+  color: #3f345f !important;
+  height: 60px;
+  line-height: 60px;
+  opacity: 0.8;
+  width: 60px;
+  text-align: center;
+}
+
+.owl-prev {
+  position: absolute;
+  left: 20px;
+  top: 33%;
+  font-size: 14px;
+  margin: 5px;
+  padding: 4px 7px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50% !important;
+  background: #fff none repeat scroll 0 0 !important;
+  box-shadow: -1px 92px 99px -62px rgba(0, 0, 0, 0.68), 0 25px 65px 0 rgba(0, 0, 0, 0.27);
+  color: #3f345f !important;
+  height: 60px;
+  line-height: 60px;
+  opacity: 0.8;
+  width: 60px;
+  text-align: center;
+}
+
+.owl-item {
+  opacity: 0.4;
+  width: 20%;
+  transform: scale(1);
+}
+
+  .center {
+    z-index: 9999;
+    width: 50%;
+    transition: .7s;
+    opacity: 1 !important;
+    transform: scale(1.1) !important;
+  }
+
+/* End custom carousel */
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h1{
+  font-size: 48px;
+}
+
+.wrapper{
+  max-width: 1140px;
+  padding: 0 16px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.signup-form{
+  width: 350px;
+}
+
+.signin-form{
+  width: 350px;
+}
+
+.section-title-line {
+  background: rgba(0, 0, 0, 0) url('./assets/img/line.png') repeat scroll 0 0;
+  display: inline-block;
+  height: 5px;
+  width: 53px;
+}
+
+.signin-button {
+  background: #40b93b;
+  margin-left: 5px !important;
+  color: #fff;
+}
+.signup-button {
+  background: #f7b71a;
+  margin-left: 5px !important;
+  color: #fff;
+}
+
+.badge {
+  width: max-content;
+      margin: 0 0 8px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-stretch: normal;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 1px;
+      line-height: normal;
+      padding: 4px 14px;
+      text-transform: uppercase;
+}
+
+.container {
+  max-width: 1140px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+}
+
+.confirm-dialog-container .mat-dialog-container {
+  padding: 0;
+  border-radius: .25em .25em .4em .4em
+}

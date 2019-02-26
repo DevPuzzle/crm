@@ -1,0 +1,122 @@
+<div class="project">
+  <div class="project-head">
+    <h3>Create project</h3>
+    <span class="close_dialog" (click)="onClose()"><i class="fas fa-times"></i></span>
+  </div>
+  <mat-divider></mat-divider>
+  <form [formGroup]="projectForm" (ngSubmit)="onSave()">
+    <div class="wrapper-columns">
+      <div class="left">
+          <div class="field">
+              <mat-form-field class="mat-form-field-style">
+                <mat-select placeholder="client" formControlName="client">
+                    <mat-option [value]="null">empty</mat-option>
+                    <mat-option *ngFor="let client of dataForSelect?.clients" [value]="client?._id">
+                        {{client?.name + ' ' + client?.last_name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+
+          <div class="field">
+              <mat-form-field class="mat-form-field-style">
+                <mat-select placeholder="employee" formControlName="employee">
+                    <mat-option [value]="null">empty</mat-option>
+                    <mat-option *ngFor="let employee of dataForSelect?.employees" [value]="employee._id">
+                        {{employee?.name + ' ' + employee?.last_name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+
+          <div class="field">
+              <mat-form-field class="mat-form-field-style">
+                <mat-select placeholder="platform" formControlName="platform" required>
+                    <mat-option *ngFor="let platform of dataForSelect?.platforms" [value]="platform._id">
+                        {{platform?.name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+
+          <div class="field">
+              <h4>Project info</h4>
+              <mat-form-field class="mat-form-field-style">
+                  <input matInput type="text" placeholder="title" formControlName="title" required>
+                  <mat-error *ngIf="projectForm.get('title').hasError('required')">
+                      {{requiredFieldError}}
+                  </mat-error>
+              </mat-form-field><br>
+              <mat-form-field class="mat-form-field-style">
+                  <input matInput type="text" placeholder="link" formControlName="link">
+              </mat-form-field><br>
+              <mat-form-field class="mat-form-field-style">
+                  <textarea matInput placeholder="info" formControlName="info"></textarea>
+              </mat-form-field>
+          </div>
+
+          <div class="field">
+              <mat-form-field class="mat-form-field-style">
+                <mat-select placeholder="status" formControlName="status">
+                    <mat-option *ngFor="let status of dataForSelect?.statuses" [value]="status._id">
+                        {{status.name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+      </div>
+
+      <div class="right">
+          <div class="date">
+          <div class="notificationHeader">
+              <h4>Notification</h4>
+              <mat-slide-toggle
+                formControlName="enable"
+                (change)="onChangeNotification($event.checked)">
+                <span *ngIf="onOff; else elseBlock"><i class="off-icon fas fa-bell-slash"></i></span>
+                <ng-template #elseBlock><i class="fas fa-bell"></i></ng-template>
+              </mat-slide-toggle>
+          </div>
+
+          <div class="field">
+              <mat-form-field class="mat-form-field-style">
+                  <mat-select placeholder="type" formControlName="type" required>
+                      <mat-option *ngFor="let type of dataForSelect?.not_types" [value]="type._id">
+                          {{type.name}}
+                      </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="projectForm.get('type').hasError('required')">
+                    {{requiredFieldError}}
+                  </mat-error>
+                </mat-form-field><br>
+
+                <mat-form-field class="mat-form-field-style">
+                    <textarea matInput placeholder="comment" formControlName="comment" required></textarea>
+                </mat-form-field>
+
+                <h5>when to remind?</h5>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="dp3" placeholder="choose a date" class="choose-date" formControlName="date" required>
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                  </mat-form-field><br>
+
+                <div class="time">
+                    <mat-form-field>
+                        <mat-select placeholder="time" formControlName="time" required>
+                            <mat-option *ngFor="let hour of time" [value]="hour?.value">
+                                {{hour?.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+              </div>
+        </div>
+        <div class="buttons">
+            <button mat-raised-button color="primary" [disabled]="projectForm.invalid">Save</button>
+            <a *ngIf="dataProject?._id" mat-raised-button color="warn" (click)="onDelete()">Delete</a>
+        </div>
+      </div>
+    </div>
+</form>
+</div>

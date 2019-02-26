@@ -1,0 +1,74 @@
+<div class="client-info">
+  <mat-card>
+    <mat-card-header>
+      <a (click)="closeInfo()" class="closeInfo"><i class="fas fa-times"></i></a>
+      <mat-card-title>Client info</mat-card-title>
+      <i class="far fa-id-card"></i>
+    </mat-card-header>
+    <form [formGroup]="clientForm"  (ngSubmit)="onSave()" class="client-info-form">
+      <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" required>
+          <mat-error *ngIf="clientForm.get('name').hasError('required')">
+            {{requiredFieldError}}
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last name" formControlName="last_name">
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="E-mail" formControlName="email" required>
+          <mat-error *ngIf="clientForm.get('email').hasError('required')">
+            {{requiredFieldError}}
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Skype" formControlName="skype">
+      </mat-form-field>
+
+      <mat-form-field>
+          <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button mat-raised-button color="primary" [disabled]="clientForm.invalid">Save</button>
+        <a (click)="onDelete()" mat-raised-button color="warn" *ngIf="ClientId">Delete</a>
+      </div>
+    </form>
+    <mat-divider></mat-divider>
+    <div *ngIf="projects?.length > 0" class="contact-made">
+      <h2>Projects</h2>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let project of projects">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{project.title}}
+              </mat-panel-title>
+              <mat-panel-description>
+                  <span *ngIf="project.status.name === 'finished'"  class="finished">finished&nbsp;<i class="fas fa-check"></i></span>
+                  <span *ngIf="project.status.name === 'in dev'"  class="indev">in dev&nbsp;<i class="fas fa-spinner"></i></span>
+                  <span *ngIf="project.status.name === 'discussed'"  class="discussed">discussed&nbsp;<i class="fas fa-comments"></i></span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-list>
+                <mat-list-item><span class="project-field">Link:&nbsp;</span><a href="{{project.link}}">{{project?.link}}</a></mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item><span class="project-field">Platform:&nbsp;</span>{{project?.platform?.name}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item><span class="project-field">Employe:&nbsp;</span>{{project?.employee?.name +' ' + project?.employee?.last_name}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item><span class="project-field">Notification:&nbsp;</span>{{project?.notification?.date +' ' + project?.notification?.time}}</mat-list-item>
+            </mat-list>
+
+          </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+  </mat-card>
+</div>
+
+
+

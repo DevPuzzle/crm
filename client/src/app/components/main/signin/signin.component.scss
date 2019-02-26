@@ -1,0 +1,18 @@
+form {
+  position: relative;
+  .mat-error {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .submit-button{
+    margin-top: 15px;
+  }
+
+  .fa-times {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    cursor: pointer;
+  }
+}
+
