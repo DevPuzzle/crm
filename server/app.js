@@ -39,7 +39,7 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`).then(result => {
     console.log('connected !!!');
-    app.listen(8080);
+    app.listen(process.env.PORT || 8080);
 }).catch(err => {
     console.log(err);
 });
