@@ -15,7 +15,7 @@
 
       <mat-form-field>
         <input matInput placeholder="Last name" formControlName="last_name">
-    </mat-form-field>
+      </mat-form-field>
 
       <mat-form-field>
           <input matInput placeholder="E-mail" formControlName="email" required>
@@ -38,72 +38,33 @@
       </div>
     </form>
     <mat-divider></mat-divider>
-    <div *ngIf="ClientId" class="contact-made">
+    <div *ngIf="projects?.length > 0" class="contact-made">
       <h2>Projects</h2>
       <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Ecommerce Electronic store
-            </mat-panel-title>
-            <mat-panel-description>
-                <span class="finished">finished&nbsp;<i class="fas fa-check"></i></span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <mat-list>
-              <mat-list-item><span class="project-field">Link:&nbsp;</span><a href="https://angular.io/">angular.io</a></mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item><span class="project-field">Platform:&nbsp;</span>UpWork</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item><span class="project-field">Employe:&nbsp;</span>Smith</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item><span class="project-field">Notification:&nbsp;</span>Some notifcitaion</mat-list-item>
-          </mat-list>
-
-        </mat-expansion-panel>
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngFor="let project of projects">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Ecommerce Electronic store
+                {{project.title}}
               </mat-panel-title>
               <mat-panel-description>
-                  <span class="indev">in dev&nbsp;<i class="fas fa-spinner"></i></span>
+                  <span *ngIf="project.status.name === 'finished'"  class="finished">finished&nbsp;<i class="fas fa-check"></i></span>
+                  <span *ngIf="project.status.name === 'in dev'"  class="indev">in dev&nbsp;<i class="fas fa-spinner"></i></span>
+                  <span *ngIf="project.status.name === 'discussed'"  class="discussed">discussed&nbsp;<i class="fas fa-comments"></i></span>
               </mat-panel-description>
             </mat-expansion-panel-header>
 
             <mat-list>
-                <mat-list-item><span class="project-field">Link:&nbsp;</span><a href="https://angular.io/">angular.io</a></mat-list-item>
+                <mat-list-item><span class="project-field">Link:&nbsp;</span><a href="{{project.link}}">{{project?.link}}</a></mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><span class="project-field">Platform:&nbsp;</span>UpWork</mat-list-item>
+                <mat-list-item><span class="project-field">Platform:&nbsp;</span>{{project?.platform?.name}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><span class="project-field">Employe:&nbsp;</span>Smith</mat-list-item>
+                <mat-list-item><span class="project-field">Employe:&nbsp;</span>{{project?.employee?.name +' ' + project?.employee?.last_name}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><span class="project-field">Notification:&nbsp;</span>Some notifcitaion</mat-list-item>
+                <mat-list-item><span class="project-field">Notification:&nbsp;</span>{{project?.notification?.date +' ' + project?.notification?.time}}</mat-list-item>
             </mat-list>
 
           </mat-expansion-panel>
-          <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Web Site
-                </mat-panel-title>
-                <mat-panel-description>
-                    <span class="discussed">discussed&nbsp;<i class="fas fa-comments"></i></span>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
 
-              <mat-list>
-                  <mat-list-item><span class="project-field">Link:&nbsp;</span><a href="https://angular.io/">angular.io</a></mat-list-item>
-                  <mat-divider></mat-divider>
-                  <mat-list-item><span class="project-field">Platform:&nbsp;</span>UpWork</mat-list-item>
-                  <mat-divider></mat-divider>
-                  <mat-list-item><span class="project-field">Employe:&nbsp;</span>Smith</mat-list-item>
-                  <mat-divider></mat-divider>
-                  <mat-list-item><span class="project-field">Notification:&nbsp;</span>Some notifcitaion</mat-list-item>
-              </mat-list>
-
-            </mat-expansion-panel>
       </mat-accordion>
     </div>
   </mat-card>

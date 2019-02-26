@@ -10,8 +10,9 @@ const User = require('../mongodb/models/user');
 const {checkAuth} = require('../helpers/helpers');
 
 async function createProject({ projectInput }, req) {
-    console.log('projectInput', projectInput);
+
     checkAuth(req.isAuth);
+
     const errors = [];
     
     if (validator.isEmpty(projectInput.title)) {
@@ -32,7 +33,7 @@ async function createProject({ projectInput }, req) {
       console.log(error);
       throw error;
     }
-    console.log('ТИП ДАННЫХ projectInput.employee', typeof projectInput.employee);
+
     const project = new Project({
         title: projectInput.title,
         info: projectInput.info,
@@ -54,7 +55,8 @@ async function createProject({ projectInput }, req) {
     return { ...createdProject._doc };
   }
 async function updateProject({id, projectInput}, req) {
-  checkAuth(req.isAuth);
+
+    checkAuth(req.isAuth);
     const errors = [];
     
     if (validator.isEmpty(projectInput.title)) {
@@ -78,6 +80,10 @@ async function updateProject({id, projectInput}, req) {
   if(user === null || companyId === null) {
       errors.push({message: 'User or company not found'});
   }
+  
+  let testDate = new Date(projectInput.date);
+ 
+  console.log('testDate/toLocalString', testDate.toLocalString());
 
   project.title = projectInput.title;
   project.info = projectInput.info;
@@ -115,14 +121,21 @@ async function getProjects(req) {
   return projects;
 }
 async function getProjectsByEmployeeId({_id},req) {
-  // console.log('THIS PROJECT CONTROLLER _ID', _id);
-  // console.log('THIS PROJECT CONTROLLER req', req);
+  checkAuth(req.isAuth);
   const projects = await Project.find({employee: _id});
   // console.log('___________id form getProjectsByEmployeeId___________', _id);
   return projects;
 }
 
+async function getProjectsByClientId({_id},req) {
+  checkAuth(req.isAuth);
+  const projects = await Project.find({client: _id});
+  return projects;
+}
+
 async function deleteProject({id}, req) {
+  checkAuth(req.isAuth);
+
   if(!req.isAuth) {
     const error = new Error('Not Authenticated!');
     error.status = 401;
@@ -146,5 +159,6 @@ async function deleteProject({id}, req) {
     getProjects: getProjects,
     getProjectById: getProjectById,
     getProjectsByEmployeeId: getProjectsByEmployeeId,
+    getProjectsByClientId: getProjectsByClientId,
     deleteProject: deleteProject
 }

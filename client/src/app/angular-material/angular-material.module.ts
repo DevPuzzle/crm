@@ -22,7 +22,8 @@ import { MatCardModule,
   MatTableModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatSortModule} from '@angular/material';
+  MatSortModule,
+  MatBadgeModule} from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule, MatDialogConfig} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -53,7 +54,8 @@ const MATERIAL_MODULES = [
   MatTableModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatBadgeModule
 ];
 
 @NgModule({

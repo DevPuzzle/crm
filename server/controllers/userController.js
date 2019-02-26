@@ -3,6 +3,7 @@ const User = require('../mongodb/models/user');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const {checkAuth} = require('../helpers/helpers');
+const nodemon = require('../nodemon');
 
 async function getAuthorizedUser (args, req) {
     const authHeader = req.get('Authorization');
@@ -15,11 +16,13 @@ async function getAuthorizedUser (args, req) {
         console.log(error);
         throw error;
     }
+
     
     const token = authHeader.split(' ')[1];
     let decodedToken;
+    
     try {
-        decodedToken = jwt.verify(token, 'crmdevpuzzlekey');
+        decodedToken = jwt.verify(token, `${nodemon.env.JWT_KEY}`);
     } catch (err) {
         return next();
       }
@@ -35,7 +38,7 @@ async function getAuthorizedUser (args, req) {
         company_id: decodedToken.companyId,
         company_name: company.name
     }
-
+    
     return AuthorizedUser;
 }
 

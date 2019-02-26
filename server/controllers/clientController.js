@@ -84,6 +84,7 @@ async function updateClient({id, clientInput}, req) {
 }
 
 async function getClientById (_, {_id}, req) {
+  
   try{
     const foundClient = await Client.findById(_id);
     return foundClient;

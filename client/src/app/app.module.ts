@@ -29,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselHolderComponent } from './components/main/main/carousel-holder/carousel-holder.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
-import { CoverListComponent } from './components/cover-letters/cover-list/cover-list.component';
 import { LetterListComponent } from './components/cover-letters/letter-list/letter-list.component';
 import { LetterInfoComponent } from './components/cover-letters/letter-info/letter-info.component';
 
@@ -53,9 +52,9 @@ import { LetterInfoComponent } from './components/cover-letters/letter-info/lett
     ProjectComponent,
     ProjectTableComponent,
     MatConfirmDialogComponent,
-    CoverListComponent,
     LetterListComponent,
     LetterInfoComponent,
+    EmployeeListComponent
     // CarouselHolderComponent
   ],
   imports: [

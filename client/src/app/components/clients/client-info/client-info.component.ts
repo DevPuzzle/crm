@@ -16,6 +16,7 @@ export class ClientInfoComponent implements OnInit {
   clientForm: FormGroup;
   company;
   user;
+  projects;
   requiredFieldError = 'This is a required field';
   panelOpenState = false;
 
@@ -39,8 +40,9 @@ export class ClientInfoComponent implements OnInit {
         this.clientGQLService
           .getClientById(params.clientId).
           subscribe( ({data, loading}) => {
-            console.log(data);
             const {client} = data;
+            this.projects = data.projectsByClient;
+            console.log(this.projects);
             this.ClientId = client._id;
             this.company = client.company.name;
             this.fillInForm(client);

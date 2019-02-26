@@ -1,3 +1,24 @@
-<p>
-  letter-list works!
-</p>
+<div class="letter-list">
+  <mat-card>
+    <mat-card-header>
+        <mat-card-title>Cover letters list</mat-card-title>
+        <i class="far fa-file-alt"></i>
+    </mat-card-header>
+      <mat-list>
+          <!-- <mat-list-item *ngIf="clients?.length == 0">Not yet</mat-list-item> -->
+        <ng-container>
+          <!-- <a [routerLink]="'edit/' + client._id" class="letter-item-link">
+            <mat-list-item class="list-item">{{client?.name}} {{client?.last_name}}</mat-list-item>
+            <mat-divider></mat-divider>
+          </a> -->
+          <a [routerLink]="" class="letter-item-link">
+            <mat-list-item class="letter-item"><span matBadge="2" matBadgeOverlap="false">in work...</span></mat-list-item>
+            <mat-divider></mat-divider>
+          </a>
+        </ng-container>
+      </mat-list>
+
+  </mat-card>
+</div>
+
+<a routerLink="new" mat-raised-button color="primary" class="add-button">Add</a>

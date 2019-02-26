@@ -90,6 +90,7 @@ const typeDefs = `
       project(_id: String!): Project!
       projects: [Project]!
       projectsByEmployee(_id: String!): [Project]!
+      projectsByClient(_id: String!): [Project]!
     }
 
     type Mutation {
@@ -121,7 +122,10 @@ const resolvers = {
       project: projectController.getProjectById,
       projects: (_, args, req) => projectController.getProjects(req),
       projectsByEmployee: (_, _id, req) => {
-        return projectController.getProjectsByEmployeeId({_id}, req)
+        return projectController.getProjectsByEmployeeId({_id}, req);
+      },
+      projectsByClient: (_, _id, req) => {
+        return projectController.getProjectsByClientId({_id}, req);
       }
     },
     Mutation: {

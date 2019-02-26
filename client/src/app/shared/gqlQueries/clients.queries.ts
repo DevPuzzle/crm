@@ -24,6 +24,28 @@ export const GET_CLIENT_BY_ID = gql`
         name
       }
     }
+    projectsByClient(_id: $id) {
+      title
+      link
+      platform {
+        name
+      }
+      employee {
+        name
+        last_name
+      }
+      status {
+        name
+      }
+      notification {
+        type {
+          name
+        }
+        comment
+        date
+        time
+      }
+    }
   }
 `;
 
