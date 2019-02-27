@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'http://argosycrm.com/graphql'
+  serverUrl: 'http://argosycrm.com'
 };
