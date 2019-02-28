@@ -56,7 +56,7 @@ export class MainComponent implements OnInit, OnDestroy {
         this.sign = true;
       }, err => {
         this.sign = false;
-        console.log('not user');
+        // console.log('not user');
       });
     this.style = {
       'position': 'absolute',

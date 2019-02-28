@@ -5,12 +5,14 @@ const graphqlHttp = require('express-graphql');
 const graphqlSchema = require('./graphql/schemas/index');
 const auth = require('./middleware/auth');
 const cors = require('./middleware/cors');
+const path = require('path');
 
 const app = express();
 
 app.use(bodyParser.json()); 
 app.use(cors);
 app.use(auth);
+app.use('/', express.static(path.join(__dirname, 'angular')));
 app.use(
   '/graphql',
   graphqlHttp({
@@ -43,5 +45,9 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
 }).catch(err => {
     console.log(err);
 });
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, 'angular', 'index.html'));
+ });
 
 

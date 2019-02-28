@@ -34,7 +34,7 @@ export function createApollo(httpLink: HttpLink, authGQLService: AuthGQLService)
   const errorHandler = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
       graphQLErrors.map(({ message, locations, path }) => {
-        console.log(message);
+        // console.log(message);
         // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
       });
     }

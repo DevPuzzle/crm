@@ -57,7 +57,7 @@ export class ClientGQLService {
         catchError(err => {
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+            // console.log(this.errorMessage);
           }
           return of(null);
         })
@@ -88,7 +88,7 @@ export class ClientGQLService {
         catchError(err => {
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+            // console.log(this.errorMessage);
           }
           return of(null);
         })
@@ -117,7 +117,7 @@ export class ClientGQLService {
         catchError(err => {
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+            // console.log(this.errorMessage);
           }
           return of(null);
         })
