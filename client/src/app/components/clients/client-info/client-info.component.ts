@@ -42,7 +42,7 @@ export class ClientInfoComponent implements OnInit {
           subscribe( ({data, loading}) => {
             const {client} = data;
             this.projects = data.projectsByClient;
-            console.log(this.projects);
+            // console.log(this.projects);
             this.ClientId = client._id;
             this.company = client.company.name;
             this.fillInForm(client);

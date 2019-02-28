@@ -21,7 +21,7 @@ export class ContactMadeGQLService {
   }
 
   createProject(projectForm) {
-    console.log('projectForm', projectForm);
+    // console.log('projectForm', projectForm);
     return this.apollo
       .mutate({
         refetchQueries: [{
@@ -37,7 +37,7 @@ export class ContactMadeGQLService {
         catchError(err => {
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+            // console.log(this.errorMessage);
           }
           return of(null);
         })
@@ -67,7 +67,7 @@ export class ContactMadeGQLService {
         catchError(err => {
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+            // console.log(this.errorMessage);
           }
           return of(null);
         })
@@ -96,7 +96,7 @@ export class ContactMadeGQLService {
         catchError(err => {
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+            // console.log(this.errorMessage);
           }
           return of(null);
         })

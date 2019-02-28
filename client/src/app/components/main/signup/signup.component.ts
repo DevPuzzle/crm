@@ -65,11 +65,11 @@ export class SignupComponent implements OnInit {
       .pipe(
         /* TODO: think how to refactor it */
         catchError(err => {
-          console.log(err.networkError);
+          //console.log(err.networkError);
           this.isSignUpData = false;
           if (err.networkError) {
             this.errorMessage = err.networkError.error.errors[0].data;
-            console.log(this.errorMessage);
+           // console.log(this.errorMessage);
             this.snackBar.open(
               this.errorMessage,
               'Dismiss'
@@ -89,7 +89,7 @@ export class SignupComponent implements OnInit {
       .subscribe(
         ({ data, loading }) => {
           const {login} = data;
-          console.log('login.token', login.token);
+          //console.log('login.token', login.token);
           localStorage.setItem('uitoken', login.token);
           this.router.navigate(['/employees']);
         },
