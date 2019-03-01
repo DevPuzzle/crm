@@ -8,7 +8,7 @@ const cors = require('./middleware/cors');
 const path = require('path');
 
 const app = express();
-
+// test
 app.use(bodyParser.json()); 
 app.use(cors);
 app.use(auth);
@@ -41,7 +41,7 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`).then(result => {
     console.log('connected !!!');
-    app.listen(process.env.PORT || 8080);
+    app.listen(80);
 }).catch(err => {
     console.log(err);
 });
