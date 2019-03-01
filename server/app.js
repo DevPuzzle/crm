@@ -8,7 +8,7 @@ const cors = require('./middleware/cors');
 const path = require('path');
 
 const app = express();
-console.log('test')
+console.log('test') 
 app.use(bodyParser.json()); 
 app.use(cors);
 app.use(auth);
