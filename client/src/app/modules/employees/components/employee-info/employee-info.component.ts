@@ -1,11 +1,10 @@
-import { EmployeeGQLService } from './../services/employee-gql.service';
-import { UserGQLService } from '../../services/user-qql.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Employee } from 'src/app/shared/interfaces';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { DialogService } from 'src/app/shared/dialog.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserGQLService } from 'src/app/components/services/user-qql.service';
+import { EmployeeGQLService } from '../../services/employee-gql.service';
 
 
 @Component({
@@ -23,7 +22,6 @@ export class EmployeeInfoComponent implements OnInit {
     private activatedRoute: ActivatedRoute, private epmloyeeGQLService: EmployeeGQLService,
     private userGQLService: UserGQLService, private fb: FormBuilder,
     private router: Router,
-    private dialog: MatDialog,
     private dialogService: DialogService
     ) { }
 
