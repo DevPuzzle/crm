@@ -12,13 +12,9 @@ import { ClientInfoComponent } from './components/clients/client-info/client-inf
 
 const routes: Routes = [
   {
-    path: 'main',
-    component: MainComponent
-  },
-  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'main'
+    component: MainComponent
   },
   {
     path: '',
