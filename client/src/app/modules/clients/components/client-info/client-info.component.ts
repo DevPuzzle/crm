@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientGQLService } from '../../employee/services/client-qql.service';
-import { UserGQLService } from '../../services/user-qql.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
 import { DialogService } from 'src/app/shared/dialog.service';
+import { ClientGQLService } from '../../services/client-qql.service';
+import { UserGQLService } from 'src/app/components/services/user-qql.service';
 
 @Component({
   selector: 'app-client-info',
@@ -26,7 +25,6 @@ export class ClientInfoComponent implements OnInit {
     private userGQLService: UserGQLService,
     private fb: FormBuilder,
     private router: Router,
-    private dialog: MatDialog,
     private dialogService: DialogService
   ) { }
 
@@ -42,19 +40,10 @@ export class ClientInfoComponent implements OnInit {
           subscribe( ({data, loading}) => {
             const {client} = data;
             this.projects = data.projectsByClient;
-            // console.log(this.projects);
             this.ClientId = client._id;
             this.company = client.company.name;
             this.fillInForm(client);
           });
-          // this.clientGQLService.ProjectsByClient(params.clientId).
-          // subscribe( ({data, loading}) => {
-          //   // const {client} = data;
-          //   console.log(loading);
-          //   // this.ClientId = client._id;
-          //   // this.company = client.company.name;
-          //   // this.fillInForm(client);
-          // });
       }
     });
   }

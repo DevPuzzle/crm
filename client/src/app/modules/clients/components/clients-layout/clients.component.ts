@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserGQLService } from '../services/user-qql.service';
+import { UserGQLService } from '../../../../components/services/user-qql.service';
 
 @Component({
   selector: 'app-clients',

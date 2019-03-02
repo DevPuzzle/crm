@@ -12,10 +12,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { HeaderComponent } from './components/header/header.component';
 import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
 import { ContactMadeComponent } from './components/contact-made/contact-made.component';
-import { ClientsComponent } from './components/clients/clients.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ClientInfoComponent } from './components/clients/client-info/client-info.component';
-import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { ProjectComponent } from './components/contact-made/project/project.component';
 import { MatNativeDateModule, NativeDateModule, MatDatepickerModule } from '@angular/material';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -29,9 +26,6 @@ import { LetterInfoComponent } from './components/cover-letters/letter-info/lett
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    ClientsComponent,
-    ClientInfoComponent,
-    ClientListComponent,
     HeaderComponent,
     CoverLettersComponent,
     ContactMadeComponent,
