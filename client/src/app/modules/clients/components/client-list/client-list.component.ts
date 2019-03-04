@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/shared/interfaces';
 import { Router } from '@angular/router';
-import { ClientGQLService } from '../../employee/services/client-qql.service';
+import { ClientGQLService } from 'src/app/modules/clients/services/client-qql.service';
 
 @Component({
   selector: 'app-client-list',

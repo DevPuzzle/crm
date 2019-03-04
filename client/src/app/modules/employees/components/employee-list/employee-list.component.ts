@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/shared/interfaces';
 import { Router } from '@angular/router';
-import { EmployeeGQLService } from '../services/employee-gql.service';
+import { EmployeeGQLService } from '../../services/employee-gql.service';
 
 @Component({
   selector: 'app-employee-list',

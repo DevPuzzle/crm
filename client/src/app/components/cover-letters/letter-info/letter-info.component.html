@@ -1,54 +1,60 @@
 <div class="letter-info">
-    <mat-card>
-      <mat-card-header>
-        <a class="closeInfo"><i class="fas fa-times"></i></a>
-        <mat-card-title>in work...</mat-card-title>
-        <i class="fas fa-list-ul"></i>
-      </mat-card-header>
-      <form  class="letter-info-form" [formGroup]="coverLetterForm">
-        <!-- <mat-form-field>
-          <input matInput placeholder="Title" formControlName="title">
-        </mat-form-field> -->
+  <mat-card>
+    <mat-card-header>
+      <a class="closeInfo"><i class="fas fa-times"></i></a>
+      <mat-card-title>in work...</mat-card-title>
+      <i class="fas fa-list-ul"></i>
+    </mat-card-header>
+    <form  class="letter-info-form" [formGroup]="coverLetterForm">
+      <!-- <mat-form-field>
+        <input matInput placeholder="Title" formControlName="title">
+      </mat-form-field> -->
 
-        <div *ngFor="let letter of coverLetterForm.controls | keyvalue" class="cover-wrapper">
+      <div formArrayName="letters">
+        <!-- <h1 *ngFor="let letter of coverLetterForm.get('letters').controls">{{letter}}</h1> -->
+        <div *ngFor="let letter of coverLetterForm.get('letters')['controls']; let i = index;" class="cover-wrapper">
 
-          <span (click)="removeLetterField(letter)" class="delete-cover-item" ><mat-icon>delete_outline</mat-icon></span>
-          <mat-form-field>
-              <textarea matInput placeholder="{{letter.key}}" required></textarea>
-          </mat-form-field>
+          <div [formGroupName]="i">
+              <span (click)="removeLetterField([i, letter])" class="delete-cover-item" ><mat-icon>delete_outline</mat-icon></span>
+              <mat-form-field>
+                  <textarea matInput placeholder="" formControlName="text" required></textarea>
+              </mat-form-field>
+          </div>
+
+          <!-- {{coverLetterForm.value | json}} -->
         </div>
+      </div>
 
+      <!-- <div *ngFor="let letter of coverLetterForm.controls | keyvalue" class="cover-wrapper">
+        <span (click)="removeLetterField(letter)" class="delete-cover-item" ><mat-icon>delete_outline</mat-icon></span>
+        <mat-form-field>
+            <textarea matInput placeholder="{{letter.key}}" required></textarea>
+        </mat-form-field>
+      </div> -->
 
-        <!-- <div *ngFor="let letter of coverLetterForm.controls | keyvalue" class="cover-wrapper">
-          <span (click)="removeLetterField(letter)" class="delete-cover-item" ><mat-icon>delete_outline</mat-icon></span>
-          <mat-form-field>
-              <textarea matInput placeholder="{{letter.key}}" required></textarea>
-          </mat-form-field>
-        </div> -->
+      <!-- <div class="cover-wrapper">
+        <span class="delete-cover-item" ><mat-icon>delete_outline</mat-icon></span>
+        <mat-form-field>
+            <textarea matInput placeholder="Cover letter text"></textarea>
+        </mat-form-field>
+      </div> -->
 
-        <!-- <div class="cover-wrapper">
-          <span class="delete-cover-item" ><mat-icon>delete_outline</mat-icon></span>
-          <mat-form-field>
-              <textarea matInput placeholder="Cover letter text"></textarea>
-          </mat-form-field>
-        </div> -->
+      <div class="add-field">
+        <button (click)="addLetterField()" mat-icon-button color="primary" matTooltip="add field"  matTooltipPosition="right">
+          <mat-icon aria-label="Example icon-button with a heart icon">playlist_add</mat-icon>
+        </button>
+      </div>
 
-        <div class="add-field">
-          <button (click)="addLetterField()" mat-icon-button color="primary" matTooltip="add field"  matTooltipPosition="right">
-            <mat-icon aria-label="Example icon-button with a heart icon">playlist_add</mat-icon>
-          </button>
-        </div>
+      <div class="buttons">
+        <button mat-raised-button color="primary" [disabled]="">Save</button>
+        <a mat-raised-button color="warn">Delete</a>
+      </div>
 
-        <div class="buttons">
-          <button mat-raised-button color="primary" [disabled]="">Save</button>
-          <a mat-raised-button color="warn">Delete</a>
-        </div>
+    </form>
+    <mat-divider></mat-divider>
 
-      </form>
-      <mat-divider></mat-divider>
-
-    </mat-card>
-  </div>
+  </mat-card>
+</div>
 
 
 

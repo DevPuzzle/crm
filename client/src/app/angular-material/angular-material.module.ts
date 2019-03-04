@@ -62,7 +62,6 @@ const MATERIAL_MODULES = [
   declarations: [],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     ...MATERIAL_MODULES
   ],
   exports: [
