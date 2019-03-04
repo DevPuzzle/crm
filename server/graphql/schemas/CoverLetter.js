@@ -27,6 +27,7 @@ const typeDefs = `
   }
 
   input CoverLetterInputData {
+    _id: ID
     title: String!
     letters: [inputLetter]
   }

@@ -19,22 +19,19 @@ import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { ProjectTableComponent } from './components/contact-made/project-table/project-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
-import { LetterListComponent } from './components/cover-letters/letter-list/letter-list.component';
-import { LetterInfoComponent } from './components/cover-letters/letter-info/letter-info.component';
+import { CoverLettersModule } from './components/cover-letters/cover-letters.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
     HeaderComponent,
-    CoverLettersComponent,
     ContactMadeComponent,
     PageNotFoundComponent,
     ProjectComponent,
     ProjectTableComponent,
     MatConfirmDialogComponent,
-    LetterListComponent,
-    LetterInfoComponent,
     // CarouselHolderComponent
   ],
   imports: [
@@ -53,6 +50,7 @@ import { LetterInfoComponent } from './components/cover-letters/letter-info/lett
     NativeDateModule,
     MatDatepickerModule,
     BrowserAnimationsModule,
+    CoverLettersModule
     // CarouselModule
   ],
   providers: [

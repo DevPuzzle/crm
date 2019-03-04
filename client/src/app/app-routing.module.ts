@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: 'letters',
-        component: CoverLettersComponent
+        loadChildren: './components/cover-letters/cover-letters.module#CoverLettersModule'
       },
       {
         path: 'contact-made',

@@ -1,3 +1,5 @@
+
+
 export interface ResponseToken {
   token: string;
   userId: string;
@@ -43,6 +45,18 @@ export interface Project {
     comment: string,
     date: Date
   };
+}
+
+export interface CoverLetter {
+  _id: string;
+  title: string;
+  company: {_id: string, name: string};
+  letters: [
+    {
+      _id: string,
+      text: string
+    }
+  ];
 }
 
 export interface AuthorizedUser {

@@ -2,16 +2,15 @@
   <mat-card>
     <mat-card-header>
       <a class="closeInfo"><i class="fas fa-times"></i></a>
-      <mat-card-title>in work...</mat-card-title>
+      <mat-card-title></mat-card-title>
       <i class="fas fa-list-ul"></i>
     </mat-card-header>
-    <form  class="letter-info-form" [formGroup]="coverLetterForm">
-      <!-- <mat-form-field>
+    <form  class="letter-info-form" [formGroup]="coverLetterForm" (ngSubmit)="onSave()">
+      <mat-form-field>
         <input matInput placeholder="Title" formControlName="title">
-      </mat-form-field> -->
+      </mat-form-field>
 
       <div formArrayName="letters">
-        <!-- <h1 *ngFor="let letter of coverLetterForm.get('letters').controls">{{letter}}</h1> -->
         <div *ngFor="let letter of coverLetterForm.get('letters')['controls']; let i = index;" class="cover-wrapper">
 
           <div [formGroupName]="i">
@@ -40,13 +39,13 @@
       </div> -->
 
       <div class="add-field">
-        <button (click)="addLetterField()" mat-icon-button color="primary" matTooltip="add field"  matTooltipPosition="right">
+        <button type="button" (click)="addLetterField()" mat-icon-button color="primary" matTooltip="add field"  matTooltipPosition="right">
           <mat-icon aria-label="Example icon-button with a heart icon">playlist_add</mat-icon>
         </button>
       </div>
 
       <div class="buttons">
-        <button mat-raised-button color="primary" [disabled]="">Save</button>
+        <button mat-raised-button color="primary" [disabled]="coverLetterForm.invalid">Save</button>
         <a mat-raised-button color="warn">Delete</a>
       </div>
 
