@@ -42,6 +42,7 @@ export class ClientInfoComponent implements OnInit {
             this.projects = data.projectsByClient;
             this.ClientId = client._id;
             this.company = client.company.name;
+            this.DateStringToDate();
             this.fillInForm(client);
           });
       }
@@ -93,7 +94,13 @@ export class ClientInfoComponent implements OnInit {
       }
     });
   }
-
+  DateStringToDate() {
+    for (const project of this.projects) {
+      if (project.notification) {
+        project.notification.date = new Date(project.notification.date);
+      }
+    }
+  }
   closeInfo() {
     this.router.navigate(['/clients']);
   }

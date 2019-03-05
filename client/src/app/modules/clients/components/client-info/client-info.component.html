@@ -43,7 +43,7 @@
       <mat-accordion>
         <mat-expansion-panel *ngFor="let project of projects">
             <mat-expansion-panel-header>
-              <mat-panel-title>
+               <mat-panel-title>
                 {{project.title}}
               </mat-panel-title>
               <mat-panel-description>
@@ -54,13 +54,25 @@
             </mat-expansion-panel-header>
 
             <mat-list>
-                <mat-list-item><span class="project-field">Link:&nbsp;</span><a href="{{project.link}}">{{project?.link}}</a></mat-list-item>
+                <mat-list-item *ngIf="project.link"><span class="project-field">Link:&nbsp;</span><a href="{{project.link}}">{{project?.link}}</a></mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><span class="project-field">Platform:&nbsp;</span>{{project?.platform?.name}}</mat-list-item>
+                <mat-list-item *ngIf="project.platform"><span class="project-field">Platform:&nbsp;</span>{{project?.platform?.name}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><span class="project-field">Employe:&nbsp;</span>{{project?.employee?.name +' ' + project?.employee?.last_name}}</mat-list-item>
+                <mat-list-item *ngIf="project.employee"><span class="project-field">Employe:&nbsp;</span>{{project?.employee?.name +' ' + project?.employee?.last_name}}</mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item><span class="project-field">Notification:&nbsp;</span>{{project?.notification?.date +' ' + project?.notification?.time}}</mat-list-item>
+                <mat-list-item *ngIf="project?.notification"><span class="project-field">Notification:&nbsp;</span>
+                  {{project?.notification?.date.getDate() + '/' +
+                  (project?.notification?.date.getMonth()+1) +'/' +
+                  (project?.notification?.date.getFullYear()) + ' ' +
+                  project?.notification?.time + ':00'}}
+
+                  <div *ngIf="project.notification.type.name === 'phone'; else elseBlock">
+                    <i class="fas fa-phone"></i>
+                  </div>
+                    <ng-template #elseBlock>
+                      <i class="fas fa-envelope"></i>
+                    </ng-template>
+                </mat-list-item>
             </mat-list>
 
           </mat-expansion-panel>

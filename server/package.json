@@ -23,7 +23,9 @@
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.4",
     "jsonwebtoken": "^8.4.0",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.4",
+    "nodemailer": "^5.1.1",
     "pug": "^2.0.3",
     "validator": "^10.11.0"
   }
