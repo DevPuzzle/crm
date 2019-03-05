@@ -58,6 +58,17 @@ export class LetterInfoComponent implements OnInit {
     // }
   }
 
+  onDelete() {
+    this.dialogService.openConfirmDialog('Are you sure to delete this cover letter?')
+    .afterClosed().subscribe(res => {
+      if (res) {
+        this.coverLetterGQLService.deleteCoverLetter(this.coverLetterId);
+        this.coverLetterId = undefined;
+        this.router.navigate(['/letters']);
+      }
+    });
+  }
+
   addLetterField() {
     (this.coverLetterForm.get('letters') as FormArray).push(
       this.formBuilder.group(
@@ -106,5 +117,8 @@ export class LetterInfoComponent implements OnInit {
         });
       }
     }
+  }
+  closeInfo() {
+    this.router.navigate(['/letters']);
   }
 }

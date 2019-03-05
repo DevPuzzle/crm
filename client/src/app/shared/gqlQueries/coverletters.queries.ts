@@ -48,3 +48,9 @@ export const UPDATE_COVERLETTER = gql`
     }
   }
 `;
+
+export const DELETE_COVERLETTER = gql`
+  mutation deleteCoverLetter($id: ID!){
+    deleteCoverLetter(id: $id)
+  }
+`;

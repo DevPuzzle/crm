@@ -1,8 +1,8 @@
 <div class="letter-info">
   <mat-card>
     <mat-card-header>
-      <a class="closeInfo"><i class="fas fa-times"></i></a>
-      <mat-card-title></mat-card-title>
+      <a (click)="closeInfo()" class="closeInfo"><i class="fas fa-times"></i></a>
+      <mat-card-title>Cover letter info</mat-card-title>
       <i class="fas fa-list-ul"></i>
     </mat-card-header>
     <form  class="letter-info-form" [formGroup]="coverLetterForm" (ngSubmit)="onSave()">
@@ -46,7 +46,7 @@
 
       <div class="buttons">
         <button mat-raised-button color="primary" [disabled]="coverLetterForm.invalid">Save</button>
-        <a mat-raised-button color="warn">Delete</a>
+        <a (click)="onDelete()" *ngIf="coverLetterId" mat-raised-button color="warn">Delete</a>
       </div>
 
     </form>
