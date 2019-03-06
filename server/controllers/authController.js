@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../mongodb/models/user');
 const Company = require('../mongodb/models/company');
-const nodemon = require('../nodemon');
 const nodemailer = require('nodemailer');
 var handlebars = require('handlebars');
 var fs = require('fs');
+const keys = require('../config/keys');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: `${process.env.EMAIL_USER}`,
-      pass: `${process.env.EMAIL_PASS}`
+      user: `${keys.EMAIL_USER}`,
+      pass: `${keys.EMAIL_PASS}`
   },
   tls: {
       rejectUnauthorized: false
@@ -49,9 +49,10 @@ async function signUserIn({email, password}) {
     email: user.email,
     companyId: user.company_id
   },
-  `${process.env.JWT_KEY}`,
+  `${keys.JWT_KEY}`,
   {  expiresIn: '2h' }
   );
+  console.log('JWT KEY FORM AUTH CONTROLLER____', `${keys.JWT_KEY}`);
   return { token: token, userId: user._id.toString() }
 };
 
@@ -110,7 +111,7 @@ async function signUserUp({ signupInput }) {
     };
     var htmlToSend = template(replacements);
     var mailOptions = {
-        from: `<${process.env.EMAIL_USER}>`,
+        from: `<${keys.EMAIL_USER}>`,
         to: user.email, // list of receivers
         subject: "Welcome to ArgosyCRM", // Subject line
         text: "Thank you for signing up", // plain text body
