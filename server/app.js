@@ -6,6 +6,7 @@ const graphqlSchema = require('./graphql/schemas/index');
 const auth = require('./middleware/auth');
 const cors = require('./middleware/cors');
 const path = require('path');
+const keys = require('./config/keys');
 
 const app = express();
 console.log('test') 
@@ -41,7 +42,7 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`).then(result => {
     console.log('connected !!!');
-    app.listen(80);
+    app.listen(process.env.PORT || 80);
 }).catch(err => {
     console.log(err);
 });
