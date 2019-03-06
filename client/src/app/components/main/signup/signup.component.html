@@ -35,7 +35,7 @@
   <button mat-flat-button color="primary" [disabled]="signupForm.invalid" class="submit-button">
     Sign up
   </button>
-  <mat-error *ngFor="let error of errorMessage">{{ error.message }}</mat-error>
+  <mat-error class="error-from-back" *ngFor="let error of errorMessage">{{ error.message }}</mat-error>
   <i (click)="closeSignup()" class="fas fa-times"></i>
 
 </form>

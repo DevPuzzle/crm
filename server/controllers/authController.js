@@ -3,7 +3,33 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../mongodb/models/user');
 const Company = require('../mongodb/models/company');
-// const nodemon = require('../nodemon');
+const nodemon = require('../nodemon');
+const nodemailer = require('nodemailer');
+var handlebars = require('handlebars');
+var fs = require('fs');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: `${process.env.EMAIL_USER}`,
+      pass: `${process.env.EMAIL_PASS}`
+  },
+  tls: {
+      rejectUnauthorized: false
+  }
+  });
+
+  var readHTMLFile = function(path, callback) {
+    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+        if (err) {
+            throw err;
+            callback(err);
+        }
+        else {
+            callback(null, html);
+        }
+    });
+};  
 
 async function signUserIn({email, password}) {
   const user = await User.findOne({email: email});
@@ -31,15 +57,15 @@ async function signUserIn({email, password}) {
 
 async function signUserUp({ signupInput }) {
   const errors = [];
-  if (!validator.isEmail(signupInput.email)) {
-    errors.push({message: 'E-mail is invalid'});
-  }
-  if (validator.isEmpty(signupInput.password) || !validator.isLength(signupInput.password, { min: 6})) {
-    errors.push({message: 'Password too short'});
-  }
-  if (validator.isEmpty(signupInput.company_name) || !validator.isLength(signupInput.company_name, { min: 2})) {
-    errors.push({message: 'Company name too short!'});
-  }
+  // if (!validator.isEmail(signupInput.email)) {
+  //   errors.push('E-mail is invalid');
+  // }
+  // if (validator.isEmpty(signupInput.password) || !validator.isLength(signupInput.password, { min: 6})) {
+  //   errors.push('Password too short');
+  // }
+  // if (validator.isEmpty(signupInput.company_name) || !validator.isLength(signupInput.company_name, { min: 2})) {
+  //   errors.push('Company name too short!');
+  // }
   const existingUser = await User.findOne({ email: signupInput.email });
   if (existingUser) {
     errors.push({message: 'User exists already!'});
@@ -49,11 +75,14 @@ async function signUserUp({ signupInput }) {
   if (existingCompany) {
     errors.push({message: 'Company exists already!'});
   }
-  console.log('errors', errors);
+
    if (errors.length > 0) {
-    const error = new Error(errors);
+    console.log('_____ERORR ARRAY_____', errors);
+    const error = new Error(JSON.stringify(errors));
     error.data = errors;
-    error.code = 422;
+    error.status = 422;
+
+    console.log('_____ERORR_____', error);
     throw error;
   }
   const company = new Company({
@@ -69,8 +98,31 @@ async function signUserUp({ signupInput }) {
     company_id: company._id.toString(),
     password: hashedPw
   });
-  const createdUser = await user.save();
-  console.log('_______createdUser_______', createdUser);
+ const createdUser = await user.save();
+
+  readHTMLFile(__dirname + '/../email/templates/sigup.hbs', function(err, html) {
+    var template = handlebars.compile(html);
+    var replacements = {
+         user: user.name,
+         login: user.email,
+         pass: signupInput.password,
+         company: company.name
+    };
+    var htmlToSend = template(replacements);
+    var mailOptions = {
+        from: `<${process.env.EMAIL_USER}>`,
+        to: user.email, // list of receivers
+        subject: "Welcome to ArgosyCRM", // Subject line
+        text: "Thank you for signing up", // plain text body
+        html : htmlToSend
+     };
+    transporter.sendMail(mailOptions, function (error, response) {
+        if (error) {
+            console.log(error);
+            callback(error);
+        }
+    });
+});
   return { ...createdUser._doc, _id: createdUser._id.toString() };
 };
 

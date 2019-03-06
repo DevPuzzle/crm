@@ -80,10 +80,6 @@ async function updateProject({id, projectInput}, req) {
   if(user === null || companyId === null) {
       errors.push({message: 'User or company not found'});
   }
-  
-  // let testDate = new Date(projectInput.date);
- 
-  // console.log('testDate/toLocalString', testDate.toLocalString());
 
   project.title = projectInput.title;
   project.info = projectInput.info;
