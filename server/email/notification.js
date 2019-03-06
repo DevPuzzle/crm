@@ -7,9 +7,11 @@ var moment = require('moment');
 const nodemailer = require('nodemailer');
 var handlebars = require('handlebars');
 var fs = require('fs');
-const dotenv = require('dotenv').config();
+const keys = require('../config/keys');
+// const dotenv = require('dotenv').config();
 
-mongoose.connect(`mongodb+srv://${nodemon.env.MONGO_USER}:${nodemon.env.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${nodemon.env.MONGO_DB}?retryWrites=true`).then(result => {
+console.log('${process.env.MONGO_USER}', `${keys.MONGO_USER}`);
+mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
     console.log('connected from notification');
 }).catch(err => {
     console.log(err);
@@ -19,8 +21,8 @@ mongoose.connect(`mongodb+srv://${nodemon.env.MONGO_USER}:${nodemon.env.MONGO_PA
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: `${nodemon.env.EMAIL_USER}`,
-        pass: `${nodemon.env.EMAIL_PASS}`
+        user: `${keys.EMAIL_USER}`,
+        pass: `${keys.EMAIL_PASS}`
     },
     tls: {
         rejectUnauthorized: false
@@ -74,7 +76,7 @@ async function checkNotifications() {
                     };
                     var htmlToSend = template(replacements);
                     var mailOptions = {
-                        from: `<${nodemon.env.EMAIL_USER}>`,
+                        from: `<${keys.env.EMAIL_USER}>`,
                         to: user.email, // list of receivers
                         subject: "Notification ✔", // Subject line
                         text: "Notification for you", // plain text body

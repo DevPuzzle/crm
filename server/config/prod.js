@@ -4,5 +4,6 @@ module.exports = {
     MONGO_DB: process.env.MONGO_DB,
     EMAIL_USER: process.env.EMAIL_USER,
     EMAIL_PASS: process.env.EMAIL_PASS,
+    JWT_KEY: process.env.JWT_KEY,
     PORT: process.env.PORT
 };
