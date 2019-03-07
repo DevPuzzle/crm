@@ -13,7 +13,7 @@ console.log('test')
 app.use(bodyParser.json()); 
 app.use(cors);
 app.use(auth);
-// app.use('/', express.static(path.join(__dirname, 'angular')));
+app.use('/', express.static(path.join(__dirname, 'angular')));
 app.use(
   '/graphql',
   graphqlHttp({
