@@ -52,7 +52,6 @@ async function signUserIn({email, password}) {
   `${keys.JWT_KEY}`,
   {  expiresIn: '2h' }
   );
-  console.log('JWT KEY FORM AUTH CONTROLLER____', `${keys.JWT_KEY}`);
   return { token: token, userId: user._id.toString() }
 };
 

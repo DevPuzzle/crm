@@ -47,8 +47,8 @@ mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluste
     console.log(err);
 });
 
-// app.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, 'angular', 'index.html'));
-//  });
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, 'angular', 'index.html'));
+ });
 
 
