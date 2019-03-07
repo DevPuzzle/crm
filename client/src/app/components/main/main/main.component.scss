@@ -64,6 +64,9 @@ $sectionPadding: 150px 0;
         @media screen and (min-width: 767.98px) {
           display: none;
         }
+        @media screen and (max-height: 414.98px) {
+          width: 70vh !important;
+        }
         .welcomeUsermobile {
           padding: 0 16px;
           display: flex;
@@ -153,6 +156,9 @@ $sectionPadding: 150px 0;
       width: 100%;
       background: $primary;
       position: relative;
+      @media screen and (max-height: 414.98px) {
+        height: 91vh;
+      }
 
       .banner{
         max-width: $maxWitdh;
@@ -164,6 +170,9 @@ $sectionPadding: 150px 0;
           top: 40%;
           display: flex;
           justify-content: center;
+        }
+        @media screen and (max-height: 414.98px) {
+          top: 27%;
         }
         .body-title{
           position: absolute;
@@ -240,6 +249,9 @@ $sectionPadding: 150px 0;
         height: 300px;
         width: 100%;
         z-index: 1;
+        @media screen and (max-width: 767.98px) {
+          height: 123px;
+        }
       }
     }
   }
@@ -502,5 +514,14 @@ footer {
     color: #3f345f;
     font-size: 12px;
     text-align: center;
+  }
+}
+
+
+::ng-deep .signup-dialog-container {
+   .mat-dialog-container {
+    @media screen and (max-width: 575.98px) {
+      width: 100vh !important;
+    }
   }
 }

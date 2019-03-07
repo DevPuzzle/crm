@@ -1,14 +1,12 @@
 const User = require('../mongodb/models/user');
 const Project = require('../mongodb/models/project');
 const Company = require('../mongodb/models/company');
+const Notification = require('../mongodb/models/notification-type');
 const mongoose = require('mongoose');
-const nodemon = require('../nodemon');
 var moment = require('moment');
-const nodemailer = require('nodemailer');
 var handlebars = require('handlebars');
-var fs = require('fs');
+var mailer = require('./mailer');
 const keys = require('../config/keys');
-// const dotenv = require('dotenv').config();
 
 console.log('${process.env.MONGO_USER}', `${keys.MONGO_USER}`);
 mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
@@ -17,39 +15,12 @@ mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluste
     console.log(err);
 });
 
-
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: `${keys.EMAIL_USER}`,
-        pass: `${keys.EMAIL_PASS}`
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
-    });
-
-var readHTMLFile = function(path, callback) {
-    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
-        if (err) {
-            throw err;
-            callback(err);
-        }
-        else {
-            callback(null, html);
-        }
-    });
-};
-
-
-
 async function checkNotifications() {
     var now = moment();
     const projects = await Project.find({notification: { $exists: true }});
 
      projects.forEach(async function(project) {
             const projectDate = new Date(project.notification.date);
-            // project.notification.date = projectDate;
 
             let notificationDate = moment({
                 year: projectDate.getFullYear(), 
@@ -60,43 +31,53 @@ async function checkNotifications() {
                 second: 0, 
                 millisecond: 0
             });
-            // console.log(moment(now).isAfter(notificationDate));
+
             if ( moment(now).isAfter(notificationDate) || moment(now).isSame(notificationDate)) {
                 const user = await User.findOne({company_id: project.company_id});
                 const company = await Company.findOne({_id: project.company_id});
+                const notificationType = await Notification.findById(project.notification.type);
 
-                console.log('ОТПРАВЛЯЕМ ИМЕЙЛ');
-                readHTMLFile(__dirname + '/templates/notification.hbs', function(err, html) {
-                    var template = handlebars.compile(html);
-                    var replacements = {
-                         user: user.name,
-                         text: project.notification.comment,
-                         project: project.title,
-                         company: company.name 
-                    };
-                    var htmlToSend = template(replacements);
-                    var mailOptions = {
-                        from: `<${keys.env.EMAIL_USER}>`,
-                        to: user.email, // list of receivers
-                        subject: "Notification ✔", // Subject line
-                        text: "Notification for you", // plain text body
-                        html : htmlToSend
-                     };
-                    transporter.sendMail(mailOptions, function (error, response) {
-                        if (error) {
-                            console.log(error);
-                            callback(error);
-                        }
+                if(notificationType.name === 'email') {                
+                    console.log('send email');
+                    mailer.readHTMLFile(__dirname + '/templates/notification.hbs', function(err, html) {
+                        var template = handlebars.compile(html);
+                        var replacements = {
+                            user: user.name,
+                            text: project.notification.comment,
+                            project: project.title,
+                            company: company.name 
+                        };
+                        var htmlToSend = template(replacements);
+                        var mailOptions = {
+                            from: `<${keys.EMAIL_USER}>`,
+                            to: user.email,
+                            subject: "Notification ✔",
+                            text: "Notification for you",
+                            html : htmlToSend
+                        };
+                        mailer.transporter.sendMail(mailOptions, function (error, response) {
+                            if (error) {
+                                console.log(error);
+                                callback(error);
+                            }
+                        });
                     });
-                });
+                } 
+                if (notificationType.name === 'phone') {
+                    console.log('send sms');
+                }
                 const updateProject = await Project.update({_id: project._id}, {$unset: {notification: true }}, function(err, res){ 
+                    exit();
                     if(err) {
                         console.log('error updating project');
                     }
-                 });
+                 });    
             }
     });
   }
 
-
   checkNotifications();
+  function exit() {
+    mongoose.disconnect();
+}
+  

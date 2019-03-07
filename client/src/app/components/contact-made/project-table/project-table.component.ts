@@ -78,7 +78,6 @@ export class ProjectTableComponent implements OnInit {
   }
 
   onEdit(row) {
-    console.log('row', row);
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(ProjectComponent, {
       disableClose: false,

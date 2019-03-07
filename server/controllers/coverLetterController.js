@@ -37,7 +37,7 @@ async function createCoverLetter({ coverLetterInput }, req) {
 }
 
 async function updateCoverLetter({id, coverLetterInput}, req) {
-    console.log('coverLetterInput', coverLetterInput);
+    // console.log('coverLetterInput', coverLetterInput);
     // checkAuth(req.isAuth);
     const errors = [];
 
