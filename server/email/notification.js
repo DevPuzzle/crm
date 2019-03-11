@@ -7,6 +7,7 @@ var moment = require('moment');
 var handlebars = require('handlebars');
 var mailer = require('./mailer');
 const keys = require('../config/keys');
+var CronJob = require('cron').CronJob;
 
 var options = {
     server: {
@@ -20,13 +21,16 @@ var options = {
     replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
   };
 
-mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
-    console.log('connected from notification');
-    checkNotifications();
-   
-}).catch(err => {
-    console.log(err);
-});
+new CronJob('0 0 * * * *', function() {
+    mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
+        console.log('connected from notification');
+        checkNotifications();
+        
+    }).catch(err => {
+        console.log(err);
+    });
+}, null, true);
+
 
 async function checkNotifications() {
     var now = moment();
