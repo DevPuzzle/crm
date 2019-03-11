@@ -54,7 +54,6 @@ export class ProjectComponent implements OnInit {
   onSave() {
     delete this.projectForm.value['enable'];
     if (this.dataProject) {
-      console.log('this.projectForm.value', this.projectForm.value);
       this.contactMadeGQLService.updateProject(this.projectForm.value, this.dataProject._id);
     } else {
       this.contactMadeGQLService.createProject(this.projectForm.value);

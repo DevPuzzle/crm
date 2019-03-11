@@ -84,6 +84,9 @@
                       <mat-option *ngFor="let type of dataForSelect?.not_types" [value]="type._id">
                           {{type.name}}
                       </mat-option>
+                      <!-- <mat-option [value]="dataForSelect?.not_types[0]._id">
+                          {{dataForSelect?.not_types[0].name}}
+                      </mat-option> -->
                   </mat-select>
                   <mat-error *ngIf="projectForm.get('type').hasError('required')">
                     {{requiredFieldError}}

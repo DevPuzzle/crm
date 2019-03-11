@@ -6,30 +6,8 @@ const Company = require('../mongodb/models/company');
 const nodemailer = require('nodemailer');
 var handlebars = require('handlebars');
 var fs = require('fs');
+var mailer = require('../email/mailer');
 const keys = require('../config/keys');
-
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-      user: `${keys.EMAIL_USER}`,
-      pass: `${keys.EMAIL_PASS}`
-  },
-  tls: {
-      rejectUnauthorized: false
-  }
-  });
-
-  var readHTMLFile = function(path, callback) {
-    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
-        if (err) {
-            throw err;
-            callback(err);
-        }
-        else {
-            callback(null, html);
-        }
-    });
-};  
 
 async function signUserIn({email, password}) {
   const user = await User.findOne({email: email});
@@ -77,12 +55,9 @@ async function signUserUp({ signupInput }) {
   }
 
    if (errors.length > 0) {
-    console.log('_____ERORR ARRAY_____', errors);
     const error = new Error(JSON.stringify(errors));
     error.data = errors;
     error.status = 422;
-
-    console.log('_____ERORR_____', error);
     throw error;
   }
   const company = new Company({
@@ -100,7 +75,7 @@ async function signUserUp({ signupInput }) {
   });
  const createdUser = await user.save();
 
-  readHTMLFile(__dirname + '/../email/templates/sigup.hbs', function(err, html) {
+ mailer.readHTMLFile(__dirname + '/../email/templates/sigup.hbs', function(err, html) {
     var template = handlebars.compile(html);
     var replacements = {
          user: user.name,
@@ -111,12 +86,12 @@ async function signUserUp({ signupInput }) {
     var htmlToSend = template(replacements);
     var mailOptions = {
         from: `<${keys.EMAIL_USER}>`,
-        to: user.email, // list of receivers
-        subject: "Welcome to ArgosyCRM", // Subject line
-        text: "Thank you for signing up", // plain text body
+        to: user.email,
+        subject: "Welcome to ArgosyCRM",
+        text: "Thank you for signing up",
         html : htmlToSend
      };
-    transporter.sendMail(mailOptions, function (error, response) {
+     mailer.transporter.sendMail(mailOptions, function (error, response) {
         if (error) {
             console.log(error);
             callback(error);

@@ -101,7 +101,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onShowSignupModal() {
-    this.dialog.open(SignupComponent);
+    this.dialog.open(SignupComponent, {
+      panelClass: 'signup-dialog-container'
+    });
   }
   onShowSigninModal() {
     this.dialog.open(SigninComponent);
