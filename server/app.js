@@ -9,7 +9,7 @@ const path = require('path');
 const keys = require('./config/keys');
 
 const app = express();
-console.log('test') 
+
 app.use(bodyParser.json()); 
 app.use(cors);
 app.use(auth);
