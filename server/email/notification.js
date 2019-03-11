@@ -8,9 +8,22 @@ var handlebars = require('handlebars');
 var mailer = require('./mailer');
 const keys = require('../config/keys');
 
-console.log('${process.env.MONGO_USER}', `${keys.MONGO_USER}`);
+var options = {
+    server: {
+        auto_reconnect: true,
+        poolSize:100,
+        socketOptions: {
+          keepAlive: 10000,
+          connectTimoutMS: 10000
+        }
+      },
+    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
+  };
+
 mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
     console.log('connected from notification');
+    checkNotifications();
+   
 }).catch(err => {
     console.log(err);
 });
@@ -19,9 +32,8 @@ async function checkNotifications() {
     var now = moment();
     const projects = await Project.find({notification: { $exists: true }});
 
-     projects.forEach(async function(project) {
+     for (let project of projects) {
             const projectDate = new Date(project.notification.date);
-
             let notificationDate = moment({
                 year: projectDate.getFullYear(), 
                 month: projectDate.getMonth(),
@@ -34,9 +46,9 @@ async function checkNotifications() {
 
             if ( moment(now).isAfter(notificationDate) || moment(now).isSame(notificationDate)) {
                 const user = await User.findOne({company_id: project.company_id});
-                const company = await Company.findOne({_id: project.company_id});
+                const company = await Company.findOne({_id: project.company_id});  
                 const notificationType = await Notification.findById(project.notification.type);
-
+  
                 if(notificationType.name === 'email') {                
                     console.log('send email');
                     mailer.readHTMLFile(__dirname + '/templates/notification.hbs', function(err, html) {
@@ -67,17 +79,12 @@ async function checkNotifications() {
                     console.log('send sms');
                 }
                 const updateProject = await Project.update({_id: project._id}, {$unset: {notification: true }}, function(err, res){ 
-                    exit();
                     if(err) {
                         console.log('error updating project');
                     }
-                 });    
+                 });  
             }
-    });
-  }
-
-  checkNotifications();
-  function exit() {
+             // end if (now date > notification date)
+    };
     mongoose.disconnect();
-}
-  
+  }
