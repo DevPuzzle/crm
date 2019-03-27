@@ -3,6 +3,9 @@ form {
   .mat-error {
     text-align: center;
     margin-top: 10px;
+    @media screen and (max-width: 575.98px) {
+      margin-top: 0  !important;
+     }
   }
   .submit-button{
     margin-top: 15px;
@@ -16,3 +19,8 @@ form {
   }
 }
 
+.signin-form {
+  @media screen and (max-width: 575.98px) {
+   width: 100%;
+  }
+}

@@ -40,7 +40,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
-mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-tivpd.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
+mongoose.connect(`mongodb+srv://${keys.MONGO_USER}:${keys.MONGO_PASSWORD}@cluster0-ccbzi.mongodb.net/${keys.MONGO_DB}?retryWrites=true`).then(result => {
     console.log('connected !!!');
     app.listen(process.env.PORT || 80);
 }).catch(err => {
