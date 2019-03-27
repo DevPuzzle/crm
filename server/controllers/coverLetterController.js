@@ -68,7 +68,7 @@ async function getCoverLetterById (_, {_id}, req) {
     try{
         const foundCoverLetter = await CoverLetter.findById(_id);
         return foundCoverLetter;
-      }catch(err) {
+      } catch(err) {
         const error = new Error();
         error.data = 'CoverLetter was not found';
         error.code = 422;
@@ -86,7 +86,7 @@ async function deleteCoverLetter({id}, req) {
     
     checkAuth(req.isAuth);
     const coverLetter = await CoverLetter.findById(id);
-    if(!coverLetter) {
+    if (!coverLetter) {
       const error = new Error('No cover letter found!');
       error.code = 404;
       throw error;
